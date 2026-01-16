@@ -1,5 +1,5 @@
-@import '/css/bootstrap.min.css';
-@import '/css/fontiran.css';
+@import './bootstrap.min.css';
+@import './fontiran.css';
 
 :root {
     --primary-color: #2e77ae;
@@ -7,13 +7,10 @@
     --light-color: #deebf8;
     --dark-color: #0d2137;
     --black-color: #36382e;
-
     --dashboard-primary-color: #00498d;
-
     --card-bg: white;
     --card-color-bg: linear-gradient(-45deg, var(--dark-color), var(--primary-color));
     --card-box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 1px 2px 4px 0 rgba(0, 0, 0, 0.2);
-
     --navbar-height: 44px;
     --sidebar-width: 240px;
     --spacing-x: 16px;
@@ -40,35 +37,44 @@ body {
     margin-right: calc(-.5 * var(--spacing-x));
 }
 
-.row > * {
-    padding-left: calc(.5 * var(--spacing-x));
-    padding-right: calc(.5 * var(--spacing-x));
-    margin-bottom: var(--spacing-y);
-}
+    .row > * {
+        padding-left: calc(.5 * var(--spacing-x));
+        padding-right: calc(.5 * var(--spacing-x));
+        margin-bottom: var(--spacing-y);
+    }
+
     .row > .col1-1 {
         width: 100%;
     }
+
     .row > .col1-2 {
         width: 50%;
     }
+
     .row > .col1-3 {
         width: 33.33333%;
     }
+
     .row > .col2-3 {
         width: 66.66666%;
     }
+
     .row > .col1-5 {
         width: 20%;
     }
+
     .row > .col2-5 {
         width: 40%;
     }
+
     .row > .col3-5 {
         width: 60%;
     }
+
     .row > .col4-5 {
         width: 80%;
     }
+
     .row > .col3-10 {
         width: 30%;
     }
@@ -156,10 +162,10 @@ body {
                 color: #000;
             }
 
-        .card.color-card .card-header h6 {
-            font: 500 13px IRANSans;
-            color: #fff;
-        }
+    .card.color-card .card-header h6 {
+        font: 500 13px IRANSans;
+        color: #fff;
+    }
 
     select,
     .card .card-header select,
@@ -242,9 +248,9 @@ body {
                 flex: 0 1 100%;
             }
 
-        .card.color-card .card-body * {
-            color: #fff;
-        }
+    .card.color-card .card-body * {
+        color: #fff;
+    }
 
 .card-double {
     padding: 0;
@@ -341,9 +347,9 @@ form .form-row {
     gap: 12px;
 }
 
-form .form-row.reverse {
-    flex-direction: row-reverse;
-}
+    form .form-row.reverse {
+        flex-direction: row-reverse;
+    }
 
     form .form-row * {
         flex-grow: 1;
@@ -461,9 +467,11 @@ form .form-row.reverse {
             border-radius: 3px;
             position: relative;
         }
-            .form-checkbox .form-label span {
-                border-radius: 0 3px 3px 0;
-            }
+
+        .form-checkbox .form-label span {
+            border-radius: 0 3px 3px 0;
+        }
+
             .form-checkbox .form-label span:last-child {
                 border-radius: 3px 0 0 3px;
             }
@@ -488,16 +496,17 @@ form .form-row.reverse {
                 content: url('/icons/check.svg');
             }
 
-    button[type="submit"] {
-        background: var(--primary-color);
-        font-size: 15px;
-        border: none;
-        height: 42px;
-    }
+button[type="submit"] {
+    background: var(--primary-color);
+    font-size: 15px;
+    border: none;
+    height: 42px;
+}
 
 a {
     text-decoration: none;
 }
+
     a:hover {
         color: dodgerblue;
     }

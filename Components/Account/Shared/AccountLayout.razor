@@ -1,20 +1,15 @@
 ﻿@inherits LayoutComponentBase
+@layout msy.Components.Layout.MainLayout
 @inject NavigationManager NavigationManager
 
-<main class="main">
-    <div class="container">
-        <div class="content">
-            @if (HttpContext is null)
-            {
-                <p>Loading...</p>
-            }
-            else
-            {
-                @Body
-            }
-        </div>
-    </div>
-</main>
+@if (HttpContext is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @Body
+}
 
 @code {
     [CascadingParameter]

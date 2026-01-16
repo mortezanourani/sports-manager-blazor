@@ -1,4 +1,4 @@
-﻿namespace Reporter.Data;
+﻿namespace msy.Data;
 
 public class Population
 {

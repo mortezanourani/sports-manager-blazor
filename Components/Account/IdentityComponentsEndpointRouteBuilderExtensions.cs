@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-using Reporter.Components.Account.Pages;
-using Reporter.Components.Account.Pages.Manage;
-using Reporter.Data;
+using msy.Components.Account.Pages;
+using msy.Components.Account.Pages.Manage;
+using msy.Data;
 
 namespace Microsoft.AspNetCore.Routing
 {

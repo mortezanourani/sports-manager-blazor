@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Reporter.Data;
+namespace msy.Data;
 
 public partial class ProjectType
 {

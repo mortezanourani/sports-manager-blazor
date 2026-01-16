@@ -4,15 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-Reporter-e11e9040-2e74-4e82-b60f-e7b8f37514f7</UserSecretsId>
+    <UserSecretsId>aspnet-msy-fa3de65a-eb5d-46fb-9bc9-a9af4eae8d15</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Components\Pages\PrivateFacilityPages\**" />
-    <Content Remove="Components\Pages\PrivateFacilityPages\**" />
-    <EmbeddedResource Remove="Components\Pages\PrivateFacilityPages\**" />
-    <None Remove="Components\Pages\PrivateFacilityPages\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.11" />

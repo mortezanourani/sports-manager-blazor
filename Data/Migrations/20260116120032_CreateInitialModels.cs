@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Reporter.Migrations
+namespace msy.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialModels : Migration
+    public partial class CreateInitialModels : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -211,6 +211,29 @@ namespace Reporter.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsersGenders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Population",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    UrbanMen = table.Column<int>(type: "int", nullable: false),
+                    UrbanWomen = table.Column<int>(type: "int", nullable: false),
+                    RuralMen = table.Column<int>(type: "int", nullable: false),
+                    RuralWomen = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Population", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Population_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -724,19 +747,19 @@ namespace Reporter.Migrations
                 name: "ProjectBudgets",
                 columns: table => new
                 {
-                    ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Year = table.Column<int>(type: "int", nullable: false),
                     SourceId = table.Column<int>(type: "int", nullable: false),
                     Approved = table.Column<int>(type: "int", nullable: false),
-                    ProjectId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectBudgets", x => x.ProjectId);
+                    table.PrimaryKey("PK_ProjectBudgets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectBudgets_ConstructionProjects_ProjectId1",
-                        column: x => x.ProjectId1,
+                        name: "FK_ProjectBudgets_ConstructionProjects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "ConstructionProjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -752,21 +775,21 @@ namespace Reporter.Migrations
                 name: "ProjectProgresses",
                 columns: table => new
                 {
-                    ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
                     Month = table.Column<int>(type: "int", nullable: false),
                     Percentage = table.Column<int>(type: "int", nullable: false),
                     ContractorUnpaid = table.Column<int>(type: "int", nullable: true),
                     CompletionBudget = table.Column<int>(type: "int", nullable: true),
                     CompletionYear = table.Column<int>(type: "int", nullable: true),
-                    ProjectId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectProgresses", x => x.ProjectId);
+                    table.PrimaryKey("PK_ProjectProgresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectProgresses_ConstructionProjects_ProjectId1",
-                        column: x => x.ProjectId1,
+                        name: "FK_ProjectProgresses_ConstructionProjects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "ConstructionProjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -908,6 +931,11 @@ namespace Reporter.Migrations
                 column: "FederationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Population_CityId",
+                table: "Population",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PrivateFacilities_CityId",
                 table: "PrivateFacilities",
                 column: "CityId");
@@ -928,9 +956,9 @@ namespace Reporter.Migrations
                 column: "UsersGenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectBudgets_ProjectId1",
+                name: "IX_ProjectBudgets_ProjectId",
                 table: "ProjectBudgets",
-                column: "ProjectId1");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectBudgets_SourceId",
@@ -938,9 +966,9 @@ namespace Reporter.Migrations
                 column: "SourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectProgresses_ProjectId1",
+                name: "IX_ProjectProgresses_ProjectId",
                 table: "ProjectProgresses",
-                column: "ProjectId1");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tournaments_FederationId",
@@ -979,6 +1007,9 @@ namespace Reporter.Migrations
 
             migrationBuilder.DropTable(
                 name: "LocalFederationPresidents");
+
+            migrationBuilder.DropTable(
+                name: "Population");
 
             migrationBuilder.DropTable(
                 name: "PrivateFacilityLicenses");

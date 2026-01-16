@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Reporter.Migrations
+namespace msy.Migrations
 {
     /// <inheritdoc />
     public partial class CreateIdentitySchema : Migration

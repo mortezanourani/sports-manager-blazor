@@ -1,32 +1,19 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="fa-IR">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="Reporter.styles.css" />
-    <HeadOutlet @rendermode="RenderModeForPage" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="msy.styles.css" />
+    <HeadOutlet />
 </head>
 
 <body>
-    <Routes @rendermode="RenderModeForPage" />
-    <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="/js/chart.js"></script>
+    <Routes />
+    <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="_framework/blazor.web.js"></script>
 </body>
 
 </html>
-
-@code {
-    [CascadingParameter]
-    private HttpContext HttpContext { get; set; } = default!;
-
-    private IComponentRenderMode? RenderModeForPage =>
-        HttpContext.Request.Path.StartsWithSegments("/Account") || 
-        HttpContext.Request.Path.StartsWithSegments("/Dashboard")
-            ? null
-            : InteractiveServer;
-}

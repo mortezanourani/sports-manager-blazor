@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 
-namespace Reporter.Components.Account
+namespace msy.Components.Account
 {
     internal sealed class IdentityRedirectManager(NavigationManager navigationManager)
     {

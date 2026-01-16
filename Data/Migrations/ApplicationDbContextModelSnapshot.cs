@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Reporter.Data;
+using msy.Data;
 
 #nullable disable
 
-namespace Reporter.Migrations
+namespace msy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -170,7 +170,7 @@ namespace Reporter.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Reporter.Data.AgeGroup", b =>
+            modelBuilder.Entity("msy.Data.AgeGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,7 +194,7 @@ namespace Reporter.Migrations
                     b.ToTable("AgeGroups");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ApplicationUser", b =>
+            modelBuilder.Entity("msy.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -259,7 +259,7 @@ namespace Reporter.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Reporter.Data.Athlete", b =>
+            modelBuilder.Entity("msy.Data.Athlete", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,7 +290,7 @@ namespace Reporter.Migrations
                     b.ToTable("Athletes");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Champion", b =>
+            modelBuilder.Entity("msy.Data.Champion", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -327,7 +327,7 @@ namespace Reporter.Migrations
                     b.ToTable("Champions");
                 });
 
-            modelBuilder.Entity("Reporter.Data.City", b =>
+            modelBuilder.Entity("msy.Data.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,7 +351,7 @@ namespace Reporter.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ConstructionProject", b =>
+            modelBuilder.Entity("msy.Data.ConstructionProject", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -384,7 +384,7 @@ namespace Reporter.Migrations
                     b.ToTable("ConstructionProjects");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Course", b =>
+            modelBuilder.Entity("msy.Data.Course", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -416,7 +416,7 @@ namespace Reporter.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Department", b =>
+            modelBuilder.Entity("msy.Data.Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -438,7 +438,7 @@ namespace Reporter.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Employee", b =>
+            modelBuilder.Entity("msy.Data.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -483,7 +483,7 @@ namespace Reporter.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("Reporter.Data.EmploymentType", b =>
+            modelBuilder.Entity("msy.Data.EmploymentType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -507,7 +507,7 @@ namespace Reporter.Migrations
                     b.ToTable("EmploymentTypes");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Facility", b =>
+            modelBuilder.Entity("msy.Data.Facility", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -570,7 +570,7 @@ namespace Reporter.Migrations
                     b.ToTable("Facilities");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FacilityContract", b =>
+            modelBuilder.Entity("msy.Data.FacilityContract", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -618,7 +618,7 @@ namespace Reporter.Migrations
                     b.ToTable("FacilityContracts");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FacilityDocument", b =>
+            modelBuilder.Entity("msy.Data.FacilityDocument", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -652,7 +652,7 @@ namespace Reporter.Migrations
                     b.ToTable("FacilityDocuments");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FacilityType", b =>
+            modelBuilder.Entity("msy.Data.FacilityType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -676,7 +676,7 @@ namespace Reporter.Migrations
                     b.ToTable("FacilityTypes");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Federation", b =>
+            modelBuilder.Entity("msy.Data.Federation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -712,7 +712,7 @@ namespace Reporter.Migrations
                     b.ToTable("Federations");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FundingSource", b =>
+            modelBuilder.Entity("msy.Data.FundingSource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -736,7 +736,7 @@ namespace Reporter.Migrations
                     b.ToTable("FundingSources");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Gender", b =>
+            modelBuilder.Entity("msy.Data.Gender", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -760,7 +760,7 @@ namespace Reporter.Migrations
                     b.ToTable("Genders");
                 });
 
-            modelBuilder.Entity("Reporter.Data.GovernmentFacility", b =>
+            modelBuilder.Entity("msy.Data.GovernmentFacility", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -815,7 +815,7 @@ namespace Reporter.Migrations
                     b.ToTable("GovernmentFacilities");
                 });
 
-            modelBuilder.Entity("Reporter.Data.GovernmentFacilityLicense", b =>
+            modelBuilder.Entity("msy.Data.GovernmentFacilityLicense", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -861,7 +861,7 @@ namespace Reporter.Migrations
                     b.ToTable("GovernmentFacilityLicenses");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Insurance", b =>
+            modelBuilder.Entity("msy.Data.Insurance", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -894,7 +894,7 @@ namespace Reporter.Migrations
                     b.ToTable("Insurances");
                 });
 
-            modelBuilder.Entity("Reporter.Data.LocalFederation", b =>
+            modelBuilder.Entity("msy.Data.LocalFederation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -930,7 +930,7 @@ namespace Reporter.Migrations
                     b.ToTable("LocalFederations");
                 });
 
-            modelBuilder.Entity("Reporter.Data.LocalFederationPresident", b =>
+            modelBuilder.Entity("msy.Data.LocalFederationPresident", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -979,7 +979,7 @@ namespace Reporter.Migrations
                     b.ToTable("LocalFederationPresidents");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Medal", b =>
+            modelBuilder.Entity("msy.Data.Medal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1006,7 +1006,7 @@ namespace Reporter.Migrations
                     b.ToTable("Medals");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Population", b =>
+            modelBuilder.Entity("msy.Data.Population", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1037,7 +1037,7 @@ namespace Reporter.Migrations
                     b.ToTable("Population");
                 });
 
-            modelBuilder.Entity("Reporter.Data.PrivateFacility", b =>
+            modelBuilder.Entity("msy.Data.PrivateFacility", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1089,7 +1089,7 @@ namespace Reporter.Migrations
                     b.ToTable("PrivateFacilities");
                 });
 
-            modelBuilder.Entity("Reporter.Data.PrivateFacilityLicense", b =>
+            modelBuilder.Entity("msy.Data.PrivateFacilityLicense", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1147,7 +1147,7 @@ namespace Reporter.Migrations
                     b.ToTable("PrivateFacilityLicenses");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ProjectBudget", b =>
+            modelBuilder.Entity("msy.Data.ProjectBudget", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1177,7 +1177,7 @@ namespace Reporter.Migrations
                     b.ToTable("ProjectBudgets");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ProjectProgress", b =>
+            modelBuilder.Entity("msy.Data.ProjectProgress", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1211,7 +1211,7 @@ namespace Reporter.Migrations
                     b.ToTable("ProjectProgresses");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ProjectType", b =>
+            modelBuilder.Entity("msy.Data.ProjectType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1235,7 +1235,7 @@ namespace Reporter.Migrations
                     b.ToTable("ProjectTypes");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Tournament", b =>
+            modelBuilder.Entity("msy.Data.Tournament", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1269,7 +1269,7 @@ namespace Reporter.Migrations
                     b.ToTable("Tournaments");
                 });
 
-            modelBuilder.Entity("Reporter.Data.TournamentLevel", b =>
+            modelBuilder.Entity("msy.Data.TournamentLevel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1296,7 +1296,7 @@ namespace Reporter.Migrations
                     b.ToTable("TournamentLevels");
                 });
 
-            modelBuilder.Entity("Reporter.Data.UsersGender", b =>
+            modelBuilder.Entity("msy.Data.UsersGender", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1322,13 +1322,13 @@ namespace Reporter.Migrations
 
             modelBuilder.Entity("CourseEmployee", b =>
                 {
-                    b.HasOne("Reporter.Data.Course", null)
+                    b.HasOne("msy.Data.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.Employee", null)
+                    b.HasOne("msy.Data.Employee", null)
                         .WithMany()
                         .HasForeignKey("EmployeesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1346,7 +1346,7 @@ namespace Reporter.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Reporter.Data.ApplicationUser", null)
+                    b.HasOne("msy.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1355,7 +1355,7 @@ namespace Reporter.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Reporter.Data.ApplicationUser", null)
+                    b.HasOne("msy.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1370,7 +1370,7 @@ namespace Reporter.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.ApplicationUser", null)
+                    b.HasOne("msy.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1379,22 +1379,22 @@ namespace Reporter.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Reporter.Data.ApplicationUser", null)
+                    b.HasOne("msy.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Reporter.Data.Athlete", b =>
+            modelBuilder.Entity("msy.Data.Athlete", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("Athletes")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.Gender", "Gender")
+                    b.HasOne("msy.Data.Gender", "Gender")
                         .WithMany("Athletes")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1405,23 +1405,23 @@ namespace Reporter.Migrations
                     b.Navigation("Gender");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Champion", b =>
+            modelBuilder.Entity("msy.Data.Champion", b =>
                 {
-                    b.HasOne("Reporter.Data.AgeGroup", "AgeGroup")
+                    b.HasOne("msy.Data.AgeGroup", "AgeGroup")
                         .WithMany("Champions")
                         .HasForeignKey("AgeGroupId");
 
-                    b.HasOne("Reporter.Data.Athlete", "Athlete")
+                    b.HasOne("msy.Data.Athlete", "Athlete")
                         .WithMany("Champions")
                         .HasForeignKey("AthleteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.Medal", "Medal")
+                    b.HasOne("msy.Data.Medal", "Medal")
                         .WithMany("Champions")
                         .HasForeignKey("MedalId");
 
-                    b.HasOne("Reporter.Data.Tournament", "Tournament")
+                    b.HasOne("msy.Data.Tournament", "Tournament")
                         .WithMany("Champions")
                         .HasForeignKey("TournamentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1436,19 +1436,19 @@ namespace Reporter.Migrations
                     b.Navigation("Tournament");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ConstructionProject", b =>
+            modelBuilder.Entity("msy.Data.ConstructionProject", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("ConstructionProjects")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.Facility", "Facility")
+                    b.HasOne("msy.Data.Facility", "Facility")
                         .WithMany("ConstructionProjects")
                         .HasForeignKey("FacilityId");
 
-                    b.HasOne("Reporter.Data.ProjectType", "Type")
+                    b.HasOne("msy.Data.ProjectType", "Type")
                         .WithMany("ConstructionProjects")
                         .HasForeignKey("TypeId");
 
@@ -1459,15 +1459,15 @@ namespace Reporter.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Employee", b =>
+            modelBuilder.Entity("msy.Data.Employee", b =>
                 {
-                    b.HasOne("Reporter.Data.Gender", "Gender")
+                    b.HasOne("msy.Data.Gender", "Gender")
                         .WithMany("Employees")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.EmploymentType", "Type")
+                    b.HasOne("msy.Data.EmploymentType", "Type")
                         .WithMany("Employees")
                         .HasForeignKey("TypeId");
 
@@ -1476,19 +1476,19 @@ namespace Reporter.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Facility", b =>
+            modelBuilder.Entity("msy.Data.Facility", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("Facilities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.FacilityType", "Type")
+                    b.HasOne("msy.Data.FacilityType", "Type")
                         .WithMany("Facilities")
                         .HasForeignKey("TypeId");
 
-                    b.HasOne("Reporter.Data.UsersGender", "UsersGender")
+                    b.HasOne("msy.Data.UsersGender", "UsersGender")
                         .WithMany("Facilities")
                         .HasForeignKey("UsersGenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1501,15 +1501,15 @@ namespace Reporter.Migrations
                     b.Navigation("UsersGender");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FacilityContract", b =>
+            modelBuilder.Entity("msy.Data.FacilityContract", b =>
                 {
-                    b.HasOne("Reporter.Data.Facility", "Facility")
+                    b.HasOne("msy.Data.Facility", "Facility")
                         .WithMany("FacilityContracts")
                         .HasForeignKey("FacilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.LocalFederation", "LegalContractor")
+                    b.HasOne("msy.Data.LocalFederation", "LegalContractor")
                         .WithMany("FacilityContracts")
                         .HasForeignKey("LegalContractorId");
 
@@ -1518,24 +1518,24 @@ namespace Reporter.Migrations
                     b.Navigation("LegalContractor");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FacilityDocument", b =>
+            modelBuilder.Entity("msy.Data.FacilityDocument", b =>
                 {
-                    b.HasOne("Reporter.Data.Facility", "Facility")
+                    b.HasOne("msy.Data.Facility", "Facility")
                         .WithMany("FacilityDocuments")
                         .HasForeignKey("FacilityId");
 
                     b.Navigation("Facility");
                 });
 
-            modelBuilder.Entity("Reporter.Data.GovernmentFacility", b =>
+            modelBuilder.Entity("msy.Data.GovernmentFacility", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("GovernmentFacilities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.FacilityType", "Type")
+                    b.HasOne("msy.Data.FacilityType", "Type")
                         .WithMany("GovernmentFacilities")
                         .HasForeignKey("TypeId");
 
@@ -1544,15 +1544,15 @@ namespace Reporter.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Reporter.Data.GovernmentFacilityLicense", b =>
+            modelBuilder.Entity("msy.Data.GovernmentFacilityLicense", b =>
                 {
-                    b.HasOne("Reporter.Data.GovernmentFacility", "Facility")
+                    b.HasOne("msy.Data.GovernmentFacility", "Facility")
                         .WithMany("GovernmentFacilityLicenses")
                         .HasForeignKey("FacilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.UsersGender", "UsersGender")
+                    b.HasOne("msy.Data.UsersGender", "UsersGender")
                         .WithMany("GovernmentFacilityLicenses")
                         .HasForeignKey("UsersGenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1563,15 +1563,15 @@ namespace Reporter.Migrations
                     b.Navigation("UsersGender");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Insurance", b =>
+            modelBuilder.Entity("msy.Data.Insurance", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("Insurances")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.Federation", "Federation")
+                    b.HasOne("msy.Data.Federation", "Federation")
                         .WithMany("Insurances")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1582,15 +1582,15 @@ namespace Reporter.Migrations
                     b.Navigation("Federation");
                 });
 
-            modelBuilder.Entity("Reporter.Data.LocalFederation", b =>
+            modelBuilder.Entity("msy.Data.LocalFederation", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("LocalFederations")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.Federation", "Federation")
+                    b.HasOne("msy.Data.Federation", "Federation")
                         .WithMany("LocalFederations")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1601,9 +1601,9 @@ namespace Reporter.Migrations
                     b.Navigation("Federation");
                 });
 
-            modelBuilder.Entity("Reporter.Data.LocalFederationPresident", b =>
+            modelBuilder.Entity("msy.Data.LocalFederationPresident", b =>
                 {
-                    b.HasOne("Reporter.Data.LocalFederation", "Federation")
+                    b.HasOne("msy.Data.LocalFederation", "Federation")
                         .WithMany("LocalFederationPresidents")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1612,9 +1612,9 @@ namespace Reporter.Migrations
                     b.Navigation("Federation");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Population", b =>
+            modelBuilder.Entity("msy.Data.Population", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("Populations")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1623,15 +1623,15 @@ namespace Reporter.Migrations
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("Reporter.Data.PrivateFacility", b =>
+            modelBuilder.Entity("msy.Data.PrivateFacility", b =>
                 {
-                    b.HasOne("Reporter.Data.City", "City")
+                    b.HasOne("msy.Data.City", "City")
                         .WithMany("PrivateFacilities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.FacilityType", "Type")
+                    b.HasOne("msy.Data.FacilityType", "Type")
                         .WithMany("PrivateFacilities")
                         .HasForeignKey("TypeId");
 
@@ -1640,15 +1640,15 @@ namespace Reporter.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Reporter.Data.PrivateFacilityLicense", b =>
+            modelBuilder.Entity("msy.Data.PrivateFacilityLicense", b =>
                 {
-                    b.HasOne("Reporter.Data.PrivateFacility", "Facility")
+                    b.HasOne("msy.Data.PrivateFacility", "Facility")
                         .WithMany("PrivateFacilityLicenses")
                         .HasForeignKey("FacilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.UsersGender", "UsersGender")
+                    b.HasOne("msy.Data.UsersGender", "UsersGender")
                         .WithMany("PrivateFacilityLicenses")
                         .HasForeignKey("UsersGenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1659,15 +1659,15 @@ namespace Reporter.Migrations
                     b.Navigation("UsersGender");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ProjectBudget", b =>
+            modelBuilder.Entity("msy.Data.ProjectBudget", b =>
                 {
-                    b.HasOne("Reporter.Data.ConstructionProject", "Project")
+                    b.HasOne("msy.Data.ConstructionProject", "Project")
                         .WithMany("ProjectBudgets")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.FundingSource", "Source")
+                    b.HasOne("msy.Data.FundingSource", "Source")
                         .WithMany("ProjectBudgets")
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1678,9 +1678,9 @@ namespace Reporter.Migrations
                     b.Navigation("Source");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ProjectProgress", b =>
+            modelBuilder.Entity("msy.Data.ProjectProgress", b =>
                 {
-                    b.HasOne("Reporter.Data.ConstructionProject", "Project")
+                    b.HasOne("msy.Data.ConstructionProject", "Project")
                         .WithMany("ProjectProgresses")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1689,15 +1689,15 @@ namespace Reporter.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Tournament", b =>
+            modelBuilder.Entity("msy.Data.Tournament", b =>
                 {
-                    b.HasOne("Reporter.Data.Federation", "Federation")
+                    b.HasOne("msy.Data.Federation", "Federation")
                         .WithMany("Tournaments")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Reporter.Data.TournamentLevel", "Level")
+                    b.HasOne("msy.Data.TournamentLevel", "Level")
                         .WithMany("Tournaments")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1708,17 +1708,17 @@ namespace Reporter.Migrations
                     b.Navigation("Level");
                 });
 
-            modelBuilder.Entity("Reporter.Data.AgeGroup", b =>
+            modelBuilder.Entity("msy.Data.AgeGroup", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Athlete", b =>
+            modelBuilder.Entity("msy.Data.Athlete", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("Reporter.Data.City", b =>
+            modelBuilder.Entity("msy.Data.City", b =>
                 {
                     b.Navigation("Athletes");
 
@@ -1737,19 +1737,19 @@ namespace Reporter.Migrations
                     b.Navigation("PrivateFacilities");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ConstructionProject", b =>
+            modelBuilder.Entity("msy.Data.ConstructionProject", b =>
                 {
                     b.Navigation("ProjectBudgets");
 
                     b.Navigation("ProjectProgresses");
                 });
 
-            modelBuilder.Entity("Reporter.Data.EmploymentType", b =>
+            modelBuilder.Entity("msy.Data.EmploymentType", b =>
                 {
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Facility", b =>
+            modelBuilder.Entity("msy.Data.Facility", b =>
                 {
                     b.Navigation("ConstructionProjects");
 
@@ -1758,7 +1758,7 @@ namespace Reporter.Migrations
                     b.Navigation("FacilityDocuments");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FacilityType", b =>
+            modelBuilder.Entity("msy.Data.FacilityType", b =>
                 {
                     b.Navigation("Facilities");
 
@@ -1767,7 +1767,7 @@ namespace Reporter.Migrations
                     b.Navigation("PrivateFacilities");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Federation", b =>
+            modelBuilder.Entity("msy.Data.Federation", b =>
                 {
                     b.Navigation("Insurances");
 
@@ -1776,56 +1776,56 @@ namespace Reporter.Migrations
                     b.Navigation("Tournaments");
                 });
 
-            modelBuilder.Entity("Reporter.Data.FundingSource", b =>
+            modelBuilder.Entity("msy.Data.FundingSource", b =>
                 {
                     b.Navigation("ProjectBudgets");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Gender", b =>
+            modelBuilder.Entity("msy.Data.Gender", b =>
                 {
                     b.Navigation("Athletes");
 
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("Reporter.Data.GovernmentFacility", b =>
+            modelBuilder.Entity("msy.Data.GovernmentFacility", b =>
                 {
                     b.Navigation("GovernmentFacilityLicenses");
                 });
 
-            modelBuilder.Entity("Reporter.Data.LocalFederation", b =>
+            modelBuilder.Entity("msy.Data.LocalFederation", b =>
                 {
                     b.Navigation("FacilityContracts");
 
                     b.Navigation("LocalFederationPresidents");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Medal", b =>
+            modelBuilder.Entity("msy.Data.Medal", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("Reporter.Data.PrivateFacility", b =>
+            modelBuilder.Entity("msy.Data.PrivateFacility", b =>
                 {
                     b.Navigation("PrivateFacilityLicenses");
                 });
 
-            modelBuilder.Entity("Reporter.Data.ProjectType", b =>
+            modelBuilder.Entity("msy.Data.ProjectType", b =>
                 {
                     b.Navigation("ConstructionProjects");
                 });
 
-            modelBuilder.Entity("Reporter.Data.Tournament", b =>
+            modelBuilder.Entity("msy.Data.Tournament", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("Reporter.Data.TournamentLevel", b =>
+            modelBuilder.Entity("msy.Data.TournamentLevel", b =>
                 {
                     b.Navigation("Tournaments");
                 });
 
-            modelBuilder.Entity("Reporter.Data.UsersGender", b =>
+            modelBuilder.Entity("msy.Data.UsersGender", b =>
                 {
                     b.Navigation("Facilities");
 
