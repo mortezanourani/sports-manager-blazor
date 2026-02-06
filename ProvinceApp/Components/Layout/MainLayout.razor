@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<nav class="primary-navbar">
+    <div class="container">
+        <MainNavMenu />
+        <form class="tn-search">
+            <input type="text" name="search" placeholder="جستجو..." />
+        </form>
+    </div>
+</nav>
+<main class="main">
+    <div class="content">
+        @Body
+    </div>
+</main>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
