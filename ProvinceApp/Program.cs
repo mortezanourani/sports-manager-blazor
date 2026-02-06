@@ -36,4 +36,6 @@ app.UseAuthorization();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
+app.MapAdditionalIdentityEndpoints();
+
 app.Run();
