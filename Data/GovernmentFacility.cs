@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace msy.Data;
+namespace Infrastructure.Data;
 
 public partial class GovernmentFacility
 {

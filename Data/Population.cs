@@ -1,4 +1,4 @@
-﻿namespace msy.Data;
+﻿namespace Infrastructure.Data;
 
 public class Population
 {

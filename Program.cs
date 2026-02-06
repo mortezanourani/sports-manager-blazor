@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using msy.Components;
-using msy.Components.Account;
-using msy.Data;
+using Infrastructure.Components;
+using Infrastructure.Components.Account;
+using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
