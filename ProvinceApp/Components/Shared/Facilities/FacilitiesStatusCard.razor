@@ -92,17 +92,17 @@
 </div>
 
 @code {
-	private DbSet<Facility>? msyFacilities;
+	private List<Facility>? msyFacilities;
 	private int msyFacilitiesCount { get; set; } = 0;
 	private int documentedMsyFacilitiesCount { get; set; } = 0;
 	private int undocumentedMsyFacilitiesCount { get; set; } = 0;
 	private int contractedMsyFacilitiesCount { get; set; } = 0;
 
-	private DbSet<GovernmentFacility>? govFacilities;
+	private List<GovernmentFacility>? govFacilities;
 	private int govFacilitiesCount { get; set; } = 0;
 	private int licensedGovFacilitiesCount { get; set; } = 0;
 
-	private DbSet<PrivateFacility>? privateFacilities;
+	private List<PrivateFacility>? privateFacilities;
 	private int privateFacilitiesCount { get; set; } = 0;
 	private int beneficalPrivateFacilitiesCount { get; set; } = 0;
 	private int ownedPrivateFacilitiesCount { get; set; } = 0;
@@ -112,7 +112,7 @@
 	{
 		using var context = DbFactory.CreateDbContext();
 
-		msyFacilities = context.Facilities;
+		msyFacilities = context.Facilities.ToList();
 		msyFacilitiesCount = msyFacilities
 			.Where(facility => facility.IsSubFacility == false)
 			.Count();
@@ -124,13 +124,13 @@
 			.Where(m => m.FacilityContracts.Count() > 0)
 			.Count();
 
-		govFacilities = context.GovernmentFacilities;
+		govFacilities = context.GovernmentFacilities.ToList();
 		govFacilitiesCount = govFacilities.Count();
 		licensedGovFacilitiesCount = govFacilities
 			.Where(m => m.GovernmentFacilityLicenses.Count() > 0)
 			.Count();
 
-		privateFacilities = context.PrivateFacilities;
+		privateFacilities = context.PrivateFacilities.ToList();
 		privateFacilitiesCount = privateFacilities.Count();
 		beneficalPrivateFacilitiesCount = privateFacilities
 			.Where(m => m.PrivateFacilityLicenses

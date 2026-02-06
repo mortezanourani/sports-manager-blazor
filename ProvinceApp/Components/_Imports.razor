@@ -8,9 +8,16 @@
 @using Microsoft.JSInterop
 @using ProvinceApp
 @using ProvinceApp.Components
+@using ProvinceApp.Components.Shared
+@using ProvinceApp.Components.Shared.Education
+@using ProvinceApp.Components.Shared.Facilities
+@using ProvinceApp.Components.Shared.SportsGroup
+@using ProvinceApp.Components.Shared.TechnicalDepartment
 
 @using Infrastructure.Data
 @using Infrastructure.Components.Account
 @using Microsoft.AspNetCore.Components.Authorization
 
 @inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<ApplicationDbContext> DbFactory

@@ -3,12 +3,10 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject RoleManager<IdentityRole> RoleManager
 @inject SignInManager<ApplicationUser> SignInManager
-@inject IEmailSender<ApplicationUser> EmailSender
+@inject IdentityUserAccessor UserAccessor
+@* @inject IEmailSender<ApplicationUser> EmailSender *@
 
-@using Infrastructure.Components.Layout
-
+@using ProvinceApp.Components.Layout
 @layout DashboardLayout
 
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
-
-@* @using Infrastructure.Components.Pages.Dashboard.HumanResource.Education *@
