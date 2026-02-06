@@ -1,0 +1,58 @@
+﻿.login {
+    margin: 32px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 32px;
+}
+
+    .login .login-image-box {
+        overflow: hidden;
+        border-radius: 24px;
+        flex: 0 1 60%;
+        background: url('/images/login_background.png');
+        background-position: center center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+
+    .login-form {
+        flex: 0 1 40%;
+        padding: 64px;
+    }
+
+    .login-form .form-header {
+        margin-bottom: 32px;
+        text-align: center;
+    }
+
+    .login .card .card-body {
+        padding: 0;
+    }
+
+::deep.login .card .card-body .checkbox {
+    position: relative;
+    display: inline-block;
+}
+
+    ::deep.login .card .card-body .checkbox .form-label {
+        font-size: 14px;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+    }
+
+        ::deep.login .card .card-body .checkbox .form-label input {
+            margin: 0;
+        }
+
+.login .card .card-body button {
+    background: var(--primary-color);
+    font-size: 15px;
+    border: none;
+    height: 42px;
+}

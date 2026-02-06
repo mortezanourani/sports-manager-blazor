@@ -1,0 +1,37 @@
+﻿<nav class="main-nav">
+    <div class="main-nav-logo">
+        <NavLink href="/" Match="NavLinkMatch.All">
+            <img src="/icons/home.svg" />
+        </NavLink>
+    </div>
+    <ul class="nav-menu main-nav-menu">
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Federations">هیات های ورزشی</NavLink>
+        </li>
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Athletes">ورزشکاران سازمان یافته</NavLink>
+        </li>
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Facilities">اماکن ورزشی دولتی</NavLink>
+        </li>
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Gyms">باشگاه های ورزشی خصوصی</NavLink>
+        </li>
+    </ul>
+    <div class="main-nav-account">
+        <NavLink href="/Dashboard">
+            <AuthorizeView>
+                <Authorized>
+                    <img src="/icons/dashboard.svg" />
+                </Authorized>
+                <NotAuthorized>
+                    <img src="/icons/account.svg" />
+                </NotAuthorized>
+            </AuthorizeView>
+        </NavLink>
+    </div>
+</nav>
+
+@code {
+
+}
