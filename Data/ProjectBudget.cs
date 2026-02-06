@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace msy.Data;
+namespace Infrastructure.Data;
 
 public partial class ProjectBudget
 {
