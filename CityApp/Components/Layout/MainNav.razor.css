@@ -1,0 +1,68 @@
+﻿::deep {
+    --primary-color: #369;
+    --card-bg-color: #def;
+    --card-border-color: #d7d7d7;
+    --card-dark-bg-color: var(--primary-color);
+    --default-text-color: #333;
+    --default-text-size: 11pt;
+}
+
+.main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 64px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+    .main-nav > * {
+        background-color: var(--card-bg-color);
+        border-radius: 50px;
+        height: 58px;
+    }
+
+    .main-nav .main-nav-logo {
+        font-weight: 500;
+    }
+
+    .main-nav .nav-menu {
+        flex-grow: 1;
+        justify-content: space-around;
+        font-weight: 400;
+    }
+
+        .main-nav .nav-menu ::deep .menu-link {
+            padding: 16px 8px;
+            font-size: 10.5pt;
+        }
+
+    .main-nav ::deep .menu-link:hover,
+    .main-nav ::deep .menu-link.active {
+        color: var(--primary-color);
+    }
+
+    .main-nav .main-nav-logo,
+    .main-nav .main-nav-account {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-nav .main-nav-account {
+        background: var(--primary-color);
+    }
+
+        .main-nav .main-nav-logo ::deep a,
+        .main-nav .main-nav-account ::deep a {
+            padding: 12px;
+            display: flex;
+            aspect-ratio: 1;
+        }
+
+            .main-nav .main-nav-logo ::deep a img,
+            .main-nav .main-nav-account ::deep a img {
+                width: 28px;
+            }

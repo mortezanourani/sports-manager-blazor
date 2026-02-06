@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
         });
 
         //Services.AddScoped<IdentityUserAccessor>();
-        //Services.AddScoped<IdentityRedirectManager>();
+        Services.AddScoped<IdentityRedirectManager>();
         //Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
         return Services;
