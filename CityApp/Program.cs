@@ -9,6 +9,12 @@ builder.Services.AddRazorComponents()
 builder.Services.AddInfrastructure(
     builder.Configuration.GetConnectionString("CityConnection"));
 
+builder.Services.AddInfrastructureIdentity(
+    builder.Configuration.GetConnectionString("CityConnection"));
+
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +29,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
