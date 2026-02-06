@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+
+<nav class="dashboard-navbar">
+    <div class="container">
+        <DashboardNavMenu />
+    </div>
+</nav>
+<main class="main">
+    <div class="content">
+        @Body
+    </div>
+</main>
+
+@code {
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (HttpContext is null)
+        {
+            NavigationManager.Refresh(forceReload: true);
+        }
+    }
+}

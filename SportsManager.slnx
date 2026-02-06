@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="CityApp/CityApp.csproj" Id="190d69d2-5404-4022-9667-57c80bf29d0a" />
   <Project Path="Infrastructure/Infrastructure.csproj" />
+  <Project Path="ProvinceApp/ProvinceApp.csproj" Id="a7d4318e-1131-4f10-bd47-251a47a73eb4" />
 </Solution>

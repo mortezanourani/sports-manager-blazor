@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+<ul class="nav">
+    <li class="nav-item">
+        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+            <img src="/icons/monitoring.svg" />
+        </NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="/Dashboard" Match="NavLinkMatch.All">
+            <img src="/icons/dashboard.svg" />
+        </NavLink>
+    </li>
+    <AuthorizeView Policy="HR_Manager">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/Dashboard/HumanResource">امور اداری</NavLink>
+        </li>
+    </AuthorizeView>
+    <AuthorizeView Policy="M88_Admin">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/Dashboard/M88">ماده 88</NavLink>
+        </li>
+    </AuthorizeView>
+    <AuthorizeView Policy="M5_Admin">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/Dashboard/M5">ماده 5</NavLink>
+        </li>
+    </AuthorizeView>
+    <AuthorizeView Policy="FullAccess">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/Dashboard/Govermentals">اماکن سایر ارگان ها</NavLink>
+        </li>
+    </AuthorizeView>
+    <AuthorizeView Policy="SportsGroup_Admin">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/Dashboard/SportsGroup">گروه توسعه ورزش</NavLink>
+        </li>
+    </AuthorizeView>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="/Dashboard/Courses">شناسنامه آموزشی</NavLink>
+    </li>
+    <AuthorizeView Policy="FullAccess">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/Dashboard/Administration/Roles">پنل مدیریت</NavLink>
+        </li>
+    </AuthorizeView>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="/Dashboard/ChangePassword">
+            <img src="/icons/account-settings.svg" />
+        </NavLink>
+    </li>
+    <li class="nav-item">
+        <form method="post" action="/Account/Logout">
+            <input name="returnUrl" value="" hidden />
+            <button type="submit" class="nav-link">
+                <img src="/icons/poweroff.svg" />
+            </button>
+        </form>
+    </li>
+</ul>
+
+@code {
+
+}
