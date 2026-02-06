@@ -1,0 +1,86 @@
+﻿@using System.Globalization
+
+<div class="graphical-status">
+    <div class="graphical-block">
+        <div class="graphical-block-content">
+            <h1 class="header-1">
+                <im>@activeFederationsCount</im>
+            </h1>
+            <p>هیات ورزشی فعال</p>
+        </div>
+    </div>
+    <div class="graphical-block double reverse">
+        <div class="graphical-block-content">
+            <h1 class="header-1">
+                <im>@athletesCount</im>
+            </h1>
+            <p>ورزشکار سازمان یافته</p>
+        </div>
+    </div>
+    <div class="graphical-block">
+        <div class="graphical-block-content">
+        </div>
+    </div>
+    <div class="graphical-block reverse">
+        <div class="graphical-block-content">
+            <h1 class="header-1">
+                <im>@facilitiesCount</im>
+            </h1>
+            <p>مکان ورزشی دولتی</p>
+        </div>
+    </div>
+    <div class="graphical-block">
+        <div class="graphical-block-content">
+            <h1 class="header-1">
+                <im>@gymsCount</im>
+            </h1>
+            <p>باشگاه ورزشی خصوصی</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    PersianCalendar persianCalendar = new PersianCalendar();
+
+    private int activeFederationsCount;
+    private int athletesCount;
+    private int facilitiesCount;
+    private int gymsCount;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+
+        activeFederationsCount = await context.LocalFederations
+            .Include(federation => federation.LocalFederationPresidents)
+            .Where(federation => federation.CityId == 4)
+            .CountAsync(federation => federation.LocalFederationPresidents.Any());
+
+        int currentYear = persianCalendar.GetYear(DateTime.Now);
+        int currentMonth = persianCalendar.GetMonth(DateTime.Now);
+        int lastYear = ((currentYear - 1) * 100) + currentMonth;
+
+        athletesCount = await context.Insurances
+            .Where(m => ((m.Year * 100) + m.Month) > lastYear)
+            .Where(m => m.CityId == 4)
+            .SumAsync(m => m.MenCount + m.WomenCount);
+
+        facilitiesCount = await context.GovernmentFacilities
+            .CountAsync(m => m.CityId == 4);
+
+        var nowDate = DateTime.Now.Date;
+        var todayDate =
+            persianCalendar.GetYear(nowDate) * 10_000 +
+            persianCalendar.GetMonth(nowDate) * 100 +
+            persianCalendar.GetDayOfMonth(nowDate);
+
+        gymsCount = await context.PrivateFacilities
+            .CountAsync(m => m.CityId == 4);
+    }
+
+}

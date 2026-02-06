@@ -1,0 +1,141 @@
+﻿::deep {
+    --graphical-block-border-radius: 24px;
+    --graphical-status-bg-color: var(--light-color);
+}
+
+.graphical-status {
+    margin: 32px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+    .graphical-status .graphical-block {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
+        aspect-ratio: .5;
+        border-radius: var(--graphical-block-border-radius);
+    }
+
+        .graphical-status .graphical-block.reverse {
+            flex-direction: column-reverse;
+        }
+
+        .graphical-status .graphical-block.double {
+            flex: 2;
+            aspect-ratio: 1;
+        }
+
+        .graphical-status .graphical-block .graphical-block-content {
+            aspect-ratio: 1;
+            position: relative;
+            background-color: var(--graphical-status-bg-color);
+            border-radius: 0 0 var(--graphical-block-border-radius) var(--graphical-block-border-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .graphical-status .graphical-block:first-child .graphical-block-content {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+            .graphical-status .graphical-block:first-child .graphical-block-content:after,
+            .graphical-status .graphical-block:first-child .graphical-block-content:before {
+                position: absolute;
+                content: '';
+                right: 0;
+                top: 100%;
+                aspect-ratio: 1;
+                background-color: var(--graphical-status-bg-color);
+                width: var(--graphical-block-border-radius);
+            }
+
+            .graphical-status .graphical-block:first-child .graphical-block-content:after {
+                border-radius: 0 var(--graphical-block-border-radius) 0 0;
+            }
+
+        .graphical-status .graphical-block:last-child .graphical-block-content {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+            .graphical-status .graphical-block:last-child .graphical-block-content:after,
+            .graphical-status .graphical-block:last-child .graphical-block-content:before {
+                position: absolute;
+                content: '';
+                left: 0;
+                top: 100%;
+                aspect-ratio: 1;
+                background-color: var(--graphical-status-bg-color);
+                width: var(--graphical-block-border-radius);
+            }
+
+            .graphical-status .graphical-block:last-child .graphical-block-content:after {
+                border-radius: var(--graphical-block-border-radius) 0 0 0;
+            }
+
+        .graphical-status .graphical-block.double .graphical-block-content {
+            aspect-ratio: 2;
+        }
+
+        .graphical-status .graphical-block.reverse .graphical-block-content {
+            border-radius: var(--graphical-block-border-radius) var(--graphical-block-border-radius) 0 0;
+        }
+
+        .graphical-status .graphical-block.reverse:first-child .graphical-block-content {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+            .graphical-status .graphical-block.reverse:first-child .graphical-block-content:after,
+            .graphical-status .graphical-block.reverse:first-child .graphical-block-content:before {
+                position: absolute;
+                content: '';
+                right: 0;
+                top: calc(-1 * var(--graphical-block-border-radius));
+                aspect-ratio: 1;
+                background-color: var(--graphical-status-bg-color);
+                width: var(--graphical-block-border-radius);
+            }
+
+            .graphical-status .graphical-block.reverse:first-child .graphical-block-content:after {
+                border-radius: 0 0 var(--graphical-block-border-radius) 0;
+            }
+
+        .graphical-status .graphical-block.reverse:last-child .graphical-block-content:after,
+        .graphical-status .graphical-block.reverse:last-child .graphical-block-content:before {
+            position: absolute;
+            content: '';
+            left: 0;
+            top: calc(-1 * var(--graphical-block-border-radius));
+            aspect-ratio: 1;
+            background-color: var(--graphical-status-bg-color);
+            width: var(--graphical-block-border-radius);
+        }
+
+        .graphical-status .graphical-block.reverse:last-child .graphical-block-content {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+            .graphical-status .graphical-block.reverse:last-child .graphical-block-content:after {
+                border-radius: 0 0 0 var(--graphical-block-border-radius);
+            }
+
+            .graphical-status .graphical-block,
+            .graphical-status .graphical-block:last-child .graphical-block-content:after,
+            .graphical-status .graphical-block:first-child .graphical-block-content:after,
+            .graphical-status .graphical-block.reverse:last-child .graphical-block-content:after,
+            .graphical-status .graphical-block.reverse:first-child .graphical-block-content:after {
+                background-image: url('/images/graphical_status_background.png');
+                background-attachment: fixed;
+                background-size: cover;
+            }

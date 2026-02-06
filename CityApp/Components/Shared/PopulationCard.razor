@@ -1,0 +1,87 @@
+﻿@using System.Globalization
+
+<div class="card population-card">
+    <h5 class="header-6 card-title">جمعیت شهرستان</h5>
+    <div class="count-cols-wrapper">
+        <div class="count-col">
+            <p class="display-6">آقایان</p>
+            <h4 class="header-5">@($"{UrbanMenPopulation + RuralMenPopulation:#,0}")</h4>
+        </div>
+        <hr class="vertical-seperator" />
+        <div class="count-col">
+            <p class="display-6">بانوان</p>
+            <h4 class="header-5">@($"{UrbanWomenPopulation + RuralWomenPopulation:#,0}")</h4>
+        </div>
+    </div>
+    <div class="count-row">
+        <p class="display-6">جمعیت کل شهرستان</p>
+        <h6 class="header-5">@($"{TotalPopulation:#,0}")</h6>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int? CityId { get; set; }
+
+    private int? TotalPopulation = null!;
+    private int? UrbanMenPopulation = null!;
+    private int? UrbanWomenPopulation = null!;
+    private int? RuralMenPopulation = null!;
+    private int? RuralWomenPopulation = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var currentYear = 1404;
+        
+        using var context = DbFactory.CreateDbContext();
+
+        var population = await context.Population
+            .Where(m => m.Year >= currentYear - 10)
+            .ToListAsync();
+
+        UrbanMenPopulation = population
+            .Sum(m => m.UrbanMen);
+
+        UrbanWomenPopulation = population
+            .Sum(m => m.UrbanWomen);
+
+        RuralMenPopulation = population
+            .Sum(m => m.RuralMen);
+
+        RuralWomenPopulation = population
+            .Sum(m => m.RuralWomen);
+
+        TotalPopulation = UrbanMenPopulation + UrbanWomenPopulation + RuralMenPopulation + RuralWomenPopulation;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (CityId is null)
+        {
+            return;
+        }
+
+        var currentYear = 1404;
+        
+        using var context = DbFactory.CreateDbContext();
+
+        var population = await context.Population
+            .Where(m => m.Year >= currentYear - 10)
+            .Where(m => m.CityId == CityId)
+            .ToListAsync();
+
+        UrbanMenPopulation = population
+            .Sum(m => m.UrbanMen);
+
+        UrbanWomenPopulation = population
+            .Sum(m => m.UrbanWomen);
+
+        RuralMenPopulation = population
+            .Sum(m => m.RuralMen);
+
+        RuralWomenPopulation = population
+            .Sum(m => m.RuralWomen);
+
+        TotalPopulation = UrbanMenPopulation + UrbanWomenPopulation + RuralMenPopulation + RuralWomenPopulation;
+    }
+}
