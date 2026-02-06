@@ -1,0 +1,16 @@
+﻿.federations-status-card {
+    padding: 32px;
+    margin: 32px auto 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 12px;
+    aspect-ratio: 4;
+}
+
+    .federations-status-card .federations-count {
+        border-radius: 50%;
+        aspect-ratio: 1;
+        background: radial-gradient(transparent 55%, var(--card-bg-color) 56%);
+    }

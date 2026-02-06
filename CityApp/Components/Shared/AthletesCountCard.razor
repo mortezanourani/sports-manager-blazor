@@ -1,0 +1,57 @@
+﻿@using System.Globalization
+
+<div class="card bordered-card white-card athletes-count-card">
+	<h5 class="header-6 card-title">ورزشکاران سازمان یافته</h5>
+	<div class="count-cols-wrapper">
+		<div class="count-col">
+			<p class="display-6">آقایان</p>
+			<h4 class="header-5">@($"{lastYearMenCount:#,0}")</h4>
+		</div>
+		<hr class="vertical-seperator" />
+		<div class="count-col">
+			<p class="display-6">بانوان</p>
+			<h4 class="header-5">@($"{lastYearWomenCount:#,0}")</h4>
+		</div>
+	</div>
+	<div class="count-row">
+		<p class="display-6">بیمه های فعال شهرستان</p>
+		<h6 class="header-5">@($"{lastYearCount:#,0}")</h6>
+	</div>
+</div>
+
+@code {
+	PersianCalendar persianCalendar = new PersianCalendar();
+
+	private List<Insurance>? Insurances;
+
+	private int lastYearCount;
+	private int lastYearMenCount;
+	private int lastYearWomenCount;
+
+	private int championsAthletesCount;
+	private int generalAthletesCount;
+
+	protected override async Task OnInitializedAsync()
+	{
+		using var context = DbFactory.CreateDbContext();
+
+		Insurances = await context.Insurances
+			.Include(m => m.Federation)
+			.Where(m => m.CityId == 4)
+			.ToListAsync();
+
+		int currentYear = persianCalendar.GetYear(DateTime.Now);
+		int currentMonth = persianCalendar.GetMonth(DateTime.Now);
+		int lastYear = ((currentYear - 1) * 100) + currentMonth;
+
+		lastYearMenCount = Insurances
+			.Where(m => ((m.Year * 100) + m.Month) > lastYear)
+			.Sum(m => m.MenCount);
+
+		lastYearWomenCount = Insurances
+			.Where(m => ((m.Year * 100) + m.Month) > lastYear)
+			.Sum(m => m.WomenCount);
+
+		lastYearCount = lastYearMenCount + lastYearWomenCount;
+	}
+}

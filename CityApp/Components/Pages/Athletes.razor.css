@@ -1,0 +1,17 @@
+﻿::deep select {
+    width: 150px;
+    font: 400 13px IRANSans;
+    outline: none;
+    border: 1px solid lightgray;
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.athletes-summary-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 24px;
+    margin: 24px auto;
+}

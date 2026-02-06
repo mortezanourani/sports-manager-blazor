@@ -1,0 +1,14 @@
+﻿.main-header {
+    margin: 64px 0;
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+    .main-header .main-header-title {
+        flex: 33.33333%;
+    }
+
+    .main-header .main-header-description {
+        flex: 50%;
+    }
