@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Infrastructure.Data;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260116120032_CreateInitialModels")]
+    partial class CreateInitialModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,7 +173,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("msy.Data.AgeGroup", b =>
+            modelBuilder.Entity("Infrastructure.Data.AgeGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,7 +197,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("AgeGroups");
                 });
 
-            modelBuilder.Entity("msy.Data.ApplicationUser", b =>
+            modelBuilder.Entity("Infrastructure.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -259,7 +262,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("msy.Data.Athlete", b =>
+            modelBuilder.Entity("Infrastructure.Data.Athlete", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,7 +293,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Athletes");
                 });
 
-            modelBuilder.Entity("msy.Data.Champion", b =>
+            modelBuilder.Entity("Infrastructure.Data.Champion", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -327,7 +330,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Champions");
                 });
 
-            modelBuilder.Entity("msy.Data.City", b =>
+            modelBuilder.Entity("Infrastructure.Data.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,7 +354,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("msy.Data.ConstructionProject", b =>
+            modelBuilder.Entity("Infrastructure.Data.ConstructionProject", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -384,7 +387,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("ConstructionProjects");
                 });
 
-            modelBuilder.Entity("msy.Data.Course", b =>
+            modelBuilder.Entity("Infrastructure.Data.Course", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -416,7 +419,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("msy.Data.Department", b =>
+            modelBuilder.Entity("Infrastructure.Data.Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -438,7 +441,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("msy.Data.Employee", b =>
+            modelBuilder.Entity("Infrastructure.Data.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -483,7 +486,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("msy.Data.EmploymentType", b =>
+            modelBuilder.Entity("Infrastructure.Data.EmploymentType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -507,7 +510,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("EmploymentTypes");
                 });
 
-            modelBuilder.Entity("msy.Data.Facility", b =>
+            modelBuilder.Entity("Infrastructure.Data.Facility", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -570,7 +573,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Facilities");
                 });
 
-            modelBuilder.Entity("msy.Data.FacilityContract", b =>
+            modelBuilder.Entity("Infrastructure.Data.FacilityContract", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -618,7 +621,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("FacilityContracts");
                 });
 
-            modelBuilder.Entity("msy.Data.FacilityDocument", b =>
+            modelBuilder.Entity("Infrastructure.Data.FacilityDocument", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -652,7 +655,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("FacilityDocuments");
                 });
 
-            modelBuilder.Entity("msy.Data.FacilityType", b =>
+            modelBuilder.Entity("Infrastructure.Data.FacilityType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -676,7 +679,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("FacilityTypes");
                 });
 
-            modelBuilder.Entity("msy.Data.Federation", b =>
+            modelBuilder.Entity("Infrastructure.Data.Federation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -712,7 +715,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Federations");
                 });
 
-            modelBuilder.Entity("msy.Data.FundingSource", b =>
+            modelBuilder.Entity("Infrastructure.Data.FundingSource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -736,7 +739,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("FundingSources");
                 });
 
-            modelBuilder.Entity("msy.Data.Gender", b =>
+            modelBuilder.Entity("Infrastructure.Data.Gender", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -760,7 +763,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Genders");
                 });
 
-            modelBuilder.Entity("msy.Data.GovernmentFacility", b =>
+            modelBuilder.Entity("Infrastructure.Data.GovernmentFacility", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -815,7 +818,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("GovernmentFacilities");
                 });
 
-            modelBuilder.Entity("msy.Data.GovernmentFacilityLicense", b =>
+            modelBuilder.Entity("Infrastructure.Data.GovernmentFacilityLicense", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -861,7 +864,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("GovernmentFacilityLicenses");
                 });
 
-            modelBuilder.Entity("msy.Data.Insurance", b =>
+            modelBuilder.Entity("Infrastructure.Data.Insurance", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -894,7 +897,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Insurances");
                 });
 
-            modelBuilder.Entity("msy.Data.LocalFederation", b =>
+            modelBuilder.Entity("Infrastructure.Data.LocalFederation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -930,7 +933,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("LocalFederations");
                 });
 
-            modelBuilder.Entity("msy.Data.LocalFederationPresident", b =>
+            modelBuilder.Entity("Infrastructure.Data.LocalFederationPresident", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -979,7 +982,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("LocalFederationPresidents");
                 });
 
-            modelBuilder.Entity("msy.Data.Medal", b =>
+            modelBuilder.Entity("Infrastructure.Data.Medal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1006,7 +1009,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Medals");
                 });
 
-            modelBuilder.Entity("msy.Data.Population", b =>
+            modelBuilder.Entity("Infrastructure.Data.Population", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1037,7 +1040,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Population");
                 });
 
-            modelBuilder.Entity("msy.Data.PrivateFacility", b =>
+            modelBuilder.Entity("Infrastructure.Data.PrivateFacility", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1089,7 +1092,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("PrivateFacilities");
                 });
 
-            modelBuilder.Entity("msy.Data.PrivateFacilityLicense", b =>
+            modelBuilder.Entity("Infrastructure.Data.PrivateFacilityLicense", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1147,7 +1150,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("PrivateFacilityLicenses");
                 });
 
-            modelBuilder.Entity("msy.Data.ProjectBudget", b =>
+            modelBuilder.Entity("Infrastructure.Data.ProjectBudget", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1177,7 +1180,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProjectBudgets");
                 });
 
-            modelBuilder.Entity("msy.Data.ProjectProgress", b =>
+            modelBuilder.Entity("Infrastructure.Data.ProjectProgress", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1211,7 +1214,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProjectProgresses");
                 });
 
-            modelBuilder.Entity("msy.Data.ProjectType", b =>
+            modelBuilder.Entity("Infrastructure.Data.ProjectType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1235,7 +1238,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProjectTypes");
                 });
 
-            modelBuilder.Entity("msy.Data.Tournament", b =>
+            modelBuilder.Entity("Infrastructure.Data.Tournament", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1269,7 +1272,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Tournaments");
                 });
 
-            modelBuilder.Entity("msy.Data.TournamentLevel", b =>
+            modelBuilder.Entity("Infrastructure.Data.TournamentLevel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1296,7 +1299,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("TournamentLevels");
                 });
 
-            modelBuilder.Entity("msy.Data.UsersGender", b =>
+            modelBuilder.Entity("Infrastructure.Data.UsersGender", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1322,13 +1325,13 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("CourseEmployee", b =>
                 {
-                    b.HasOne("msy.Data.Course", null)
+                    b.HasOne("Infrastructure.Data.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.Employee", null)
+                    b.HasOne("Infrastructure.Data.Employee", null)
                         .WithMany()
                         .HasForeignKey("EmployeesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1346,7 +1349,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("msy.Data.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1355,7 +1358,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("msy.Data.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1370,7 +1373,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1379,22 +1382,22 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("msy.Data.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("msy.Data.Athlete", b =>
+            modelBuilder.Entity("Infrastructure.Data.Athlete", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("Athletes")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.Gender", "Gender")
+                    b.HasOne("Infrastructure.Data.Gender", "Gender")
                         .WithMany("Athletes")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1405,23 +1408,23 @@ namespace Infrastructure.Migrations
                     b.Navigation("Gender");
                 });
 
-            modelBuilder.Entity("msy.Data.Champion", b =>
+            modelBuilder.Entity("Infrastructure.Data.Champion", b =>
                 {
-                    b.HasOne("msy.Data.AgeGroup", "AgeGroup")
+                    b.HasOne("Infrastructure.Data.AgeGroup", "AgeGroup")
                         .WithMany("Champions")
                         .HasForeignKey("AgeGroupId");
 
-                    b.HasOne("msy.Data.Athlete", "Athlete")
+                    b.HasOne("Infrastructure.Data.Athlete", "Athlete")
                         .WithMany("Champions")
                         .HasForeignKey("AthleteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.Medal", "Medal")
+                    b.HasOne("Infrastructure.Data.Medal", "Medal")
                         .WithMany("Champions")
                         .HasForeignKey("MedalId");
 
-                    b.HasOne("msy.Data.Tournament", "Tournament")
+                    b.HasOne("Infrastructure.Data.Tournament", "Tournament")
                         .WithMany("Champions")
                         .HasForeignKey("TournamentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1436,19 +1439,19 @@ namespace Infrastructure.Migrations
                     b.Navigation("Tournament");
                 });
 
-            modelBuilder.Entity("msy.Data.ConstructionProject", b =>
+            modelBuilder.Entity("Infrastructure.Data.ConstructionProject", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("ConstructionProjects")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.Facility", "Facility")
+                    b.HasOne("Infrastructure.Data.Facility", "Facility")
                         .WithMany("ConstructionProjects")
                         .HasForeignKey("FacilityId");
 
-                    b.HasOne("msy.Data.ProjectType", "Type")
+                    b.HasOne("Infrastructure.Data.ProjectType", "Type")
                         .WithMany("ConstructionProjects")
                         .HasForeignKey("TypeId");
 
@@ -1459,15 +1462,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("msy.Data.Employee", b =>
+            modelBuilder.Entity("Infrastructure.Data.Employee", b =>
                 {
-                    b.HasOne("msy.Data.Gender", "Gender")
+                    b.HasOne("Infrastructure.Data.Gender", "Gender")
                         .WithMany("Employees")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.EmploymentType", "Type")
+                    b.HasOne("Infrastructure.Data.EmploymentType", "Type")
                         .WithMany("Employees")
                         .HasForeignKey("TypeId");
 
@@ -1476,19 +1479,19 @@ namespace Infrastructure.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("msy.Data.Facility", b =>
+            modelBuilder.Entity("Infrastructure.Data.Facility", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("Facilities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.FacilityType", "Type")
+                    b.HasOne("Infrastructure.Data.FacilityType", "Type")
                         .WithMany("Facilities")
                         .HasForeignKey("TypeId");
 
-                    b.HasOne("msy.Data.UsersGender", "UsersGender")
+                    b.HasOne("Infrastructure.Data.UsersGender", "UsersGender")
                         .WithMany("Facilities")
                         .HasForeignKey("UsersGenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1501,15 +1504,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("UsersGender");
                 });
 
-            modelBuilder.Entity("msy.Data.FacilityContract", b =>
+            modelBuilder.Entity("Infrastructure.Data.FacilityContract", b =>
                 {
-                    b.HasOne("msy.Data.Facility", "Facility")
+                    b.HasOne("Infrastructure.Data.Facility", "Facility")
                         .WithMany("FacilityContracts")
                         .HasForeignKey("FacilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.LocalFederation", "LegalContractor")
+                    b.HasOne("Infrastructure.Data.LocalFederation", "LegalContractor")
                         .WithMany("FacilityContracts")
                         .HasForeignKey("LegalContractorId");
 
@@ -1518,24 +1521,24 @@ namespace Infrastructure.Migrations
                     b.Navigation("LegalContractor");
                 });
 
-            modelBuilder.Entity("msy.Data.FacilityDocument", b =>
+            modelBuilder.Entity("Infrastructure.Data.FacilityDocument", b =>
                 {
-                    b.HasOne("msy.Data.Facility", "Facility")
+                    b.HasOne("Infrastructure.Data.Facility", "Facility")
                         .WithMany("FacilityDocuments")
                         .HasForeignKey("FacilityId");
 
                     b.Navigation("Facility");
                 });
 
-            modelBuilder.Entity("msy.Data.GovernmentFacility", b =>
+            modelBuilder.Entity("Infrastructure.Data.GovernmentFacility", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("GovernmentFacilities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.FacilityType", "Type")
+                    b.HasOne("Infrastructure.Data.FacilityType", "Type")
                         .WithMany("GovernmentFacilities")
                         .HasForeignKey("TypeId");
 
@@ -1544,15 +1547,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("msy.Data.GovernmentFacilityLicense", b =>
+            modelBuilder.Entity("Infrastructure.Data.GovernmentFacilityLicense", b =>
                 {
-                    b.HasOne("msy.Data.GovernmentFacility", "Facility")
+                    b.HasOne("Infrastructure.Data.GovernmentFacility", "Facility")
                         .WithMany("GovernmentFacilityLicenses")
                         .HasForeignKey("FacilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.UsersGender", "UsersGender")
+                    b.HasOne("Infrastructure.Data.UsersGender", "UsersGender")
                         .WithMany("GovernmentFacilityLicenses")
                         .HasForeignKey("UsersGenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1563,15 +1566,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("UsersGender");
                 });
 
-            modelBuilder.Entity("msy.Data.Insurance", b =>
+            modelBuilder.Entity("Infrastructure.Data.Insurance", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("Insurances")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.Federation", "Federation")
+                    b.HasOne("Infrastructure.Data.Federation", "Federation")
                         .WithMany("Insurances")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1582,15 +1585,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Federation");
                 });
 
-            modelBuilder.Entity("msy.Data.LocalFederation", b =>
+            modelBuilder.Entity("Infrastructure.Data.LocalFederation", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("LocalFederations")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.Federation", "Federation")
+                    b.HasOne("Infrastructure.Data.Federation", "Federation")
                         .WithMany("LocalFederations")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1601,9 +1604,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Federation");
                 });
 
-            modelBuilder.Entity("msy.Data.LocalFederationPresident", b =>
+            modelBuilder.Entity("Infrastructure.Data.LocalFederationPresident", b =>
                 {
-                    b.HasOne("msy.Data.LocalFederation", "Federation")
+                    b.HasOne("Infrastructure.Data.LocalFederation", "Federation")
                         .WithMany("LocalFederationPresidents")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1612,9 +1615,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Federation");
                 });
 
-            modelBuilder.Entity("msy.Data.Population", b =>
+            modelBuilder.Entity("Infrastructure.Data.Population", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("Populations")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1623,15 +1626,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("msy.Data.PrivateFacility", b =>
+            modelBuilder.Entity("Infrastructure.Data.PrivateFacility", b =>
                 {
-                    b.HasOne("msy.Data.City", "City")
+                    b.HasOne("Infrastructure.Data.City", "City")
                         .WithMany("PrivateFacilities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.FacilityType", "Type")
+                    b.HasOne("Infrastructure.Data.FacilityType", "Type")
                         .WithMany("PrivateFacilities")
                         .HasForeignKey("TypeId");
 
@@ -1640,15 +1643,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("msy.Data.PrivateFacilityLicense", b =>
+            modelBuilder.Entity("Infrastructure.Data.PrivateFacilityLicense", b =>
                 {
-                    b.HasOne("msy.Data.PrivateFacility", "Facility")
+                    b.HasOne("Infrastructure.Data.PrivateFacility", "Facility")
                         .WithMany("PrivateFacilityLicenses")
                         .HasForeignKey("FacilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.UsersGender", "UsersGender")
+                    b.HasOne("Infrastructure.Data.UsersGender", "UsersGender")
                         .WithMany("PrivateFacilityLicenses")
                         .HasForeignKey("UsersGenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1659,15 +1662,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("UsersGender");
                 });
 
-            modelBuilder.Entity("msy.Data.ProjectBudget", b =>
+            modelBuilder.Entity("Infrastructure.Data.ProjectBudget", b =>
                 {
-                    b.HasOne("msy.Data.ConstructionProject", "Project")
+                    b.HasOne("Infrastructure.Data.ConstructionProject", "Project")
                         .WithMany("ProjectBudgets")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.FundingSource", "Source")
+                    b.HasOne("Infrastructure.Data.FundingSource", "Source")
                         .WithMany("ProjectBudgets")
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1678,9 +1681,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Source");
                 });
 
-            modelBuilder.Entity("msy.Data.ProjectProgress", b =>
+            modelBuilder.Entity("Infrastructure.Data.ProjectProgress", b =>
                 {
-                    b.HasOne("msy.Data.ConstructionProject", "Project")
+                    b.HasOne("Infrastructure.Data.ConstructionProject", "Project")
                         .WithMany("ProjectProgresses")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1689,15 +1692,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("msy.Data.Tournament", b =>
+            modelBuilder.Entity("Infrastructure.Data.Tournament", b =>
                 {
-                    b.HasOne("msy.Data.Federation", "Federation")
+                    b.HasOne("Infrastructure.Data.Federation", "Federation")
                         .WithMany("Tournaments")
                         .HasForeignKey("FederationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("msy.Data.TournamentLevel", "Level")
+                    b.HasOne("Infrastructure.Data.TournamentLevel", "Level")
                         .WithMany("Tournaments")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1708,17 +1711,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("Level");
                 });
 
-            modelBuilder.Entity("msy.Data.AgeGroup", b =>
+            modelBuilder.Entity("Infrastructure.Data.AgeGroup", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("msy.Data.Athlete", b =>
+            modelBuilder.Entity("Infrastructure.Data.Athlete", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("msy.Data.City", b =>
+            modelBuilder.Entity("Infrastructure.Data.City", b =>
                 {
                     b.Navigation("Athletes");
 
@@ -1737,19 +1740,19 @@ namespace Infrastructure.Migrations
                     b.Navigation("PrivateFacilities");
                 });
 
-            modelBuilder.Entity("msy.Data.ConstructionProject", b =>
+            modelBuilder.Entity("Infrastructure.Data.ConstructionProject", b =>
                 {
                     b.Navigation("ProjectBudgets");
 
                     b.Navigation("ProjectProgresses");
                 });
 
-            modelBuilder.Entity("msy.Data.EmploymentType", b =>
+            modelBuilder.Entity("Infrastructure.Data.EmploymentType", b =>
                 {
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("msy.Data.Facility", b =>
+            modelBuilder.Entity("Infrastructure.Data.Facility", b =>
                 {
                     b.Navigation("ConstructionProjects");
 
@@ -1758,7 +1761,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("FacilityDocuments");
                 });
 
-            modelBuilder.Entity("msy.Data.FacilityType", b =>
+            modelBuilder.Entity("Infrastructure.Data.FacilityType", b =>
                 {
                     b.Navigation("Facilities");
 
@@ -1767,7 +1770,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("PrivateFacilities");
                 });
 
-            modelBuilder.Entity("msy.Data.Federation", b =>
+            modelBuilder.Entity("Infrastructure.Data.Federation", b =>
                 {
                     b.Navigation("Insurances");
 
@@ -1776,56 +1779,56 @@ namespace Infrastructure.Migrations
                     b.Navigation("Tournaments");
                 });
 
-            modelBuilder.Entity("msy.Data.FundingSource", b =>
+            modelBuilder.Entity("Infrastructure.Data.FundingSource", b =>
                 {
                     b.Navigation("ProjectBudgets");
                 });
 
-            modelBuilder.Entity("msy.Data.Gender", b =>
+            modelBuilder.Entity("Infrastructure.Data.Gender", b =>
                 {
                     b.Navigation("Athletes");
 
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("msy.Data.GovernmentFacility", b =>
+            modelBuilder.Entity("Infrastructure.Data.GovernmentFacility", b =>
                 {
                     b.Navigation("GovernmentFacilityLicenses");
                 });
 
-            modelBuilder.Entity("msy.Data.LocalFederation", b =>
+            modelBuilder.Entity("Infrastructure.Data.LocalFederation", b =>
                 {
                     b.Navigation("FacilityContracts");
 
                     b.Navigation("LocalFederationPresidents");
                 });
 
-            modelBuilder.Entity("msy.Data.Medal", b =>
+            modelBuilder.Entity("Infrastructure.Data.Medal", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("msy.Data.PrivateFacility", b =>
+            modelBuilder.Entity("Infrastructure.Data.PrivateFacility", b =>
                 {
                     b.Navigation("PrivateFacilityLicenses");
                 });
 
-            modelBuilder.Entity("msy.Data.ProjectType", b =>
+            modelBuilder.Entity("Infrastructure.Data.ProjectType", b =>
                 {
                     b.Navigation("ConstructionProjects");
                 });
 
-            modelBuilder.Entity("msy.Data.Tournament", b =>
+            modelBuilder.Entity("Infrastructure.Data.Tournament", b =>
                 {
                     b.Navigation("Champions");
                 });
 
-            modelBuilder.Entity("msy.Data.TournamentLevel", b =>
+            modelBuilder.Entity("Infrastructure.Data.TournamentLevel", b =>
                 {
                     b.Navigation("Tournaments");
                 });
 
-            modelBuilder.Entity("msy.Data.UsersGender", b =>
+            modelBuilder.Entity("Infrastructure.Data.UsersGender", b =>
                 {
                     b.Navigation("Facilities");
 
