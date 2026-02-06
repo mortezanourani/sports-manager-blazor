@@ -1,0 +1,66 @@
+﻿.login {
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 44px);
+    width: 100vw;
+    background-image: url("/images/login.background.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.login .card {
+    width: 320px;
+    height: auto;
+    background: none;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px -2px black;
+    border: 1px solid gray;
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+    .login .card .card-header {
+        padding: 16px;
+        padding-bottom: 0;
+        justify-content: center;
+    }
+
+        .login .card .card-header h5 {
+            font-size: 16px;
+        }
+
+    .login .card .card-body {
+        padding: 16px;
+    }
+
+::deep.login .card .card-body .checkbox {
+    position: relative;
+    display: inline-block;
+}
+
+    ::deep.login .card .card-body .checkbox .form-label {
+        font-size: 14px;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+    }
+
+        ::deep.login .card .card-body .checkbox .form-label input {
+            margin: 0;
+        }
+
+.login .card .card-body button {
+    background: var(--primary-color);
+    font-size: 15px;
+    border: none;
+    height: 42px;
+}

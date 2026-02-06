@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
             options.UseSqlServer(connectionString);
         });
 
-        //Services.AddScoped<IdentityUserAccessor>();
+        Services.AddScoped<IdentityUserAccessor>();
         Services.AddScoped<IdentityRedirectManager>();
         //Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 

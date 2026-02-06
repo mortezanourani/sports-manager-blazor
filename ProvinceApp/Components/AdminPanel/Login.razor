@@ -1,5 +1,7 @@
 ﻿@page "/Account/Login"
 
+@layout Components.Layout.MainLayout
+
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Identity
@@ -18,7 +20,6 @@
             <h5>ورود به پنل کاربری</h5>
         </div>
         <div class="card-body">
-            <StatusMessage Message="@errorMessage" />
             <EditForm Model="Input" method="post" OnValidSubmit="LoginUser" FormName="login">
                 <DataAnnotationsValidator />
                 <ValidationSummary class="text-danger" role="alert" />
