@@ -49,8 +49,6 @@
 </div>
 
 @code {
-    private string? errorMessage;
-
     [CascadingParameter]
     private HttpContext HttpContext { get; set; } = default!;
 
@@ -92,7 +90,7 @@
         }
         else
         {
-            errorMessage = "Error: Invalid login attempt.";
+            // Error Handling
         }
     }
 
