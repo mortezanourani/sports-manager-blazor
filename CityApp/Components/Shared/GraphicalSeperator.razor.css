@@ -1,0 +1,149 @@
+﻿::deep {
+    --graphical-block-border-radius: 24px;
+    --graphical-seperator-bg-color: var(--light-color);
+}
+
+.graphical-seperator {
+    margin: 32px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+    .graphical-seperator .graphical-block {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
+        aspect-ratio: .5;
+        border-radius: var(--graphical-block-border-radius);
+    }
+
+        .graphical-seperator .graphical-block.reverse {
+            flex-direction: column-reverse;
+        }
+
+        .graphical-seperator .graphical-block.double {
+            flex: 2;
+            aspect-ratio: 1;
+        }
+
+        .graphical-seperator .graphical-block .graphical-block-whitespace {
+            aspect-ratio: 1;
+            position: relative;
+            background-color: var(--graphical-seperator-bg-color);
+            border-radius: 0 0 var(--graphical-block-border-radius) var(--graphical-block-border-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .graphical-seperator .graphical-block:first-child .graphical-block-whitespace {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+            .graphical-seperator .graphical-block:first-child .graphical-block-whitespace:after,
+            .graphical-seperator .graphical-block:first-child .graphical-block-whitespace:before {
+                position: absolute;
+                content: '';
+                right: 0;
+                top: 100%;
+                aspect-ratio: 1;
+                background-color: var(--graphical-seperator-bg-color);
+                width: var(--graphical-block-border-radius);
+            }
+
+            .graphical-seperator .graphical-block:first-child .graphical-block-whitespace:after {
+                border-radius: 0 var(--graphical-block-border-radius) 0 0;
+            }
+
+        .graphical-seperator .graphical-block:last-child .graphical-block-whitespace {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+            .graphical-seperator .graphical-block:last-child .graphical-block-whitespace:after,
+            .graphical-seperator .graphical-block:last-child .graphical-block-whitespace:before {
+                position: absolute;
+                content: '';
+                left: 0;
+                top: 100%;
+                aspect-ratio: 1;
+                background-color: var(--graphical-seperator-bg-color);
+                width: var(--graphical-block-border-radius);
+            }
+
+            .graphical-seperator .graphical-block:last-child .graphical-block-whitespace:after {
+                border-radius: var(--graphical-block-border-radius) 0 0 0;
+            }
+
+        .graphical-seperator .graphical-block.double .graphical-block-whitespace {
+            aspect-ratio: 2;
+        }
+
+        .graphical-seperator .graphical-block.reverse .graphical-block-whitespace {
+            border-radius: var(--graphical-block-border-radius) var(--graphical-block-border-radius) 0 0;
+        }
+
+        .graphical-seperator .graphical-block.reverse:first-child .graphical-block-whitespace {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+            .graphical-seperator .graphical-block.reverse:first-child .graphical-block-whitespace:after,
+            .graphical-seperator .graphical-block.reverse:first-child .graphical-block-whitespace:before {
+                position: absolute;
+                content: '';
+                right: 0;
+                top: calc(-1 * var(--graphical-block-border-radius));
+                aspect-ratio: 1;
+                background-color: var(--graphical-seperator-bg-color);
+                width: var(--graphical-block-border-radius);
+            }
+
+            .graphical-seperator .graphical-block.reverse:first-child .graphical-block-whitespace:after {
+                border-radius: 0 0 var(--graphical-block-border-radius) 0;
+            }
+
+        .graphical-seperator .graphical-block.reverse:last-child .graphical-block-whitespace:after,
+        .graphical-seperator .graphical-block.reverse:last-child .graphical-block-whitespace:before {
+            position: absolute;
+            content: '';
+            left: 0;
+            top: calc(-1 * var(--graphical-block-border-radius));
+            aspect-ratio: 1;
+            background-color: var(--graphical-seperator-bg-color);
+            width: var(--graphical-block-border-radius);
+        }
+
+        .graphical-seperator .graphical-block.reverse:last-child .graphical-block-whitespace {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+            .graphical-seperator .graphical-block.reverse:last-child .graphical-block-whitespace:after {
+                border-radius: 0 0 0 var(--graphical-block-border-radius);
+            }
+
+            .graphical-seperator .graphical-block,
+            .graphical-seperator .graphical-block:last-child .graphical-block-whitespace:after,
+            .graphical-seperator .graphical-block:first-child .graphical-block-whitespace:after,
+            .graphical-seperator .graphical-block.reverse:last-child .graphical-block-whitespace:after,
+            .graphical-seperator .graphical-block.reverse:first-child .graphical-block-whitespace:after {
+                background-image: url('/images/graphical_seperator_background.png');
+                background-attachment: fixed;
+                background-size: cover;
+            }
+
+    .graphical-seperator.b .graphical-block,
+    .graphical-seperator.b .graphical-block:last-child .graphical-block-whitespace:after,
+    .graphical-seperator.b .graphical-block:first-child .graphical-block-whitespace:after,
+    .graphical-seperator.b .graphical-block.reverse:last-child .graphical-block-whitespace:after,
+    .graphical-seperator.b .graphical-block.reverse:first-child .graphical-block-whitespace:after {
+        background-image: url('/images/graphical_seperator_background2.png');
+    }

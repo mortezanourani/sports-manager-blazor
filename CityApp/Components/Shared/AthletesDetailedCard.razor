@@ -43,6 +43,7 @@ else
 		</div>
 		<div class="counts-wrapper">
 			<div class="card white-card bordered-card year-count">
+				<h5 class="title header-5">تجمیعی سال @Year</h5>
 				<div class="item-count">
 					<img src="/icons/man-blue.svg" />
 					@($"{menAthletesCount:#,0}")
@@ -65,10 +66,10 @@ else
 					else
 					{
 						<QuickGrid Items="Insurances.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
-							<PropertyColumn Title="هیات ورزشی" Property="@(insurance => insurance.Key.PersianName)" />
-							<PropertyColumn Title="آقایان" Property="@(insurance => $"{insurance.Sum(f => f.MenCount):#,0}")" />
-							<PropertyColumn Title="بانوان" Property="@(insurance => $"{insurance.Sum(f => f.WomenCount):#,0}")" />
-							<PropertyColumn Class="fw-bold justify-content-center" Title="مجموع" Property="@(insurance => $"{insurance.Sum(f => f.MenCount + f.WomenCount):#,0}")" />
+							<PropertyColumn Class="title display-6" Property="@(insurance => insurance.Key.PersianName)" />
+							<PropertyColumn Class="item-count men" Property="@(insurance => $"{insurance.Sum(f => f.MenCount):#,0}")" />
+							<PropertyColumn Class="item-count women" Property="@(insurance => $"{insurance.Sum(f => f.WomenCount):#,0}")" />
+							<PropertyColumn Class="item-count total" Title="مجموع" Property="@(insurance => $"{insurance.Sum(f => f.MenCount + f.WomenCount):#,0}")" />
 						</QuickGrid>
 					}
 				</div>
