@@ -6,11 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddInfrastructure(
-    builder.Configuration.GetConnectionString("ProvinceConnection"));
+var connectionString = builder.Configuration.GetConnectionString("ProvinceConnection");
+builder.Services.AddInfrastructure(connectionString!);
 
-builder.Services.AddInfrastructureIdentity(
-    builder.Configuration.GetConnectionString("ProvinceConnection"));
+builder.Services.AddInfrastructureIdentity(connectionString!);
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

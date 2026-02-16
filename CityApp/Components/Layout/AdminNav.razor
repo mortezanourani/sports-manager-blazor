@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+<nav class="main-nav">
+    <div class="main-nav-logo">
+        <NavLink href="/" Match="NavLinkMatch.All">
+            <img src="/icons/home.svg" />
+        </NavLink>
+    </div>
+    <ul class="nav-menu main-nav-menu">
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Federations">هیات های ورزشی</NavLink>
+        </li>
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Athletes">بیمه ورزشی</NavLink>
+        </li>
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Facilities">ماده 88</NavLink>
+        </li>
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Gyms">ماده 5</NavLink>
+        </li>
+        <li class="menu-item main-nav-menu-item">
+            <NavLink class="menu-link main-nav-link" href="/Dashboard/ChangePassword">تغییر رمزعبور</NavLink>
+        </li>
+    </ul>
+    <div class="main-nav-account">
+        <form method="post" action="/Account/Logout">
+            <input name="returnUrl" value="" hidden />
+            <button type="submit" class="nav-link">
+                <img src="/icons/poweroff.svg" />
+            </button>
+        </form>
+    </div>
+</nav>
+
+@code {
+
+}
