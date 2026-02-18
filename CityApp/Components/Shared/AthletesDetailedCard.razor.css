@@ -76,42 +76,16 @@
     }
 
         .athletes-federations-list .counts-wrapper .year-count {
-            flex: 0 1 20%;
+            flex: 0 1 25%;
         }
 
         .athletes-federations-list .counts-wrapper .federations-count {
-            flex: 0 1 80%;
+            flex: 0 1 75%;
         }
 
 .card .card-body .card-row .card-col img {
     height: 48px;
 }
-
-.year-count {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 6px;
-}
-
-    .year-count .title,
-    ::deep .table-wrapper .quickgrid-table td.title {
-        min-height: 64px;
-    }
-
-    .year-count .item-count {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-        .year-count .item-count:last-child {
-            padding: 8px;
-            margin: 0 -8px -8px;
-            border-radius: 8px;
-            background-color: #eee;
-        }
 
 ::deep .table-wrapper {
     display: flex;
@@ -139,147 +113,80 @@
             gap: 16px;
         }
 
+            .year-count,
             ::deep .table-wrapper .quickgrid-table tbody tr:has(*) {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 justify-content: space-between;
                 align-items: stretch;
+                flex-wrap: wrap;
                 gap: 8px;
                 padding: 21px;
                 border: 1px solid var(--card-border-color);
                 border-radius: 24px;
-                flex: 0 1 25%;
+                flex: 0 1 100%;
             }
 
-        ::deep .table-wrapper .quickgrid-table td.item-count {
-            position: relative;
-            text-align: left;
-            font-weight: 300;
-        }
-
-            ::deep .table-wrapper .quickgrid-table td.item-count:after {
-                position: absolute;
-                right: 0;
-                top: 0;
-            }
-
-            ::deep .table-wrapper .quickgrid-table td.item-count.men:after {
-                content: url('/icons/man-blue.svg');
-            }
-
-            ::deep .table-wrapper .quickgrid-table td.item-count.women:after {
-                content: url('/icons/woman-blue.svg');
-            }
-
-        ::deep .table-wrapper .quickgrid-table td.item-count.total {
-            padding: 8px;
-            margin: 0 -8px -8px;
-            border-radius: 8px;
-            background-color: var(--card-bg-color);
-            font-weight: 500;
-        }
-
-                ::deep .table-wrapper .quickgrid-table td.item-count.total:after {
-                    top: 8px;
-                    right: 8px;
-                    content: url('/icons/genders-blue.svg');
+                .year-count .item-count:after,
+                ::deep .table-wrapper .quickgrid-table td.item-count:after {
+                    content: "";
+                    width: 32px;
+                    aspect-ratio: 1;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    margin-bottom: 4px;
                 }
 
-/*
-.card .card-body .card-row .card-col h4 {
-    font-weight: 300;
-}
-
-*:has(hr.vertical-seperator) {
-    position: relative;
-}
-
-hr.vertical-seperator {
-    width: 0;
-    border: none;
-    border-right: 1px solid var(--dark-color);
-}
-
-.city-count {
-    display: flex;
-    flex-direction: row;
-    justify-content: stretch;
-    align-items: center;
-    gap: 0px;
-}
-
-.item-count {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    gap: 12px;
-    flex: 0 1 100%;
-}
-
-.item-count:nth-child(2n+1) {
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-}
-
-
-                    ::deep .list-card .card-body .table-wrapper .quickgrid-table tbody tr:nth-child(2n) {
-                        background: var(--light-color);
-                    }
-
-                    ::deep .list-card .card-body .table-wrapper .quickgrid-table tbody tr:hover {
-                        transform: scale(1.01);
-                        box-shadow: 0 0 8px 0px dimgray;
-                    }
-
-                    ::deep .list-card .card-body .table-wrapper .quickgrid-table tbody tr td {
-                        padding: 8px 12px;
-                        text-align: center;
-                        font-size: 13px;
-                        font-weight: 400;
-                    }
-
-                        ::deep .list-card .card-body .table-wrapper .quickgrid-table tbody tr td:first-child {
-                            font-weight: 500;
-                            text-align: right;
-                        }
-
-                        ::deep .list-card .card-body .table-wrapper .quickgrid-table tbody tr td:last-child {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: flex-end;
-                            align-items: center;
-                            gap: 16px;
-                        }
-
-                            ::deep .list-card .card-body .table-wrapper .quickgrid-table tbody tr td:last-child .edit-link {
-                                opacity: 0;
-                            }
-
-                    ::deep .list-card .card-body .table-wrapper .quickgrid-table tbody tr:hover td:last-child .edit-link {
-                        opacity: 1;
-                    }
-
-    ::deep .list-card .paginator {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        border: none;
-    }
-
-    ::deep .list-card .card-header .paginator {
-        margin: 0;
-        padding: 0;
-        width: auto;
-        border: none;
-    }
-
-        ::deep .list-card .card-header .paginator nav {
-            flex-direction: row-reverse;
+        .year-count .men:after,
+        ::deep .table-wrapper .quickgrid-table td.item-count.men:after {
+            background-image: url('/icons/man-blue.svg');
         }
 
-            ::deep .list-card .card-header .paginator nav * {
-                color: var(--dark-color);
-                border-color: var(--primary-color);
-            }
-*/
+        .year-count .women:after,
+        ::deep .table-wrapper .quickgrid-table td.item-count.women:after {
+            background-image: url('/icons/woman-blue.svg');
+        }
+
+                .year-count .title,
+                ::deep .table-wrapper .quickgrid-table td.title {
+                    padding: 12px;
+                    margin-bottom: 24px;
+                    border-radius: 8px;
+                    background-color: var(--primary-color);
+                    color: var(--light-color);
+                    font-weight: 500;
+                    font-size: 15px;
+                    text-align: center;
+                    width: 100%;
+                    line-height: 1;
+                }
+
+        .year-count .total,
+        ::deep .table-wrapper .quickgrid-table td.total {
+            text-align: center;
+            margin-bottom: 16px;
+            width: 100%;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .year-count .men,
+        .year-count .women,
+        ::deep .table-wrapper .quickgrid-table td.men,
+        ::deep .table-wrapper .quickgrid-table td.women {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            width: 45%;
+        }
+
+                .year-count .title {
+                    background-color: transparent;
+                }
+                .year-count .men,
+                .year-count .women,
+                .year-count .total {
+                    color: var(--light-color);
+                }

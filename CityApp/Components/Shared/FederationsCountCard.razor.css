@@ -1,0 +1,53 @@
+﻿::deep.federations-count {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+    ::deep.federations-count .count {
+        direction: ltr;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        position: absolute;
+        /*margin-top: 5%;*/
+        width: 110px;
+    }
+
+/*    ::deep.federations-count .count:after {
+        content: "";
+        position: absolute;
+        width: 48px;
+        height: 3px;
+        border-radius: 5px;
+        transform: rotate(-60deg);
+        background: var(--primary-color);
+        left: 40%;
+        top: 55%;
+    }
+*/
+        ::deep.federations-count .count * {
+            color: var(--light-color);
+        }
+
+        ::deep.federations-count .count .local {
+            text-align: center;
+            line-height: 1;
+        }
+
+        ::deep.federations-count .count .national {
+            text-align: right;
+            color: var(--primary-color);
+        }
+
+::deep.card-title {
+    margin-top: 16px;
+    text-align: center;
+    color: var(--light-color);
+    /*display: none;*/
+}
