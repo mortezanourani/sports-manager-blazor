@@ -1,116 +1,156 @@
-﻿.city-federations-card {
-    background: none;
-    box-shadow: none;
-    overflow: visible;
-    padding: 0;
+﻿.federations-list {
+    justify-content: flex-start;
 }
 
-    .city-federations-card .card-header {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    .city-federations-card .card-body {
-        padding: var(--spacing-x);
-        background: var(--card-bg);
-        box-shadow: var(--card-box-shadow);
-        border-radius: 24px;
-    }
-
-.summary {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 4px 0 16px;
-    background: var(--primary-color);
-    color: var(--light-color);
-}
-
-    .summary > div {
+    .federations-list .list-header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 12px;
-        border-left: 1px solid lightgray;
-        flex: 0 1 25%;
+        gap: 64px;
+        margin: 48px auto 32px;
     }
 
-        .summary > div:last-child {
-            border-left: none;
+        .federations-list .list-header .header-year {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex: 0 1 100%;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--card-bg-color);
+            border-radius: 50px;
+            height: 58px;
+            padding: 0 25px 0 15px;
         }
 
-.federations-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
+        .federations-list .list-header .header-year .title {
+            font-weight: 400;
+        }
+
+        .federations-list .list-header .paginator {
+            margin: 0;
+            padding: 0;
+        }
+
+            .federations-list .list-header .paginator nav {
+                gap: 16px;
+            }
+
+                .federations-list .list-header .paginator nav button {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: var(--card-bg-color);
+                    border: none;
+                    border-radius: 50px;
+                    aspect-ratio: 1;
+                    height: 58px;
+                    padding: 21px;
+                }
+
+                    .federations-list .list-header .paginator nav button:hover {
+                        background-color: var(--primary-color);
+                        border: none;
+                    }
+
+                    .federations-list .list-header .paginator nav button:disabled {
+                        background-color: transparent;
+                        border: 1px solid var(--card-border-color);
+                    }
+
+                    .federations-list .list-header .paginator nav button img {
+                        height: 32px;
+                    }
+
+    .federations-list .counts-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 16px;
+        margin: 32px auto;
+    }
+
+        .federations-list .counts-wrapper .federations-count {
+            flex: 0 1 100%;
+        }
+
+.card .card-body .card-row .card-col img {
+    height: 48px;
 }
 
-    .federations-list ::deep.federations-table {
-        width: 100%;
+::deep .table-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+    ::deep .table-wrapper .quickgrid-table {
+        flex-grow: 1;
         border-collapse: separate;
         border-spacing: 0;
     }
 
-        .federations-list ::deep.federations-table thead tr {
-            background-color: lightgray;
-        }
-        .federations-list ::deep.federations-table thead tr th {
-            padding: 12px 12px 8px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
+        ::deep .table-wrapper .quickgrid-table thead {
+            display: none;
         }
 
-            .federations-list ::deep.federations-table thead tr th .col-title {
-                justify-content: center;
-                font-size: 13px;
-                font-weight: 600;
-            }
-
-            .federations-list ::deep.federations-table thead tr th:first-child .col-title {
-                justify-content: right;
-            }
-
-        .federations-list ::deep.federations-table tbody tr {
-            background: #ffffff;
+        ::deep .table-wrapper .quickgrid-table tbody {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 16px;
         }
 
-            .federations-list ::deep.federations-table tbody tr:nth-child(2n) {
-                background: var(--light-color);
+            ::deep .table-wrapper .quickgrid-table tbody tr:has(*) {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: stretch;
+                padding: 21px;
+                border: 1px solid var(--card-border-color);
+                background-color: white;
+                border-radius: 24px;
+                flex: 0 1 25%;
             }
 
-            .federations-list ::deep.federations-table tbody tr:hover {
-                transform: scale(1.01);
-                box-shadow: 0 0 8px 0px dimgray;
-            }
+        ::deep .table-wrapper .quickgrid-table td.item-count {
+            position: relative;
+            font-weight: 400;
+        }
 
-            .federations-list ::deep.federations-table tbody tr td {
-                padding: 8px 12px;
-                text-align: center;
-                font-size: 13px;
-                font-weight: 400;
-            }
+        ::deep .table-wrapper .quickgrid-table td.title {
+            padding: 12px;
+            margin: 0 -8px -8px;
+            margin-bottom: 0;
+            border-radius: 8px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            font-size: 15px;
+            font-weight: 500;
+        }
 
-                .federations-list ::deep.federations-table tbody tr td:first-child {
-                    font-weight: 500;
-                    text-align: right;
-                }
+        ::deep .table-wrapper .quickgrid-table td.nationalid {
+            text-align: left;
+            margin-top: 4px;
+            margin-bottom: 64px;
+        }
 
-                .federations-list ::deep.federations-table tbody tr td .info-link {
-                    opacity: 0;
-                    display: flex;
-                    justify-content: flex-end;
-                }
+        ::deep .table-wrapper .quickgrid-table td.name {
+            text-align: right;
+            text-wrap: nowrap;
+        }
 
-            .federations-list ::deep.federations-table tbody tr:hover td .info-link {
-                opacity: 1;
-            }
-
-    .federations-list .paginator {
-        margin: 8px 0 0;
-        padding-bottom: 0;
-        border-top: 1px solid lightgray;
-    }
+        ::deep .table-wrapper .quickgrid-table td.type {
+            text-align: right;
+            text-wrap: nowrap;
+            font-weight: 300;
+            font-size: 12px;
+            color: var(--primary-color);
+        }

@@ -1,0 +1,38 @@
+﻿@rendermode InteractiveServer
+
+<div class="card colored-card">
+    <div class="federations-count">
+        @if (federationsCount is null)
+        {
+            <Loading />
+        }
+        else
+        {
+            <svg width="160" height="160" viewBox="-5 -5 222 222" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                <circle r="95" cx="105" cy="105" fill="transparent" stroke="var(--dark-color)" stroke-width="13"></circle>
+                <circle r="95" cx="105" cy="105" stroke="var(--light-color)" stroke-width="14" stroke-linecap="round" stroke-dashoffset="@string.Format("{0}px", percentPixelCount)" fill="transparent" stroke-dasharray="600px"></circle>
+            </svg>
+            <div class="count">
+                <h1 class="local header-1">@localFederationsCount</h1>
+            </div>
+        }
+    </div>
+    <h5 class="card-title header-5">هیات های فعال شهرستان</h5>
+</div>
+
+@code {
+    private int? federationsCount { get; set; }
+    private int? localFederationsCount { get; set; }
+    private int? percentPixelCount { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        federationsCount = null;
+        using var context = DbFactory.CreateDbContext();
+
+        federationsCount = await context.Federations.CountAsync();
+        localFederationsCount = await context.LocalFederations
+            .CountAsync(m => m.CityId == 4);
+        percentPixelCount = (int)((1 - ((double)localFederationsCount / federationsCount)) * 600);
+    }
+}

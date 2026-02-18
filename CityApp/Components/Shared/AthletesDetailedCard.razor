@@ -42,19 +42,16 @@ else
 			}
 		</div>
 		<div class="counts-wrapper">
-			<div class="card white-card bordered-card year-count">
+			<div class="card colored-card bordered-card year-count">
 				<h5 class="title header-5">تجمیعی سال @Year</h5>
-				<div class="item-count">
-					<img src="/icons/man-blue.svg" />
+				<div class="item-count header-3 total">
+					@($"{menAthletesCount + womenAthletesCount:#,0}")
+				</div>
+				<div class="item-count display-4 men">
 					@($"{menAthletesCount:#,0}")
 				</div>
-				<div class="item-count">
-					<img src="/icons/woman-blue.svg" />
+				<div class="item-count display-4 women">
 					@($"{womenAthletesCount:#,0}")
-				</div>
-				<div class="item-count">
-					<img src="/icons/genders-blue.svg" />
-					@($"{menAthletesCount + womenAthletesCount:#,0}")
 				</div>
 			</div>
 			<div class="federations-count">
@@ -67,9 +64,9 @@ else
 					{
 						<QuickGrid Items="Insurances.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
 							<PropertyColumn Class="title display-6" Property="@(insurance => insurance.Key.PersianName)" />
-							<PropertyColumn Class="item-count men" Property="@(insurance => $"{insurance.Sum(f => f.MenCount):#,0}")" />
-							<PropertyColumn Class="item-count women" Property="@(insurance => $"{insurance.Sum(f => f.WomenCount):#,0}")" />
-							<PropertyColumn Class="item-count total" Title="مجموع" Property="@(insurance => $"{insurance.Sum(f => f.MenCount + f.WomenCount):#,0}")" />
+							<PropertyColumn Class="item-count header-3 total" Title="مجموع" Property="@(insurance => $"{insurance.Sum(f => f.MenCount + f.WomenCount):#,0}")" />
+							<PropertyColumn Class="item-count display-4 men" Property="@(insurance => $"{insurance.Sum(f => f.MenCount):#,0}")" />
+							<PropertyColumn Class="item-count display-4 women" Property="@(insurance => $"{insurance.Sum(f => f.WomenCount):#,0}")" />
 						</QuickGrid>
 					}
 				</div>
@@ -124,7 +121,7 @@ else
 			);
 	}
 
-	private PaginationState pagination = new PaginationState { ItemsPerPage = 4 };
+	private PaginationState pagination = new PaginationState { ItemsPerPage = 3 };
 
 	private async Task GoToPageAsync(int pageIndex)
 	{

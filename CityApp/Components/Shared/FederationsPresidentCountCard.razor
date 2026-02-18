@@ -1,0 +1,48 @@
+﻿@rendermode InteractiveServer
+
+<div class="card bordered-card wrapper">
+    <div class="count-card">
+        @if (federationsCount is null)
+        {
+            <Loading />
+        }
+        else
+        {
+            <svg width="120" height="120" viewBox="-5 -5 222 222" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                <circle r="95" cx="105" cy="105" fill="transparent" stroke="lightgray" stroke-width="13"></circle>
+                <circle r="95" cx="105" cy="105" stroke="var(--primary-color)" stroke-width="14" stroke-linecap="round" stroke-dashoffset="@string.Format("{0}px", percentPixels)" fill="transparent" stroke-dasharray="600px"></circle>
+            </svg>
+            <div class="count">
+                <h3 class="header-3">@presidentsCount</h3>
+            </div>
+
+        }
+    </div>
+    <h5 class="card-title header-5">تعداد احکام ریاست</h5>
+</div>
+
+@code {
+    private int? presidentsCount { get; set; }
+    private int? federationsCount { get; set; }
+    private int? percentPixels { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        federationsCount = null;
+        using var context = DbFactory.CreateDbContext();
+
+        var federations = await context.LocalFederations
+            .Include(m => m.LocalFederationPresidents)
+            .Where(m => m.CityId == 4)
+            .ToListAsync();
+        federationsCount = federations
+            .Count();
+        presidentsCount = federations!
+            .Count(m => m.LocalFederationPresidents
+                .OrderByDescending(president => president.AppointmentDate)
+                .FirstOrDefault()!
+                .IsPresident == true);
+
+        percentPixels = (int)((1 - ((double)presidentsCount / federationsCount)) * 600);
+    }
+}
