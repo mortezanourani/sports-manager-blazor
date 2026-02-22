@@ -1,22 +1,73 @@
 ﻿<div class="graphical-seperator @Type">
-    <div class="graphical-block double reverse">
-        <div class="graphical-block-whitespace"></div>
-    </div>
-    <div class="graphical-block">
-        <div class="graphical-block-whitespace"></div>
-    </div>
-    <div class="graphical-block reverse">
-        <div class="graphical-block-whitespace"></div>
-    </div>
-    <div class="graphical-block double">
-        <div class="graphical-block-whitespace"></div>
-    </div>
-    <div class="graphical-block double reverse">
-        <div class="graphical-block-whitespace"></div>
-    </div>
-    <div class="graphical-block">
-        <div class="graphical-block-whitespace"></div>
-    </div>
+    @if (Type == "a")
+    {
+        <div class="graphical-block double reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block double">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block double reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+    }
+    else if (Type == "b")
+    {
+        <div class="graphical-block double">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block double">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block reverse double">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+    }
+    else if (Type == "c" || Type == "d")
+    {
+        <div class="graphical-block reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block double">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block double reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+        <div class="graphical-block reverse">
+            <div class="graphical-block-whitespace"></div>
+        </div>
+    }
 </div>
 
 @code {

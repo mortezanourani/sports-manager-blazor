@@ -8,7 +8,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 64px;
-        margin: 48px auto 32px;
+        margin: 48px auto 16px;
     }
 
         .federations-list .list-header .header-year {
@@ -19,7 +19,7 @@
             gap: 16px;
             flex: 0 1 100%;
             border: 1px solid var(--card-border-color);
-            background-color: var(--card-bg-color);
+            background-color: #f7f7f7;
             border-radius: 50px;
             height: 58px;
             padding: 0 25px 0 15px;
@@ -64,14 +64,13 @@
                     .federations-list .list-header .paginator nav button img {
                         height: 32px;
                     }
-
     .federations-list .counts-wrapper {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: stretch;
         gap: 16px;
-        margin: 32px auto;
+        margin: 16px auto;
     }
 
         .federations-list .counts-wrapper .federations-count {
@@ -82,6 +81,53 @@
     height: 48px;
 }
 
+::deep .table-wrapper table {
+    width: 100%;
+}
+
+    ::deep .table-wrapper table thead {
+        display: none;
+    }
+
+    ::deep .table-wrapper table tbody {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+        ::deep .table-wrapper table tbody tr {
+            position: relative;
+            height: 56px;
+            border-radius: 50px;
+            border: 1px solid lightgray;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+        }
+
+            ::deep .table-wrapper table tbody tr td.gender,
+            ::deep .table-wrapper table tbody tr td.info-button {
+                height: inherit;
+                aspect-ratio: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            ::deep .table-wrapper table tbody tr td.phone {
+                flex: .5;
+                margin-bottom: -4px;
+            }
+
+            ::deep .table-wrapper table tbody tr td.title {
+                flex: 1;
+                margin-bottom: -4px;
+            }
+
+/*
 ::deep .table-wrapper {
     display: flex;
     flex-direction: row;
@@ -127,7 +173,6 @@
 
         ::deep .table-wrapper .quickgrid-table td.title {
             padding: 12px;
-            /*margin: 0 -8px -8px;*/
             margin-bottom: 0;
             border-radius: 8px;
             background-color: var(--primary-color);
@@ -155,3 +200,4 @@
             font-size: 12px;
             color: var(--primary-color);
         }
+*/

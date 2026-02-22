@@ -1,0 +1,54 @@
+﻿@using System.Globalization
+
+<div class="card bordered-card white-card m5-percapita-card">
+	<h5 class="header-6 card-title">سرانه ورزشی بخش خصوصی</h5>
+	<div class="count-row">
+		<p class="display-6">سرانه ورزشی روباز</p>
+		<h4 class="header-5">@($"{landPerCapita:#,0}")</h4>
+	</div>
+	<div class="count-row">
+		<p class="display-6">سرانه ورزشی سرپوشیده</p>
+		<h4 class="header-5">@($"{hallPerCapita:#,0}")</h4>
+	</div>
+</div>
+
+@code {
+	PersianCalendar persianCalendar = new PersianCalendar();
+
+	private List<Insurance>? Insurances;
+
+	private double? landPerCapita;
+	private double? hallPerCapita;
+
+	protected override async Task OnInitializedAsync()
+	{
+		var nowDate = DateTime.Now.Date;
+		var todayDate =
+			persianCalendar.GetYear(nowDate) * 10_000 +
+			persianCalendar.GetMonth(nowDate) * 100 +
+			persianCalendar.GetDayOfMonth(nowDate);
+
+		using var context = DbFactory.CreateDbContext();
+
+		var population = await context.Population
+			.Where(m => m.CityId == 4)
+			.SumAsync(m => m.RuralMen + m.RuralWomen + m.UrbanMen + m.UrbanWomen);
+
+		var facilities = await context.PrivateFacilities
+			.Include(f => f.PrivateFacilityLicenses)
+			.Where(f => f.CityId == 4)
+			.ToListAsync();
+
+		var sportLandArea = facilities
+			.Where(f => f.PrivateFacilityLicenses
+				.Any(l => !string.IsNullOrEmpty(l.ExpireDate) && Int32.Parse(l.ExpireDate!.Replace("-", "").Replace("/", "")) >= todayDate))
+			.Sum(f => f.SportLandArea);
+		landPerCapita = (double)sportLandArea! / population;
+
+		var sportHallArea = facilities
+			.Where(f => f.PrivateFacilityLicenses
+				.Any(l => !string.IsNullOrEmpty(l.ExpireDate) && Int32.Parse(l.ExpireDate!.Replace("-", "").Replace("/", "")) >= todayDate))
+			.Sum(f => f.SportHallArea);
+		hallPerCapita = (double)sportHallArea! / population;
+	}
+}
