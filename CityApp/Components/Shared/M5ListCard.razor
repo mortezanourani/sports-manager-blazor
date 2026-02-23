@@ -51,10 +51,11 @@ else
 							<TemplateColumn Class="title" Title="عنوان باشگاه">
 								<div class="names-wrapper">
 									<h4 class="header-5">@context.Name</h4>
-									<p class="text-4">@context.PrivateFacilityLicenses.FirstOrDefault()!.Name</p>
+									<p class="text-5">@context.PrivateFacilityLicenses.OrderByDescending(m => m.ExpireDate).FirstOrDefault()!.Serial</p>
 								</div>
 							</TemplateColumn>
-							<PropertyColumn Class="title display-6" Title="کد پستی" Property="@(m => m.ZipCode)" />
+							<PropertyColumn Class="title text-3" Title="شماره پروانه" Property="@(m => m.PrivateFacilityLicenses.FirstOrDefault()!.Name)" />
+							@* <PropertyColumn Class="title text-3" Title="کد پستی" Property="@(m => m.ZipCode)" /> *@
 							<PropertyColumn Class="phone text-3" Property="@(m => m.Phone)" />
 							<PropertyColumn Class="phone text-3" Property="@(m => m.PrivateFacilityLicenses.FirstOrDefault()!.Phone)" />
 							<TemplateColumn Class="info-button">
