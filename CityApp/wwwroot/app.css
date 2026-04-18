@@ -39,6 +39,11 @@ body {
     color: var(--main-color);
 }
 
+.link {
+    color: var(--primary-color);
+    font-weight: 400 !important;
+}
+
 .row {
     margin-left: calc(-.5 * var(--spacing-x));
     margin-right: calc(-.5 * var(--spacing-x));
@@ -721,3 +726,138 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+
+/* List Table Styles */
+.list-wrapper {
+    justify-content: flex-start;
+}
+
+    .list-wrapper .list-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 64px;
+        margin-bottom: 16px;
+    }
+
+        .list-wrapper .list-header .header-title {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex: 0 1 100%;
+            border: 1px solid var(--card-border-color);
+            background-color: #f7f7f7;
+            border-radius: 50px;
+            height: 58px;
+            padding: 0 25px 0 15px;
+        }
+
+        .list-wrapper .list-header .header-title.colored {
+            background-color: white;
+        }
+
+            .list-wrapper .list-header .header-title .title {
+                font-weight: 400;
+            }
+
+            .list-wrapper .list-header .header-title .search {
+                height: 36px;
+            }
+
+                .list-wrapper .list-header .header-title .search input {
+                    border-radius: 50px;
+                }
+
+        .list-wrapper .list-header .paginator {
+            margin: 0;
+            padding: 0;
+        }
+
+            .list-wrapper .list-header .paginator nav {
+                gap: 16px;
+            }
+
+                .list-wrapper .list-header .paginator nav button {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: var(--card-bg-color);
+                    border: none;
+                    border-radius: 50px;
+                    aspect-ratio: 1;
+                    height: 58px;
+                    padding: 21px;
+                }
+
+                    .list-wrapper .list-header .paginator nav button:hover {
+                        background-color: var(--primary-color);
+                        border: none;
+                    }
+
+                    .list-wrapper .list-header .paginator nav button:disabled {
+                        background-color: transparent;
+                        border: 1px solid var(--card-border-color);
+                    }
+
+                    .list-wrapper .list-header .paginator nav button img {
+                        height: 32px;
+                    }
+
+    .list-wrapper .table-wrapper table {
+        width: 100%;
+    }
+
+    .list-wrapper .table-wrapper table thead {
+        display: none;
+    }
+
+    .list-wrapper .table-wrapper table tbody {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+        .list-wrapper .table-wrapper table tbody tr {
+            position: relative;
+            height: 56px;
+            border-radius: 50px;
+            border: 1px solid lightgray;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+        }
+
+            .list-wrapper .table-wrapper table tbody tr:empty {
+                display: none;
+            }
+
+            .list-wrapper .table-wrapper table tbody tr td {
+                flex: 1;
+            }
+
+            .list-wrapper .table-wrapper table tbody tr td.action-button {
+                height: inherit;
+                aspect-ratio: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex: 0;
+            }
+
+                .list-wrapper .table-wrapper table tbody tr td.light {
+                    flex: .5;
+                    margin-bottom: -4px;
+                }
+
+                .list-wrapper .table-wrapper table tbody tr td.bold {
+                    flex: 1;
+                    margin-bottom: -4px;
+                }
