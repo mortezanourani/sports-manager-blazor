@@ -39,6 +39,11 @@ body {
     color: var(--main-color);
 }
 
+hr.white-space {
+    margin: 24px 0;
+    border: none;
+}
+
 .link {
     color: var(--primary-color);
     font-weight: 400 !important;
@@ -380,6 +385,7 @@ form .form-row {
     position: relative;
     height: 42px;
     user-select: none;
+    background-color: var(--bs-body-bg);
 }
 
     .form-group .form-control {
@@ -387,6 +393,9 @@ form .form-row {
         padding: 10px 10px 10px 42px;
         border: 1px solid #a9a9a9;
         height: 100%;
+        z-index: 1;
+        position: relative;
+        background: none;
     }
 
         .form-group .form-control:focus {
@@ -404,6 +413,7 @@ form .form-row {
         margin: 0;
         left: 0;
         top: 0;
+        z-index: 0;
     }
 
         .form-group .form-label img {
@@ -648,6 +658,14 @@ p {
     font-size: 9pt;
 }
 
+.text-green {
+    color: #40aa40;
+}
+
+.text-red {
+    color: #ff4040;
+}
+
 b {
     font-weight: 500;
 }
@@ -861,3 +879,47 @@ h1:focus {
                     flex: 1;
                     margin-bottom: -4px;
                 }
+
+
+/* Checkbox */
+.form-group.checkbox {
+    flex-basis: auto;
+    height: 42px;
+    border: 1px solid #a9a9a9;
+    border-radius: 6px;
+    aspect-ratio: 1;
+
+    flex-grow: 0;
+    height: 42px;
+    border: 1px solid #a9a9a9;
+    border-top-color: rgb(169, 169, 169);
+    border-right-color: rgb(169, 169, 169);
+    border-bottom-color: rgb(169, 169, 169);
+    border-left-color: rgb(169, 169, 169);
+    border-radius: 6px;
+    aspect-ratio: 1;
+}
+
+    .form-group.checkbox .form-check-input {
+        display: none;
+    }
+
+    .form-group.checkbox:has(.form-check-input) {
+        border-color: #ff4040;
+    }
+
+        .form-group.checkbox:has(.form-check-input) img.checked {
+            display: none;
+        }
+
+    .form-group.checkbox:has(.form-check-input:checked) {
+        border-color: #40aa40;
+    }
+
+        .form-group.checkbox:has(.form-check-input:checked) img.unchecked {
+            display: none;
+        }
+
+        .form-group.checkbox:has(.form-check-input:checked) img.checked {
+            display: block;
+        }
