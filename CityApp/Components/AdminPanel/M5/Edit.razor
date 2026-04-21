@@ -185,37 +185,42 @@
         }
         else
         {
-            <div class="card licenses-list-card">
-                <div class="card-header">
-                    <h6 class="title">@($"فهرست مجوزهای باشگاه {Facility!.Name}")</h6>
-                    <div class="header-link">
-                        <a class="header-link" href="/Panel/M5/Licenses/Add/@Facility.Id">
-                            <img src="/icons/note-add.svg" />
-                            ثبت مجوز جدید
-                        </a>
+            <div class="list-wrapper">
+                <div class="list-header">
+                    <div class="header-title">
+                        <h6 class="title">@($"فهرست مجوزهای باشگاه {Facility!.Name}")</h6>
+                    </div>
+                    <div class="paginator">
+                        <nav role="navigation">
+                            <a href="/Panel/M5/Licenses/Add/@Facility.Id">
+                                <img src="/icons/note-add.svg" />
+                            </a>
+                        </nav>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="licenses-list">
-                        <QuickGrid Items="Licenses.AsQueryable()" Theme="" Class="licenses-table">
-                            <PropertyColumn Title="سریال مجوز" Property="@(license => license.Serial!)" />
-                            <PropertyColumn Title="نوع مالکیت مجوز" Property="@(license => license.IsBeneficial == null ? "نامشخص" : (license.IsBeneficial == true ? "حقیقی" : "حقوقی"))" />
-                            <PropertyColumn Title="نوع مالکیت ملک" Property="@(license => license.IsOwner == null ? "نامشخص" : (license.IsOwner == true ? "تملیکی" : "استیجاری"))" />
-                            <PropertyColumn Title="نوع مجوز" Property="@(license => license.IsRenewal == null ? "نامشخص" : (license.IsRenewal == true ? "تمدید" : "تاسیس"))" />
-                            <PropertyColumn Title="ارگان / شرکت" Property="@(license => license.Company!)" />
-                            <PropertyColumn Title="تاریخ تاسیس" Property="@(license => license.StartDate!)" />
-                            <PropertyColumn Title="تاریخ انقضا" Property="@(license => license.ExpireDate!)" />
-                            <PropertyColumn Title="نام موسس" Property="@(license => license.Name!)" />
-                            <PropertyColumn Title="کد ملی موسس" Property="@(license => license.SeenCode!)" />
-                            <PropertyColumn Title="شماره همراه موسس" Property="@(license => license.Phone!)" />
-                            <PropertyColumn Title="جنسیت باشگاه" Property="@(license => license.UsersGender!.PersianName)" />
-                            <TemplateColumn>
-                                <a class="edit-link" href="/Panel/M5/Licenses/Edit/@context.Id">
-                                    <img src="/icons/note-edit.svg" />
-                                </a>
-                            </TemplateColumn>
-                        </QuickGrid>
-                    </div>
+                <div class="table-wrapper">
+                    <QuickGrid Items="Licenses.AsQueryable()" Theme="" Class="licenses-table">
+                        <TemplateColumn Class="action-button status" Title="جنسیت">
+                            <img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name)" />
+                        </TemplateColumn>
+                        <PropertyColumn Class="action-button status" Title="سریال مجوز" Property="@(license => license.Serial!)" />
+                        <PropertyColumn Class="header-5" Title="نام موسس" Property="@(license => license.Name!)" />
+                        <PropertyColumn Class="text-3" Title="سریال مجوز" Property="@(license => license.Serial!)" />
+                        <PropertyColumn Class="text-3" Title="نوع مالکیت مجوز" Property="@(license => license.IsBeneficial == null ? "نامشخص" : (license.IsBeneficial == true ? "حقیقی" : "حقوقی"))" />
+                        <PropertyColumn Class="text-3" Title="نوع مالکیت ملک" Property="@(license => license.IsOwner == null ? "نامشخص" : (license.IsOwner == true ? "تملیکی" : "استیجاری"))" />
+                        <PropertyColumn Class="text-3" Title="نوع مجوز" Property="@(license => license.IsRenewal == null ? "نامشخص" : (license.IsRenewal == true ? "تمدید" : "تاسیس"))" />
+                        <PropertyColumn Class="text-3" Title="ارگان / شرکت" Property="@(license => license.Company!)" />
+                        <PropertyColumn Class="text-3" Title="تاریخ تاسیس" Property="@(license => license.StartDate!)" />
+                        <PropertyColumn Class="text-3" Title="تاریخ انقضا" Property="@(license => license.ExpireDate!)" />
+                        <PropertyColumn Class="text-3" Title="کد ملی موسس" Property="@(license => license.SeenCode!)" />
+                        <PropertyColumn Class="text-3" Title="شماره همراه موسس" Property="@(license => license.Phone!)" />
+                        <PropertyColumn Class="text-3" Title="جنسیت باشگاه" Property="@(license => license.UsersGender!.PersianName)" />
+                        <TemplateColumn Class="action-button">
+                            <a class="edit-link" href="/Panel/M5/Licenses/Edit/@context.Id">
+                                <img src="/icons/note-edit.svg" />
+                            </a>
+                        </TemplateColumn>
+                    </QuickGrid>
                 </div>
             </div>
         }
