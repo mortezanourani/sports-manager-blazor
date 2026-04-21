@@ -799,6 +799,7 @@ h1:focus {
                 gap: 16px;
             }
 
+                .list-wrapper .list-header .paginator nav a,
                 .list-wrapper .list-header .paginator nav button {
                     display: flex;
                     flex-direction: row;
@@ -808,20 +809,24 @@ h1:focus {
                     border: none;
                     border-radius: 50px;
                     aspect-ratio: 1;
+                    width: 58px;
                     height: 58px;
                     padding: 21px;
                 }
 
+                    .list-wrapper .list-header .paginator nav a:hover,
                     .list-wrapper .list-header .paginator nav button:hover {
                         background-color: var(--primary-color);
                         border: none;
                     }
 
+                    .list-wrapper .list-header .paginator nav a:disabled,
                     .list-wrapper .list-header .paginator nav button:disabled {
                         background-color: transparent;
                         border: 1px solid var(--card-border-color);
                     }
 
+                    .list-wrapper .list-header .paginator nav a img,
                     .list-wrapper .list-header .paginator nav button img {
                         height: 32px;
                     }
