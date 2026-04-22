@@ -1,0 +1,26 @@
+﻿@inherits LayoutComponentBase
+
+@layout Layout.AdminLayout
+
+<AuthorizeView Policy="SportsGroup_Admin">
+    <nav class="secondary-navbar">
+        <div class="container">
+            <h5 class="sub-title">ورزشکاران سازمان یافته</h5>
+            <ul class="nav">
+                <li class="nav-item">
+                    <NavLink href="/Panel/Athletes" Match="NavLinkMatch.All">آمار ورزشکاران سازمان یافته</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Panel/Athletes/Add">ثبت آمار ورزشکاران سازمان یافته</NavLink>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <article class="content py-3">
+        @Body
+    </article>
+</AuthorizeView>
+
+@code {
+
+}
