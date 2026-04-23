@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+
+@layout Layout.AdminLayout
+
+<AuthorizeView Policy="M5_Admin">
+    <nav class="secondary-navbar bordered-card">
+        <div class="container">
+            <h5 class="sub-title">اماکن ورزشی سایر ارگان ها</h5>
+            <ul class="nav">
+                <li class="nav-item">
+                    <NavLink href="/Panel/Orgs" Match="NavLinkMatch.All">فهرست اماکن ورزشی سایر ارگان ها</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Panel/Orgs/Add">افزودن مکان جدید</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Panel/Orgs/Licenses" Match="NavLinkMatch.All">فهرست مجوزهای ماده 5 سایر ارگان ها</NavLink>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <article class="content py-3">
+        @Body
+    </article>
+</AuthorizeView>
+
+@code {
+
+}
