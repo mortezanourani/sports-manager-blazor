@@ -23,7 +23,7 @@
             var userAccount = await UserManager.FindByNameAsync(employee.SeenCode);
             if (userAccount is null)
             {
-                var user = Activator.CreateInstance<ApplicationUser>();
+                var user = Activator.CreateInstance<ProvinceUser>();
                 user.UserName = employee.SeenCode;
                 user.Email = string.Format("{0}@reporter.guilan.msy", employee.SeenCode);
                 user.EmailConfirmed = true;

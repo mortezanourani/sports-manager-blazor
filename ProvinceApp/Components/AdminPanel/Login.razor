@@ -5,9 +5,9 @@
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Identity
-@using Infrastructure.Data
+@using Infrastructure.Models
 
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<ProvinceUser> SignInManager
 @inject ILogger<Login> Logger
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
