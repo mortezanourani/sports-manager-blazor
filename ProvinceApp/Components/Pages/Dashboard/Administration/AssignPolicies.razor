@@ -170,7 +170,7 @@
 
     private async Task UpdateLists()
     {
-        ApplicationUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
+        ProvinceUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
         if (user is null) return;
 
         var userRoles = await UserManager.GetRolesAsync(user!);
@@ -196,7 +196,7 @@
 
     private async Task AddRole()
     {
-        ApplicationUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
+        ProvinceUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
         if (user is null) return;
 
         await UserManager.AddToRoleAsync(user!, Role!.Name);
@@ -207,7 +207,7 @@
 
     private async Task RemoveRole(string Role)
     {
-        ApplicationUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
+        ProvinceUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
         if (user is null) return;
 
         await UserManager.RemoveFromRoleAsync(user!, Role!);
@@ -218,7 +218,7 @@
 
     private async Task AddDepartment()
     {
-        ApplicationUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
+        ProvinceUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
         if (user is null) return;
 
         using var context = DbFactory.CreateDbContext();
@@ -242,7 +242,7 @@
 
     private async Task RemoveDepartment(string Department)
     {
-        ApplicationUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
+        ProvinceUser? user = await UserManager.FindByIdAsync(Employee!.AccountId!);
         if (user is null) return;
 
         var claims = await UserManager.GetClaimsAsync(user!);
