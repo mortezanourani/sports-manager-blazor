@@ -27,7 +27,7 @@ builder.Services.AddScoped<IdentityUserAccessor>();
 
 builder.Services.AddScoped<IdentityRedirectManager>();
 
-//builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -48,7 +48,7 @@ builder.Services.AddIdentityCore<ProvinceUser>(options => {
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
-//builder.Services.AddSingleton<IEmailSender<ProvinceUser>, IdentityNoOpEmailSender>();
+builder.Services.AddSingleton<IEmailSender<ProvinceUser>, IdentityNoOpEmailSender>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddQuickGridEntityFrameworkAdapter();
