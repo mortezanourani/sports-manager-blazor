@@ -3,15 +3,11 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class Facility
+public abstract class BaseFacility
 {
     public Guid Id { get; set; }
 
     public string Name { get; set; } = null!;
-
-    public int? TypeId { get; set; }
-
-    public int CityId { get; set; }
 
     public bool? IsRural { get; set; }
 
@@ -25,8 +21,6 @@ public partial class Facility
 
     public bool IsActive { get; set; }
 
-    public int UsersGenderId { get; set; }
-
     public string? Sports { get; set; }
 
     public string? ZipCode { get; set; }
@@ -36,16 +30,4 @@ public partial class Facility
     public string? Phone { get; set; }
 
     public bool IsSubFacility { get; set; }
-
-    public virtual City City { get; set; } = null!;
-
-    public virtual ICollection<ConstructionProject> ConstructionProjects { get; set; } = new List<ConstructionProject>();
-
-    public virtual ICollection<FacilityContract> FacilityContracts { get; set; } = new List<FacilityContract>();
-
-    public virtual ICollection<FacilityDocument> FacilityDocuments { get; set; } = new List<FacilityDocument>();
-
-    public virtual FacilityType? Type { get; set; }
-
-    public virtual UsersGender UsersGender { get; set; } = null!;
 }

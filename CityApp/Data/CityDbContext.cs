@@ -16,8 +16,6 @@ public class CityDbContext(DbContextOptions<CityDbContext> options) : IdentityDb
 
     public DbSet<City> Cities { get; set; }
 
-    public DbSet<ConstructionProject> ConstructionProjects { get; set; }
-
     public DbSet<Course> Courses { get; set; }
 
     public DbSet<Department> Departments { get; set; }

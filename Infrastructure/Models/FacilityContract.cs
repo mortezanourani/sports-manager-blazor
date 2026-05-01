@@ -27,7 +27,7 @@ public partial class FacilityContract
 
     public string? LicenseDate { get; set; }
 
-    public virtual Facility Facility { get; set; } = null!;
+    //public virtual Facility Facility { get; set; } = null!;
 
     //public virtual LocalFederation? LegalContractor { get; set; }
 }

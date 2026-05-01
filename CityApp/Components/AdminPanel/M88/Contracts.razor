@@ -104,21 +104,18 @@
 
 		using var context = DbFactory.CreateDbContext();
 
-		var contracts = await context.FacilityContracts
-				.Include(contract => contract.Facility)
-					.ThenInclude(facility => facility.City)
-				// .Include(contract => contract.LegalContractor)
-				.Where(contract => contract.Facility.CityId == CityId)
-				.OrderByDescending(contract => contract.ExpireDate)
-				.ToListAsync();
+		List<FacilityContract> contracts = await context.Facilities
+			.SelectMany(m => m.FacilityContracts)
+			.OrderByDescending(m => m.ExpireDate)
+			.ToListAsync();
 
 		FacilitiesContracts = string.IsNullOrEmpty(searchText)
 			? contracts
 			: contracts
 				.Where(contract =>
 					contract.Name.Contains(searchText)
-					||
-					contract.Facility.Name.Contains(searchText)
+				// ||
+				// contract.Facility.Name.Contains(searchText)
 				)
 				.OrderByDescending(contract => contract.ExpireDate)
 				.ToList();
@@ -131,12 +128,9 @@
 
 		using var context = DbFactory.CreateDbContext();
 
-		FacilitiesContracts = await context.FacilityContracts
-			.Include(contract => contract.Facility)
-				.ThenInclude(facility => facility.City)
-			// .Include(contract => contract.LegalContractor)
-			.Where(contract => contract.Facility.CityId == CityId)
-			.OrderByDescending(contract => contract.ExpireDate)
+		FacilitiesContracts = await context.Facilities
+			.SelectMany(m => m.FacilityContracts)
+			.OrderByDescending(m => m.ExpireDate)
 			.ToListAsync();
 
 		await pagination.SetCurrentPageIndexAsync(0);

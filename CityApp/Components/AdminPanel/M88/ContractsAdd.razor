@@ -167,7 +167,6 @@
     {
         using var context = DbFactory.CreateDbContext();
         Facility = await context.Facilities
-            .Include(facility => facility.City)
             .FirstOrDefaultAsync(facility => facility.Id == FacilityId);
     }
 
