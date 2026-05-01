@@ -194,7 +194,6 @@
             .ToListAsync();
 
         Facility = await context.GovernmentFacilities
-            .Include(facility => facility.City)
             .FirstOrDefaultAsync(facility => facility.Id == FacilityId);
     }
 

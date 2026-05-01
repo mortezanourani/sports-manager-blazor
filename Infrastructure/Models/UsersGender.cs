@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class UsersGender
+public class UsersGender
 {
     public int Id { get; set; }
 
@@ -12,10 +12,4 @@ public partial class UsersGender
     public string? NormalizedName { get; set; }
 
     public string PersianName { get; set; } = null!;
-
-    //public virtual ICollection<Facility> Facilities { get; set; } = new List<Facility>();
-
-    public virtual ICollection<GovernmentFacilityLicense> GovernmentFacilityLicenses { get; set; } = new List<GovernmentFacilityLicense>();
-
-    //public virtual ICollection<PrivateFacilityLicense> PrivateFacilityLicenses { get; set; } = new List<PrivateFacilityLicense>();
 }

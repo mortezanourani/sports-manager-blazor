@@ -84,7 +84,6 @@ else
 		Facilities = await context.GovernmentFacilities
 			.Include(m => m.GovernmentFacilityLicenses)
 				.ThenInclude(m => m.UsersGender)
-			.Where(m => m.CityId == 4)
 			.OrderBy(m => m.Name)
 			.ToListAsync();
 	}

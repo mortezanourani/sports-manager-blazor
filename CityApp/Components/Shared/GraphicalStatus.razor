@@ -69,7 +69,7 @@
             .SumAsync(m => m.MenCount + m.WomenCount);
 
         facilitiesCount = await context.GovernmentFacilities
-            .CountAsync(m => m.CityId == 4);
+            .CountAsync();
 
         var nowDate = DateTime.Now.Date;
         var todayDate =

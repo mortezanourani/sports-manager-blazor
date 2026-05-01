@@ -75,7 +75,6 @@
                 <EditForm method="post" Model="Facility" OnValidSubmit="AddFacility" FormName="create" Enhance>
                     <DataAnnotationsValidator />
                     <ValidationSummary role="alert" />
-                    <input type="hidden" name="Facility.CityId" value="@CityId" />
                     <div class="form-row">
                         <div class="form-group fa mb-3">
                             <label for="title" class="form-label">
@@ -183,7 +182,6 @@
 
     private List<FacilityType>? Types;
 
-    private int CityId = 4;
     private int TypeId = 1;
 
     protected override async Task OnInitializedAsync()
@@ -198,7 +196,6 @@
     {
         using var context = DbFactory.CreateDbContext();
 
-        Facility.CityId = CityId;
         Facility.TypeId = TypeId;
 
         try
@@ -206,8 +203,6 @@
             var isExist = context.GovernmentFacilities
                 .Any(facility =>
                     facility.Name == Facility.Name
-                    &&
-                    facility.CityId == Facility.CityId
                 );
 
             if (isExist)
