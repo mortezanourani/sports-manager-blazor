@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProvinceApp.Identity;
+using ProvinceApp.Models;
 
 namespace ProvinceApp.Data;
 

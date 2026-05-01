@@ -106,7 +106,6 @@ else
 			.Include(m => m.Federation)
 			.OrderBy(m => m.Federation.PersianName)
 			.Where(m => m.Year == Year)
-			.Where(m => m.CityId == 4)
 			.GroupBy(m => m.Federation)
 			.ToListAsync();
 

@@ -14,7 +14,7 @@
             بازگشت به صفحه ویرایش هیات
         </a>
         <div class="instructions">
-            <p class="mb-0">فرم مقابل جهت ویرایش آمار ورزشکاران سازمان یافته هیات @Insurance?.Federation?.PersianName شهرستان @Insurance?.City?.PersianName ایجاد شده است.</p>
+            <p class="mb-0">فرم مقابل جهت ویرایش آمار ورزشکاران سازمان یافته هیات @Insurance?.Federation?.PersianName ایجاد شده است.</p>
             <p class="mb-3">لذا امکان تغییر شهرستان و یا هیات ورزشی در این فرم وجود ندارد.</p>
             <div class="instruction-item">
                 <div class="icon-title mb-2">
@@ -52,7 +52,6 @@
                     <DataAnnotationsValidator />
                     <ValidationSummary class="text-danger" role="alert" />
                     <input type="hidden" name="Insurance.Id" value="@Insurance!.Id" />
-                    <input type="hidden" name="Insurance.CityId" value="@Insurance!.CityId" />
                     <input type="hidden" name="Insurance.FederationId" value="@Insurance!.FederationId" />
                     <div class="form-row">
                         <div class="form-group fa mb-3">
@@ -134,7 +133,6 @@
         using var context = DbFactory.CreateDbContext();
 
         Insurance ??= await context.Insurances
-            .Include(insurance => insurance.City)
             .Include(insurance => insurance.Federation)
             .FirstOrDefaultAsync(insurance => insurance.Id == Id!);
 

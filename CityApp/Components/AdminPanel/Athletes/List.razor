@@ -10,7 +10,7 @@
 <div class="list-wrapper">
 	<div class="list-header">
 		<div class="header-title colored">
-			<h6 class="title">آمار ورزشکاران سازمان یافته هیات @Federation?.PersianName شهرستان @City?.PersianName</h6>
+			<h6 class="title">آمار ورزشکاران سازمان یافته هیات @Federation?.PersianName شهرستان</h6>
 		</div>
 		<div class="paginator">
 			<nav role="navigation">
@@ -97,12 +97,9 @@
 </div>
 
 @code {
-	private int CityId = 4;
-
 	[Parameter]
 	public int? FederationId { get; set; }
 
-	private City? City;
 	private Federation? Federation;
 
 	private List<Insurance>? Insurances;
@@ -110,9 +107,6 @@
 	protected override async Task OnInitializedAsync()
 	{
 		using var context = DbFactory.CreateDbContext();
-
-		City = await context.Cities
-			.FirstOrDefaultAsync(city => city.Id == CityId);
 
 		Federation = await context.Federations
 			.FirstOrDefaultAsync(federation => federation.Id == FederationId);
@@ -126,9 +120,7 @@
 		using var context = DbFactory.CreateDbContext();
 
 		Insurances = await context.Insurances
-			.Include(insurance => insurance.City)
 			.Include(insurance => insurance.Federation)
-			.Where(insurance => insurance.CityId == CityId)
 			.Where(insurance => insurance.FederationId == FederationId)
 			.OrderByDescending(insurance => insurance.Month)
 			.OrderByDescending(insurance => insurance.Year)

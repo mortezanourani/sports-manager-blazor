@@ -26,7 +26,6 @@
 
 		Insurances = await context.Insurances
 			.Include(m => m.Federation)
-			.Where(m => m.CityId == 4)
 			.ToListAsync();
 
 		int currentYear = persianCalendar.GetYear(DateTime.Now);
