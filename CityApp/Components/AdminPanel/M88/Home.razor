@@ -103,7 +103,6 @@
 				.Include(facility => facility.Type)
 				.Include(facility => facility.UsersGender)
 				.Include(facility => facility.FacilityContracts)
-				.Where(facility => facility.City!.Id == CityId)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync();
 
@@ -131,7 +130,6 @@
 			.Include(facility => facility.Type)
 			.Include(facility => facility.UsersGender)
 			.Include(facility => facility.FacilityContracts)
-			.Where(facility => facility.City!.Id == CityId)
 			.OrderBy(facility => facility.Name)
 			.ToListAsync();
 

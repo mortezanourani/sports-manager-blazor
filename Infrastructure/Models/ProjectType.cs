@@ -13,5 +13,5 @@ public partial class ProjectType
 
     public string PersianTitle { get; set; } = null!;
 
-    public virtual ICollection<ConstructionProject> ConstructionProjects { get; set; } = new List<ConstructionProject>();
+    //public virtual ICollection<ConstructionProject> ConstructionProjects { get; set; } = new List<ConstructionProject>();
 }

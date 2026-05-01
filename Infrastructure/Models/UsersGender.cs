@@ -13,7 +13,7 @@ public partial class UsersGender
 
     public string PersianName { get; set; } = null!;
 
-    public virtual ICollection<Facility> Facilities { get; set; } = new List<Facility>();
+    //public virtual ICollection<Facility> Facilities { get; set; } = new List<Facility>();
 
     public virtual ICollection<GovernmentFacilityLicense> GovernmentFacilityLicenses { get; set; } = new List<GovernmentFacilityLicense>();
 

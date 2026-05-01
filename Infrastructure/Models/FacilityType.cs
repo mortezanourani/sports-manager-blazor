@@ -13,7 +13,7 @@ public partial class FacilityType
 
     public string PersianTitle { get; set; } = null!;
 
-    public virtual ICollection<Facility> Facilities { get; set; } = new List<Facility>();
+    //public virtual ICollection<Facility> Facilities { get; set; } = new List<Facility>();
 
     public virtual ICollection<GovernmentFacility> GovernmentFacilities { get; set; } = new List<GovernmentFacility>();
 

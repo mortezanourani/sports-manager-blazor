@@ -8,7 +8,7 @@
 
 <div class="row form-wrapper">
     <div class="col3-5 mb-0">
-        <h6 class="display-4 mb-1">ویرایش قرارداد واگذاری @Contract?.Facility.Name</h6>
+        <h6 class="display-4 mb-1">ویرایش قرارداد واگذاری @* @Contract?.Facility.Name *@</h6>
         <a class="text-4 d-block mb-3 link" href="/Panel/M88/Edit/@Contract?.FacilityId">
             بازگشت به صفحه ویرایش مکان ورزشی
         </a>
@@ -166,8 +166,8 @@
     {
         using var context = DbFactory.CreateDbContext();
         Contract = await context.FacilityContracts
-            .Include(contract => contract.Facility)
-                .ThenInclude(facility => facility.City)
+            // .Include(contract => contract.Facility)
+                // .ThenInclude(facility => facility.City)
             .FirstOrDefaultAsync(contract => contract.Id == Id);
 
         if (Contract is null)

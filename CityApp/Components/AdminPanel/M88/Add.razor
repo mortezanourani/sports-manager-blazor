@@ -208,7 +208,6 @@
     {
         using var context = DbFactory.CreateDbContext();
 
-        Facility.CityId = CityId;
         Facility.TypeId = TypeId;
 
         try
@@ -216,8 +215,6 @@
             var isExist = context.PrivateFacilities
                 .Any(facility =>
                     facility.Name == Facility.Name
-                    &&
-                    facility.CityId == Facility.CityId
                 );
 
             if (isExist)

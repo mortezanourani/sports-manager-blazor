@@ -21,5 +21,5 @@ public partial class ProjectProgress
 
     public int? CompletionYear { get; set; }
 
-    public virtual ConstructionProject Project { get; set; } = null!;
+    //public virtual ConstructionProject Project { get; set; } = null!;
 }

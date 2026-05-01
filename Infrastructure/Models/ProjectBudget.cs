@@ -17,7 +17,7 @@ public partial class ProjectBudget
 
     public int Approved { get; set; }
 
-    public virtual ConstructionProject Project { get; set; } = null!;
+    //public virtual ConstructionProject Project { get; set; } = null!;
 
     public virtual FundingSource Source { get; set; } = null!;
 }
