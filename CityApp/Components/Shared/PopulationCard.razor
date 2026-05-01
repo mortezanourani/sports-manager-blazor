@@ -67,7 +67,6 @@
 
         var population = await context.Population
             .Where(m => m.Year >= currentYear - 10)
-            .Where(m => m.CityId == CityId)
             .ToListAsync();
 
         UrbanMenPopulation = population

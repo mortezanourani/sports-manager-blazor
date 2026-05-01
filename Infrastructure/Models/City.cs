@@ -27,5 +27,5 @@ public partial class City
 
     public virtual ICollection<PrivateFacility> PrivateFacilities { get; set; } = new List<PrivateFacility>();
 
-    public virtual ICollection<Population> Populations { get; set; } = new List<Population>();
+    //public virtual ICollection<Population> Populations { get; set; } = new List<Population>();
 }
