@@ -67,10 +67,8 @@ else
 		using var context = DbFactory.CreateDbContext();
 
 		Federations = await context.LocalFederations
-			.Include(federation => federation.City)
 			.Include(federation => federation.Federation)
 			.Include(federation => federation.LocalFederationPresidents)
-			.Where(federation => federation.City!.Id == 4)
 			.OrderBy(federation => federation.Federation.PersianName)
 			.ToListAsync();
 	}

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class LocalFederationPresident
+public abstract class BaseFederationPresident
 {
     public Guid Id { get; set; }
-
-    public Guid FederationId { get; set; }
 
     public string Name { get; set; } = null!;
 
@@ -28,6 +26,4 @@ public partial class LocalFederationPresident
     public string? TermEnd { get; set; }
 
     public bool IsPresident { get; set; }
-
-    public virtual LocalFederation Federation { get; set; } = null!;
 }

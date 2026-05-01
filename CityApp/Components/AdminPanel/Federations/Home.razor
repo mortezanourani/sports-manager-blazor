@@ -142,17 +142,13 @@
 
 		Federations = string.IsNullOrEmpty(searchText)
 			? await context.LocalFederations
-				.Include(federation => federation.City)
 				.Include(federation => federation.Federation)
 				.Include(federation => federation.LocalFederationPresidents)
-				.Where(federation => federation.City!.Id == cityId)
 				.OrderBy(federation => federation.Federation.PersianName)
 				.ToListAsync()
 			: await context.LocalFederations
-				.Include(federation => federation.City)
 				.Include(federation => federation.Federation)
 				.Include(federation => federation.LocalFederationPresidents)
-				.Where(federation => federation.City!.Id == cityId)
 				.Where(federation => federation.Federation.PersianName.Contains(searchText))
 				.OrderBy(federation => federation.Federation.PersianName)
 				.ToListAsync();
@@ -165,10 +161,8 @@
 		using var context = DbFactory.CreateDbContext();
 
 		Federations = await context.LocalFederations
-			.Include(federation => federation.City)
 			.Include(federation => federation.Federation)
 			.Include(federation => federation.LocalFederationPresidents)
-			.Where(federation => federation.City!.Id == cityId)
 			.OrderBy(federation => federation.Federation.PersianName)
 			.ToListAsync();
 

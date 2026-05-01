@@ -55,7 +55,6 @@
                     <DataAnnotationsValidator />
                     <input type="hidden" name="LocalFederation.Id" value="@LocalFederation!.Id" />
                     <input type="hidden" name="LocalFederation.FederationId" value="@LocalFederation!.FederationId" />
-                    <input type="hidden" name="LocalFederation.CityId" value="@LocalFederation!.CityId" />
                     <input type="hidden" name="LocalFederation.District" value="@LocalFederation!.District" />
                     <div class="form-group fa mb-3">
                         <label for="federationid" class="form-label">
@@ -206,15 +205,18 @@
         using var context = DbFactory.CreateDbContext();
 
         LocalFederation ??= await context.LocalFederations
-            .Include(federation => federation.City)
             .Include(federation => federation.Federation)
             .Include(federation => federation.LocalFederationPresidents)
             .FirstOrDefaultAsync(federation => federation.Id == Id);
 
-        Presidents ??= await context.LocalFederationPresidents
-            .Where(president => president.Federation.Id == Id)
+        Presidents ??= LocalFederation!.LocalFederationPresidents
             .OrderByDescending(president => president.AppointmentDate)
-            .ToListAsync();
+            .ToList();
+
+        // Presidents ??= await context.LocalFederationPresidents
+        //     .Where(president => president.Federation.Id == Id)
+        //     .OrderByDescending(president => president.AppointmentDate)
+        //     .ToListAsync();
 
         pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged();
     }
@@ -224,10 +226,6 @@
         using var context = DbFactory.CreateDbContext();
 
         LocalFederation!.LocalFederationPresidents = Presidents!.ToArray();
-
-        var city = await context.Cities
-            .FirstOrDefaultAsync(city => city.Id == LocalFederation!.CityId);
-        LocalFederation!.City = city!;
 
         context.Attach(LocalFederation!).State = EntityState.Modified;
 
