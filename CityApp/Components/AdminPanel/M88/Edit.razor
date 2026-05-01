@@ -262,7 +262,7 @@
         else
         {
             Contracts = await context.FacilityContracts
-                .Include(contract => contract.LegalContractor)
+                // .Include(contract => contract.LegalContractor)
                 .Where(contract => contract.FacilityId == Facility!.Id)
                 .OrderByDescending(contract => contract.ExpireDate)
                 .ToListAsync();

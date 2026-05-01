@@ -32,7 +32,7 @@
 
         federationsCount = await context.Federations.CountAsync();
         localFederationsCount = await context.LocalFederations
-            .CountAsync(m => m.CityId == 4);
+            .CountAsync();
         percentPixelCount = (int)((1 - ((double)localFederationsCount / federationsCount)) * 600);
     }
 }

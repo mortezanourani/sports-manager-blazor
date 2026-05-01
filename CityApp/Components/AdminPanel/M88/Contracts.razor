@@ -107,7 +107,7 @@
 		var contracts = await context.FacilityContracts
 				.Include(contract => contract.Facility)
 					.ThenInclude(facility => facility.City)
-				.Include(contract => contract.LegalContractor)
+				// .Include(contract => contract.LegalContractor)
 				.Where(contract => contract.Facility.CityId == CityId)
 				.OrderByDescending(contract => contract.ExpireDate)
 				.ToListAsync();
@@ -134,7 +134,7 @@
 		FacilitiesContracts = await context.FacilityContracts
 			.Include(contract => contract.Facility)
 				.ThenInclude(facility => facility.City)
-			.Include(contract => contract.LegalContractor)
+			// .Include(contract => contract.LegalContractor)
 			.Where(contract => contract.Facility.CityId == CityId)
 			.OrderByDescending(contract => contract.ExpireDate)
 			.ToListAsync();

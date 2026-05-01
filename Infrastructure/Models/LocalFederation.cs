@@ -3,13 +3,9 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class LocalFederation
+public abstract class BaseLocalFederation
 {
     public Guid Id { get; set; }
-
-    public int FederationId { get; set; }
-
-    public int CityId { get; set; }
 
     public string? District { get; set; }
 
@@ -20,12 +16,4 @@ public partial class LocalFederation
     public string? ZipCode { get; set; }
 
     public string? Phone { get; set; }
-
-    public virtual City City { get; set; } = null!;
-
-    public virtual ICollection<FacilityContract> FacilityContracts { get; set; } = new List<FacilityContract>();
-
-    public virtual Federation Federation { get; set; } = null!;
-
-    public virtual ICollection<LocalFederationPresident> LocalFederationPresidents { get; set; } = new List<LocalFederationPresident>();
 }

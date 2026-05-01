@@ -152,10 +152,10 @@
         using var context = DbFactory.CreateDbContext();
 
         LocalFederationPresident ??= await context.LocalFederationPresidents
-            .Include(president => president.Federation)
-                .ThenInclude(federation => federation.Federation)
-            .Include(president => president.Federation)
-                .ThenInclude(federation => federation.City)
+            // .Include(president => president.Federation)
+                // .ThenInclude(federation => federation.Federation)
+            // .Include(president => president.Federation)
+                // .ThenInclude(federation => federation.City)
             .FirstOrDefaultAsync(m => m.Id == Id);
     }
 

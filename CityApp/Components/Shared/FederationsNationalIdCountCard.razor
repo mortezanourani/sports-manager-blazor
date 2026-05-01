@@ -31,7 +31,6 @@
         using var context = DbFactory.CreateDbContext();
 
         var federations = await context.LocalFederations
-            .Where(m => m.CityId == 4)
             .ToListAsync();
         federationsCount = federations
             .Count();

@@ -58,7 +58,6 @@
 
         activeFederationsCount = await context.LocalFederations
             .Include(federation => federation.LocalFederationPresidents)
-            .Where(federation => federation.CityId == 4)
             .CountAsync(federation => federation.LocalFederationPresidents.Any());
 
         int currentYear = persianCalendar.GetYear(DateTime.Now);

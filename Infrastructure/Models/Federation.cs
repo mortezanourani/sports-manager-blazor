@@ -23,7 +23,7 @@ public partial class Federation
 
     //public virtual ICollection<Insurance> Insurances { get; set; } = new List<Insurance>();
 
-    public virtual ICollection<LocalFederation> LocalFederations { get; set; } = new List<LocalFederation>();
+    //public virtual ICollection<LocalFederation> LocalFederations { get; set; } = new List<LocalFederation>();
 
     public virtual ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
 }

@@ -33,7 +33,6 @@
 
         var federations = await context.LocalFederations
             .Include(m => m.LocalFederationPresidents)
-            .Where(m => m.CityId == 4)
             .ToListAsync();
         federationsCount = federations
             .Count();

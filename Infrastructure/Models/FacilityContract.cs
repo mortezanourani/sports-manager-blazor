@@ -29,5 +29,5 @@ public partial class FacilityContract
 
     public virtual Facility Facility { get; set; } = null!;
 
-    public virtual LocalFederation? LegalContractor { get; set; }
+    //public virtual LocalFederation? LegalContractor { get; set; }
 }
