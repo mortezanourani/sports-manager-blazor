@@ -1,4 +1,5 @@
-﻿using CityApp.Identity;
+﻿using CityApp.Models;
+using CityApp.Identity;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

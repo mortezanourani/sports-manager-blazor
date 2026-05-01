@@ -7,50 +7,44 @@
 
 <PageTitle>ورزشکاران سازمان یافته</PageTitle>
 
-@if (City is null)
-{
-	<Loading CardMode=true />
-}
-else
-{
-	<div class="list-wrapper">
-		<div class="list-header">
-			<div class="header-title colored">
-				<h6 class="title">آمار ورزشکاران سازمان یافته شهرستان @City?.PersianName</h6>
-				<div class="search form-group fa">
-					<label class="form-label" for="paginator-search-input">
-						<img src="/icons/search-gray.svg" />
-					</label>
-					<InputText class="form-control" placeholder=@($"جستجو بر اساس هیات ورزشی") id="paginator-search-input" @bind-Value="searchText" @oninput="Search"></InputText>
-				</div>
+<div class="list-wrapper">
+	<div class="list-header">
+		<div class="header-title colored">
+			<h6 class="title">آمار ورزشکاران سازمان یافته شهرستان</h6>
+			<div class="search form-group fa">
+				<label class="form-label" for="paginator-search-input">
+					<img src="/icons/search-gray.svg" />
+				</label>
+				<InputText class="form-control" placeholder=@($"جستجو بر اساس هیات ورزشی") id="paginator-search-input" @bind-Value="searchText" @oninput="Search"></InputText>
 			</div>
-			<div class="paginator">
-				<nav role="navigation">
-					@if (pagination.TotalItemCount.HasValue)
-					{
-						var totalPages = pagination.TotalItemCount;
-						var pageIndex = pagination.CurrentPageIndex;
-						var currentPage = pageIndex + 1;
-						var lastPage = pagination.LastPageIndex + 1;
-						var firstItemNumber = 1 + (pagination.ItemsPerPage * pagination.CurrentPageIndex);
-						var lastItemNumber = pagination.ItemsPerPage * (pagination.CurrentPageIndex + 1);
-						<button @onclick="@(() => GoToPageAsync(pageIndex - 1))"
-								class="btn"
-								aria-current="@AriaCurrentValue(pageIndex - 1)"
-								aria-label="@(pageIndex - 1)"
-								disabled=@((pageIndex <= 0) ? "disabled" : false)>
-							<img src="/icons/arrow-right.svg" />
-						</button>
-						<button @onclick="@(() => GoToPageAsync(pageIndex + 1))"
-								class="btn"
-								aria-current="@AriaCurrentValue(pageIndex + 1)"
-								aria-label="@(pageIndex + 1)"
-								disabled=@((currentPage >= lastPage) ? "disabled" : false)>
-							<img src="/icons/arrow-left.svg" />
-						</button>
-					}
-				</nav>
-				@*
+		</div>
+		<div class="paginator">
+			<nav role="navigation">
+				@if (pagination.TotalItemCount.HasValue)
+				{
+					var totalPages = pagination.TotalItemCount;
+					var pageIndex = pagination.CurrentPageIndex;
+					var currentPage = pageIndex + 1;
+					var lastPage = pagination.LastPageIndex + 1;
+					var firstItemNumber = 1 + (pagination.ItemsPerPage * pagination.CurrentPageIndex);
+					var lastItemNumber = pagination.ItemsPerPage * (pagination.CurrentPageIndex + 1);
+					<button @onclick="@(() => GoToPageAsync(pageIndex - 1))"
+							class="btn"
+							aria-current="@AriaCurrentValue(pageIndex - 1)"
+							aria-label="@(pageIndex - 1)"
+							disabled=@((pageIndex <= 0) ? "disabled" : false)>
+						<img src="/icons/arrow-right.svg" />
+					</button>
+					<button @onclick="@(() => GoToPageAsync(pageIndex + 1))"
+							class="btn"
+							aria-current="@AriaCurrentValue(pageIndex + 1)"
+							aria-label="@(pageIndex + 1)"
+							disabled=@((currentPage >= lastPage) ? "disabled" : false)>
+						<img src="/icons/arrow-left.svg" />
+					</button>
+				}
+			</nav>
+			@*
 						<div class="total border-0 p-0">
 							<div class="total">
 								@($"آقایان: {Insurances!.Sum(insurance => insurance.MenCount)}")
@@ -63,55 +57,51 @@ else
 							</div>
 						</div>
 						*@
-			</div>
 		</div>
-		@if (Insurances is null)
-		{
-			<Loading CardMode=true />
-		}
-		else
-		{
-			<div class="table-wrapper">
-				@if (Insurances is not null)
-				{
-					<QuickGrid Items="Insurances.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
-						<TemplateColumn Class="action-button status">
-							<img src="/icons/arrow-left.svg" />
-						</TemplateColumn>
-						<PropertyColumn Class="bold" Title="هیات ورزشی" Property="@(insurance => insurance.Key.PersianName)" />
-
-						<TemplateColumn Class="action-button text-3" Title="تعداد بیمه آقایان">
-							<img src="/icons/man-blue.svg" />
-						</TemplateColumn>
-						<PropertyColumn Class="light text-3" Title="تعداد بیمه آقایان" Property="@(insurance => insurance.MenCount)" />
-
-						<TemplateColumn Class="action-button text-3" Title="تعداد بیمه آقایان">
-							<img src="/icons/woman-blue.svg" />
-						</TemplateColumn>
-						<PropertyColumn Class="light text-3" Title="تعداد بیمه بانوان" Property="@(insurance => insurance.WomenCount)" />
-
-						<TemplateColumn Class="action-button header-5" Title="تعداد بیمه آقایان">
-							<img src="/icons/genders-blue.svg" />
-						</TemplateColumn>
-						<PropertyColumn Class="light header-5" Title="مجموع ورزشکاران سازمان یافته" Property="@(insurance => insurance.MenCount + insurance.WomenCount)" />
-
-						<TemplateColumn Class="action-button">
-							<a class="edit-link" href="/Panel/Athletes/List/@context.Key.Id">
-								<img src="/icons/calendar-blue.svg" />
-							</a>
-						</TemplateColumn>
-					</QuickGrid>
-				}
-			</div>
-		}
 	</div>
-}
+	@if (Insurances is null)
+	{
+		<Loading CardMode=true />
+	}
+	else
+	{
+		<div class="table-wrapper">
+			@if (Insurances is not null)
+			{
+				<QuickGrid Items="Insurances.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
+					<TemplateColumn Class="action-button status">
+						<img src="/icons/arrow-left.svg" />
+					</TemplateColumn>
+					<PropertyColumn Class="bold" Title="هیات ورزشی" Property="@(insurance => insurance.Key.PersianName)" />
+
+					<TemplateColumn Class="action-button text-3" Title="تعداد بیمه آقایان">
+						<img src="/icons/man-blue.svg" />
+					</TemplateColumn>
+					<PropertyColumn Class="light text-3" Title="تعداد بیمه آقایان" Property="@(insurance => insurance.MenCount)" />
+
+					<TemplateColumn Class="action-button text-3" Title="تعداد بیمه آقایان">
+						<img src="/icons/woman-blue.svg" />
+					</TemplateColumn>
+					<PropertyColumn Class="light text-3" Title="تعداد بیمه بانوان" Property="@(insurance => insurance.WomenCount)" />
+
+					<TemplateColumn Class="action-button header-5" Title="تعداد بیمه آقایان">
+						<img src="/icons/genders-blue.svg" />
+					</TemplateColumn>
+					<PropertyColumn Class="light header-5" Title="مجموع ورزشکاران سازمان یافته" Property="@(insurance => insurance.MenCount + insurance.WomenCount)" />
+
+					<TemplateColumn Class="action-button">
+						<a class="edit-link" href="/Panel/Athletes/List/@context.Key.Id">
+							<img src="/icons/calendar-blue.svg" />
+						</a>
+					</TemplateColumn>
+				</QuickGrid>
+			}
+		</div>
+	}
+</div>
+
 
 @code {
-	private int CityId = 4;
-
-	private City? City;
-
 	private List<ViewModel>? Insurances;
 
 	private string? searchText;
@@ -119,9 +109,6 @@ else
 	protected override async Task OnInitializedAsync()
 	{
 		using var context = DbFactory.CreateDbContext();
-
-		City = await context.Cities
-			.FirstOrDefaultAsync(city => city.Id == CityId);
 	}
 
 	private async Task Search(ChangeEventArgs args)
@@ -134,9 +121,7 @@ else
 		var old = getDateString(DateTime.Now.AddYears(-1));
 		Insurances = string.IsNullOrEmpty(searchText)
 		? await context.Insurances
-			.Include(insurance => insurance.City)
 			.Include(insurance => insurance.Federation)
-			.Where(insurance => insurance.CityId == CityId)
 			.Where(insurance =>
 				old < insurance.Year * 100 + insurance.Month
 				&&
@@ -152,9 +137,7 @@ else
 			.OrderBy(select => select.Key.PersianName)
 			.ToListAsync()
 		: await context.Insurances
-			.Include(insurance => insurance.City)
 			.Include(insurance => insurance.Federation)
-			.Where(insurance => insurance.CityId == CityId)
 			.Where(insurance => insurance.Federation.PersianName.Contains(searchText))
 			.Where(insurance =>
 				old < insurance.Year * 100 + insurance.Month
@@ -182,9 +165,7 @@ else
 		var current = getDateString(DateTime.Today);
 		var old = getDateString(DateTime.Now.AddYears(-1));
 		Insurances = await context.Insurances
-			.Include(insurance => insurance.City)
 			.Include(insurance => insurance.Federation)
-			.Where(insurance => insurance.CityId == CityId)
 			.Where(insurance =>
 				old < insurance.Year * 100 + insurance.Month
 				&&

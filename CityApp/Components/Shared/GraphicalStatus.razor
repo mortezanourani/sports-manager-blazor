@@ -67,7 +67,6 @@
 
         athletesCount = await context.Insurances
             .Where(m => ((m.Year * 100) + m.Month) > lastYear)
-            .Where(m => m.CityId == 4)
             .SumAsync(m => m.MenCount + m.WomenCount);
 
         facilitiesCount = await context.GovernmentFacilities

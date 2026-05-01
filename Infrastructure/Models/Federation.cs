@@ -21,7 +21,7 @@ public partial class Federation
 
     public bool IsRural { get; set; }
 
-    public virtual ICollection<Insurance> Insurances { get; set; } = new List<Insurance>();
+    //public virtual ICollection<Insurance> Insurances { get; set; } = new List<Insurance>();
 
     public virtual ICollection<LocalFederation> LocalFederations { get; set; } = new List<LocalFederation>();
 
