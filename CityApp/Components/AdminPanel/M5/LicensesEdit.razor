@@ -228,7 +228,6 @@
 
         License = await context.PrivateFacilityLicenses
             .Include(license => license.Facility)
-                .ThenInclude(facility => facility.City)
             .FirstOrDefaultAsync(license => license.Id == Id);
 
         if (License is null)

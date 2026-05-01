@@ -110,13 +110,11 @@
 			? await context.PrivateFacilities
 				.Include(facility => facility.Type)
 				.Include(facility => facility.PrivateFacilityLicenses)
-				.Where(facility => facility.City!.Id == CityId)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync()
 			: await context.PrivateFacilities
 				.Include(facility => facility.Type)
 				.Include(facility => facility.PrivateFacilityLicenses)
-				.Where(facility => facility.City!.Id == CityId)
 				.Where(facility =>
 					facility.Name.Contains(searchText)
 					||
@@ -137,7 +135,6 @@
 		Facilities = await context.PrivateFacilities
 			.Include(facility => facility.Type)
 			.Include(facility => facility.PrivateFacilityLicenses)
-			.Where(facility => facility.City!.Id == CityId)
 			.OrderBy(facility => facility.Name)
 			.ToListAsync();
 

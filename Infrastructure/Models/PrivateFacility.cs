@@ -3,15 +3,11 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class PrivateFacility
+public abstract class BasePrivateFacility
 {
     public Guid Id { get; set; }
 
     public string Name { get; set; } = null!;
-
-    public int? TypeId { get; set; }
-
-    public int CityId { get; set; }
 
     public string? District { get; set; }
 
@@ -30,10 +26,4 @@ public partial class PrivateFacility
     public string? Address { get; set; }
 
     public string? Phone { get; set; }
-
-    public virtual City City { get; set; } = null!;
-
-    public virtual ICollection<PrivateFacilityLicense> PrivateFacilityLicenses { get; set; } = new List<PrivateFacilityLicense>();
-
-    public virtual FacilityType? Type { get; set; }
 }
