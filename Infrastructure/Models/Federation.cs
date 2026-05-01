@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class Federation
+public class Federation
 {
     public int Id { get; set; }
 
@@ -20,10 +20,4 @@ public partial class Federation
     public bool IsGeneral { get; set; }
 
     public bool IsRural { get; set; }
-
-    //public virtual ICollection<Insurance> Insurances { get; set; } = new List<Insurance>();
-
-    //public virtual ICollection<LocalFederation> LocalFederations { get; set; } = new List<LocalFederation>();
-
-    public virtual ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
 }

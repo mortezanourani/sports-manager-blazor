@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class FacilityDocument
+public class FacilityDocument
 {
     public Guid Id { get; set; }
 
@@ -20,6 +20,4 @@ public partial class FacilityDocument
     public double? Area { get; set; }
 
     public string? Date { get; set; }
-
-    //public virtual Facility? Facility { get; set; }
 }

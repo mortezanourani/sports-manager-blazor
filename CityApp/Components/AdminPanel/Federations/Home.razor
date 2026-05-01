@@ -11,7 +11,7 @@
 		<div class="list-wrapper">
 			<div class="list-header">
 				<div class="header-title">
-					<h6 class="title">فهرست هیات های ورزشی @City?.PersianName</h6>
+					<h6 class="title">فهرست هیات های ورزشی</h6>
 					<div class="search form-group fa">
 						<label class="form-label" for="paginator-search-input">
 							<img src="/icons/search-gray.svg" />
@@ -112,10 +112,6 @@
 </div>
 
 @code {
-	private int cityId = 4;
-
-	private City? City;
-
 	private List<LocalFederation>? Federations;
 
 	private int activeFederationsCount;
@@ -129,8 +125,6 @@
 	{
 		using var context = DbFactory.CreateDbContext();
 		
-		City = await context.Cities!.FirstOrDefaultAsync(city => city.Id == cityId);
-
 		await UpdateList();
 	}
 

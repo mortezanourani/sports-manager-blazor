@@ -12,7 +12,7 @@ else
 		<div class="list-header">
 			<div class="header-year">
 				<h6 class="title text-3">ورزشکاران سازمان یافته هیات ها در سال @Year</h6>
-				<InputSelect class="select" @bind-Value="Year">
+				<InputSelect class="select" @bind-Value="Year" @onclick="OnParametersSetAsync">
 					@foreach (int year in Years!)
 					{
 						<option value="@year">@year</option>
@@ -118,6 +118,8 @@ else
 			.Sum(m => m.Sum(
 				m => m.WomenCount)
 			);
+
+		pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged();
 	}
 
 	private PaginationState pagination = new PaginationState { ItemsPerPage = 3 };

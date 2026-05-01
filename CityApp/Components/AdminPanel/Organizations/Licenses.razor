@@ -11,7 +11,7 @@
 <div class="list-wrapper">
 	<div class="list-header">
 		<div class="header-title colored">
-			<h6 class="title">فهرست مجوزهای ماده 5 سایر ارگان های شهرستان @City?.PersianName</h6>
+			<h6 class="title">فهرست مجوزهای ماده 5 سایر ارگان های شهرستان</h6>
 			<div class="search form-group fa">
 				<label class="form-label" for="paginator-search-input">
 					<img src="/icons/search-gray.svg" />
@@ -75,10 +75,6 @@
 </div>
 
 @code {
-	private int CityId = 4;
-
-	private City? City;
-
 	private List<GovernmentFacilityLicense>? FacilitiesLicenses { get; set; }
 
 	private string? searchText;
@@ -86,9 +82,6 @@
 	protected override async Task OnInitializedAsync()
 	{
 		using var context = DbFactory.CreateDbContext();
-
-		City = await context.Cities
-			.FirstOrDefaultAsync(m => m.Id == CityId);
 
 		await UpdateList();
 	}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class TournamentLevel
+public class TournamentLevel
 {
     public int Id { get; set; }
 
@@ -14,6 +14,4 @@ public partial class TournamentLevel
     public string? NormalizedTitle { get; set; }
 
     public string PersianTitle { get; set; } = null!;
-
-    public virtual ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
 }

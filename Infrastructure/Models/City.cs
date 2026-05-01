@@ -12,6 +12,4 @@ public class City
     public string? NormalizedName { get; set; }
 
     public string PersianName { get; set; } = null!;
-
-    public virtual ICollection<Athlete> Athletes { get; set; } = new List<Athlete>();
 }

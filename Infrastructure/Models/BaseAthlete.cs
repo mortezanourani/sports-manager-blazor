@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public class Department
+public abstract class BaseAthlete
 {
     public Guid Id { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public string? NormalizedName { get; set; }
+    public string? SeenCode { get; set; }
 
-    public string PersianName { get; set; } = null!;
+    public string? Phone { get; set; }
 }
