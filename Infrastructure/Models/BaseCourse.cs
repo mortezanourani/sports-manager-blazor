@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class Course
+public abstract class BaseCourse
 {
     public Guid Id { get; set; }
 
@@ -18,6 +18,4 @@ public partial class Course
     public string Month { get; set; } = null!;
 
     public bool IsOnline { get; set; }
-
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 }

@@ -12,6 +12,4 @@ public class AgeGroup
     public string? NormalizedName { get; set; }
 
     public string PersianName { get; set; } = null!;
-
-    public virtual ICollection<Champion> Champions { get; set; } = new List<Champion>();
 }

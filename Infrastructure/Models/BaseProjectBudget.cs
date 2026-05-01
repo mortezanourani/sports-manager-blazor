@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Models;
 
-public partial class ProjectBudget
+public abstract class BaseProjectBudget
 {
     [Key]
     public Guid Id { get; set; }
@@ -13,11 +13,5 @@ public partial class ProjectBudget
 
     public int Year { get; set; }
 
-    public int SourceId { get; set; }
-
     public int Approved { get; set; }
-
-    //public virtual ConstructionProject Project { get; set; } = null!;
-
-    public virtual FundingSource Source { get; set; } = null!;
 }

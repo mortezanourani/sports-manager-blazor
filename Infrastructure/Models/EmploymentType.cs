@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class EmploymentType
+public class EmploymentType
 {
     public int Id { get; set; }
 
@@ -12,6 +12,4 @@ public partial class EmploymentType
     public string? NormalizedTitle { get; set; }
 
     public string PersianTitle { get; set; } = null!;
-
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 }

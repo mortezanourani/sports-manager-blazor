@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class FacilityType
+public class FacilityType
 {
     public int Id { get; set; }
 

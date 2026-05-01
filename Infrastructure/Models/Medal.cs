@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class Medal
+public class Medal
 {
     public int Id { get; set; }
 
@@ -14,6 +14,4 @@ public partial class Medal
     public string? NormalizedColor { get; set; }
 
     public string PersianTitle { get; set; } = null!;
-
-    public virtual ICollection<Champion> Champions { get; set; } = new List<Champion>();
 }

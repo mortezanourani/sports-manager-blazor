@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Models;
 
-public partial class ProjectProgress
+public abstract class BaseProjectProgress
 {
     [Key]
     public Guid Id { get; set; }
@@ -20,6 +20,4 @@ public partial class ProjectProgress
     public int? CompletionBudget { get; set; }
 
     public int? CompletionYear { get; set; }
-
-    //public virtual ConstructionProject Project { get; set; } = null!;
 }

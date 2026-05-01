@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class Employee
+public abstract class BaseEmployee
 {
     public Guid Id { get; set; }
 
     public string SeenCode { get; set; } = null!;
-
-    public int GenderId { get; set; }
 
     public string FirstName { get; set; } = null!;
 
@@ -21,13 +19,5 @@ public partial class Employee
 
     public string? BirthDate { get; set; }
 
-    public int? TypeId { get; set; }
-
     public string? AccountId { get; set; }
-
-    public virtual Gender Gender { get; set; } = null!;
-
-    public virtual EmploymentType? Type { get; set; }
-
-    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }
