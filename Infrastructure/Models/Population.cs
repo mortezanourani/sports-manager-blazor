@@ -1,10 +1,8 @@
 ﻿namespace Infrastructure.Models;
 
-public class Population
+public abstract class BasePopulation
 {
     public Guid Id { get; set; }
-
-    public int CityId { get; set; }
 
     public int Year { get; set; }
 
@@ -15,6 +13,4 @@ public class Population
     public int RuralMen { get; set; }
 
     public int RuralWomen { get; set; }
-
-    public virtual City City { get; set; } = null!;
 }

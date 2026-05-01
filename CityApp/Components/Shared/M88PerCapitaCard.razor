@@ -31,7 +31,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		var population = await context.Population
-			.Where(m => m.CityId == 4)
 			.SumAsync(m => m.RuralMen + m.RuralWomen + m.UrbanMen + m.UrbanWomen);
 
 		var facilities = await context.PrivateFacilities
