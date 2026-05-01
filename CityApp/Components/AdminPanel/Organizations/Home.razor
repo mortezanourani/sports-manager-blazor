@@ -109,7 +109,6 @@
 		var facilities = await context.GovernmentFacilities
 				.Include(facility => facility.Type)
 				.Include(facility => facility.GovernmentFacilityLicenses)
-				.Where(facility => facility.City!.Id == CityId)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync();
 
@@ -136,7 +135,6 @@
 		Facilities = await context.GovernmentFacilities
 				.Include(facility => facility.Type)
 				.Include(facility => facility.GovernmentFacilityLicenses)
-				.Where(facility => facility.City!.Id == CityId)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync();
 

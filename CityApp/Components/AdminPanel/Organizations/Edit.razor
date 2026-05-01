@@ -266,7 +266,6 @@
     {
         using var context = DbFactory.CreateDbContext();
 
-        Facility.City = context.Cities.FirstOrDefault(city => city.Id == CityId)!;
         Facility.Type = context.FacilityTypes.FirstOrDefault(type => type.Id == Facility!.TypeId);
         Facility.GovernmentFacilityLicenses = await context.GovernmentFacilityLicenses
             .Where(license => license.FacilityId == Facility.Id)

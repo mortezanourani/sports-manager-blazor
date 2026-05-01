@@ -102,8 +102,6 @@
 		var licenses = await context.GovernmentFacilityLicenses
 				.Include(license => license.UsersGender)
 				.Include(license => license.Facility)
-					.ThenInclude(facility => facility.City)
-				.Where(license => license.Facility.CityId == CityId)
 				.OrderByDescending(license => license.ExpireDate)
 				.ToListAsync();
 
@@ -129,8 +127,6 @@
 		FacilitiesLicenses = await context.GovernmentFacilityLicenses
 				.Include(license => license.UsersGender)
 				.Include(license => license.Facility)
-					.ThenInclude(facility => facility.City)
-				.Where(license => license.Facility.CityId == CityId)
 				.OrderByDescending(license => license.ExpireDate)
 				.ToListAsync();
 
