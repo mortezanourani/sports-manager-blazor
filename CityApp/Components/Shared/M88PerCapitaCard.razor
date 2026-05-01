@@ -35,7 +35,6 @@
 
 		var facilities = await context.PrivateFacilities
 			.Include(f => f.PrivateFacilityLicenses)
-			.Where(f => f.CityId == 4)
 			.ToListAsync();
 
 		var sportLandArea = facilities

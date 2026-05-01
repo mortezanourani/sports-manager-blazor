@@ -78,7 +78,7 @@
             persianCalendar.GetDayOfMonth(nowDate);
 
         gymsCount = await context.PrivateFacilities
-            .CountAsync(m => m.CityId == 4);
+            .CountAsync();
     }
 
 }

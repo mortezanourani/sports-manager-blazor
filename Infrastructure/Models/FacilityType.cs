@@ -12,10 +12,4 @@ public partial class FacilityType
     public string? NormalizedType { get; set; }
 
     public string PersianTitle { get; set; } = null!;
-
-    //public virtual ICollection<Facility> Facilities { get; set; } = new List<Facility>();
-
-    public virtual ICollection<GovernmentFacility> GovernmentFacilities { get; set; } = new List<GovernmentFacility>();
-
-    public virtual ICollection<PrivateFacility> PrivateFacilities { get; set; } = new List<PrivateFacility>();
 }

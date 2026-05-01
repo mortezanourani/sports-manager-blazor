@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class PrivateFacilityLicense
+public abstract class BasePrivateFacilityLicense
 {
     public Guid Id { get; set; }
-
-    public Guid FacilityId { get; set; }
 
     public bool? IsBeneficial { get; set; }
 
@@ -21,8 +19,6 @@ public partial class PrivateFacilityLicense
 
     public string? ExpireDate { get; set; }
 
-    public int UsersGenderId { get; set; }
-
     public string? MenSports { get; set; }
 
     public string? WomenSports { get; set; }
@@ -34,8 +30,4 @@ public partial class PrivateFacilityLicense
     public string? SeenCode { get; set; }
 
     public string? Phone { get; set; }
-
-    public virtual PrivateFacility Facility { get; set; } = null!;
-
-    public virtual UsersGender UsersGender { get; set; } = null!;
 }

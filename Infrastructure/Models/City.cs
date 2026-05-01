@@ -25,7 +25,7 @@ public partial class City
 
     //public virtual ICollection<LocalFederation> LocalFederations { get; set; } = new List<LocalFederation>();
 
-    public virtual ICollection<PrivateFacility> PrivateFacilities { get; set; } = new List<PrivateFacility>();
+    //public virtual ICollection<PrivateFacility> PrivateFacilities { get; set; } = new List<PrivateFacility>();
 
     //public virtual ICollection<Population> Populations { get; set; } = new List<Population>();
 }

@@ -39,7 +39,6 @@
 
         var facilities = await context.PrivateFacilities
             .Include(m => m.PrivateFacilityLicenses)
-            .Where(m => m.CityId == 4)
             .ToListAsync();
 
         totalCount = facilities.Count();
