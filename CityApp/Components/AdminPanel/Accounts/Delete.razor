@@ -1,0 +1,68 @@
+﻿@page "/Panel/Accounts/Delete/{UserId}"
+
+@using Microsoft.AspNetCore.Identity
+@using System.ComponentModel.DataAnnotations
+
+@inject UserManager<CityUser> UserManager
+
+@rendermode InteractiveServer
+
+<AuthorizeView Policy="FullAccess" Context="AuthContext">
+    <div class="row form-wrapper">
+        <div class="col3-5 mb-0">
+            <h6 class="display-4">حذف کاربر</h6>
+            <a class="text-4 d-block mb-3 link" href="/Panel/Accounts/Edit/@UserId!" type="button">بازگشت به صفحه ویرایش.</a>
+            <div class="instructions">
+                <p class="mb-3">آیا از حذف حساب کاربری @($"{User?.FirstName} {User?.LastName}") اطمینان دارید؟</p>
+            </div>
+        </div>
+        <div class="col2-5 mb-auto">
+            @if (User is null)
+            {
+                <Loading CardMode=true />
+            }
+            else
+            {
+                <div class="card bordered-card">
+                    <button type="button" class="btn btn-danger w-100" @onclick="() => DeleteUser(UserId!)">بله، کاربر را حذف می کنم.</button>
+                </div>
+            }
+        </div>
+    </div>
+</AuthorizeView>
+
+@code {
+    [Parameter]
+    public string? UserId { get; set; }
+
+    private CityUser? User { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+
+        User ??= await UserManager.Users
+            .FirstOrDefaultAsync(u => u.Id == UserId);
+
+        if (User is null)
+        {
+            NavigationManager.NavigateTo("/Panel/Accounts");
+        }
+    }
+
+    private async Task DeleteUser(string UserId)
+    {
+        CityUser? user = await UserManager.FindByIdAsync(UserId!);
+        if (user is null) return;
+
+        try
+        {
+            await UserManager.DeleteAsync(user);
+            NavigationManager.NavigateTo("/Panel/Accounts");
+        }
+        catch
+        {
+        }
+        return;
+    }
+}

@@ -1,0 +1,26 @@
+﻿@inherits LayoutComponentBase
+
+@layout Layout.AdminLayout
+
+<AuthorizeView Policy="FullAccess">
+    <nav class="secondary-navbar">
+        <div class="container">
+            <h5 class="sub-title">حساب های کاربری</h5>
+            <ul class="nav">
+                <li class="nav-item">
+                    <NavLink href="/Panel/Accounts" Match="NavLinkMatch.All">فهرست کاربران</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Panel/Accounts/Add">ایجاد حساب کاربری جدید</NavLink>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <article class="content py-3">
+        @Body
+    </article>
+</AuthorizeView>
+
+@code {
+
+}
