@@ -8,6 +8,8 @@ namespace CityApp.Data;
 
 public class CityDbContext(DbContextOptions<CityDbContext> options) : IdentityDbContext<CityUser>(options)
 {
+    public DbSet<Department> Departments { get; set; }
+
     public DbSet<Facility> Facilities { get; set; }
 
     public DbSet<FacilityContract> FacilityContracts { get; set; }

@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+@inject UserManager<CityUser> UserManager
+
+@page "/Panel/Accounts"
+
+@rendermode InteractiveServer
+
+<PageTitle>کاربران سامانه</PageTitle>
+
+
+<div class="list-wrapper">
+	<div class="list-header">
+		<div class="header-title colored">
+			<h6 class="title">فهرست کاربران سامانه</h6>
+			<div class="search form-group fa">
+				<label class="form-label" for="paginator-search-input">
+					<img src="/icons/search-gray.svg" />
+				</label>
+				<InputText class="form-control" placeholder=@($"جستجو بر اساس نام یا کد ملی") id="paginator-search-input" @bind-Value="searchText" @oninput="Search"></InputText>
+			</div>
+		</div>
+		<div class="paginator">
+			<nav role="navigation">
+				@if (pagination.TotalItemCount.HasValue)
+				{
+					var totalPages = pagination.TotalItemCount;
+					var pageIndex = pagination.CurrentPageIndex;
+					var currentPage = pageIndex + 1;
+					var lastPage = pagination.LastPageIndex + 1;
+					var firstItemNumber = 1 + (pagination.ItemsPerPage * pagination.CurrentPageIndex);
+					var lastItemNumber = pagination.ItemsPerPage * (pagination.CurrentPageIndex + 1);
+					<button @onclick="@(() => GoToPageAsync(pageIndex - 1))"
+							class="btn"
+							aria-current="@AriaCurrentValue(pageIndex - 1)"
+							aria-label="@(pageIndex - 1)"
+							disabled=@((pageIndex <= 0) ? "disabled" : false)>
+						<img src="/icons/arrow-right.svg" />
+					</button>
+					<button @onclick="@(() => GoToPageAsync(pageIndex + 1))"
+							class="btn"
+							aria-current="@AriaCurrentValue(pageIndex + 1)"
+							aria-label="@(pageIndex + 1)"
+							disabled=@((currentPage >= lastPage) ? "disabled" : false)>
+						<img src="/icons/arrow-left.svg" />
+					</button>
+				}
+			</nav>
+		</div>
+	</div>
+	@if (Users is null)
+	{
+		<Loading CardMode="true" />
+	}
+	else
+	{
+		<div class="table-wrapper">
+			<QuickGrid Items="Users.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
+				<TemplateColumn Class="action-button status" Title="جنسیت">
+					<img src="@string.Format("/icons/gender-{0}-only.svg", context.Gender?.Name.ToLower())" />
+				</TemplateColumn>
+				<PropertyColumn Class="header-5" Title="نام و نام خانوادگی" Property="@(u => $"{u.FirstName} {u.LastName}")" />
+				<PropertyColumn Class="text-3" Title="کد ملی" Property="@(u => u.UserName)" />
+				<PropertyColumn Class="text-3" Title="نام پدر" Property="@(u => u.FatherName)" />
+				<PropertyColumn Class="text-3" Title="تاریخ تولد" Property="@(u => u.BirthDate!)" />
+				@* <PropertyColumn Class="light" Title="نوع قرارداد" Property="@(u => u.Type!.PersianTitle)" /> *@
+				<PropertyColumn Class="text-3" Title="کد پرسنلی" Property="@(u => u.PersonnelId)" />
+				<TemplateColumn Class="action-button">
+					<AuthorizeView Policy="FullAccess" Context="AuthContext">
+						<a class="edit-link" href="/Panel/Accounts/ResetPassword/@context.Id">
+							<img src="/icons/password.svg" />
+						</a>
+					</AuthorizeView>
+				</TemplateColumn>
+				<TemplateColumn Class="action-button">
+					<AuthorizeView Policy="FullAccess" Context="AuthContext">
+						<a class="edit-link" href="/Panel/Accounts/AssignPolicies/@context.Id">
+							<img src="/icons/identity.svg" />
+						</a>
+					</AuthorizeView>
+				</TemplateColumn>
+				<TemplateColumn Class="action-button">
+					<AuthorizeView Policy="HR_Admin" Context="AuthContext">
+						<a class="edit-link" href="/Panel/Accounts/Edit/@context.Id">
+							<img src="/icons/user-edit.svg" />
+						</a>
+					</AuthorizeView>
+				</TemplateColumn>
+			</QuickGrid>
+		</div>
+	}
+</div>
+
+@code {
+	private List<CityUser>? Users;
+
+	private string? searchText;
+
+	protected override async Task OnInitializedAsync()
+	{
+		Users = null;
+
+		using var context = DbFactory.CreateDbContext();
+
+		Users = await UserManager.Users
+			.Include(u => u.Gender)
+			.OrderBy(u => u.FirstName)
+			.OrderBy(u => u.LastName)
+			.ToListAsync();
+
+		pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged();
+	}
+
+	private async Task Search(ChangeEventArgs args)
+	{
+		searchText = args.Value!.ToString();
+
+		using var context = DbFactory.CreateDbContext();
+
+		Users = string.IsNullOrEmpty(searchText)
+			? await UserManager.Users
+				.Include(u => u.Gender)
+				.OrderBy(u => u.FirstName)
+				.OrderBy(u => u.LastName)
+				.ToListAsync()
+			: await UserManager.Users
+				.Include(u => u.Gender)
+				.Where(u =>
+					u.LastName.Contains(searchText)
+					||
+					u.FirstName.Contains(searchText)
+					||
+					u.UserName!.Contains(searchText))
+				.OrderBy(u => u.FirstName)
+				.OrderBy(u => u.LastName)
+				.ToListAsync();
+	}
+
+	private PaginationState pagination = new PaginationState { ItemsPerPage = 6 };
+
+	private async Task GoToPageAsync(int pageIndex)
+	{
+		await pagination.SetCurrentPageIndexAsync(pageIndex);
+	}
+
+	private string? AriaCurrentValue(int pageIndex)
+		=> pagination.CurrentPageIndex == pageIndex ? "page" : null;
+}

@@ -43,6 +43,10 @@
         color: var(--primary-color);
     }
 
+    .main-nav ::deep .menu-link.active svg {
+        fill: var(--primary-color);
+    }
+
     .main-nav .main-nav-logo,
     .main-nav .main-nav-account {
         aspect-ratio: 1;

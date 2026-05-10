@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Infrastructure.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CityApp.Identity;
 
@@ -13,4 +14,7 @@ public class CityUser : IdentityUser
     public string? BirthDate { get; set; }
 
     public string? PersonnelId { get; set; }
+
+    public int? GenderId { get; set; }
+    public Gender? Gender { get; set; }
 }
