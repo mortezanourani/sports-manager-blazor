@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+@inject IdentityUserAccessor UserAccessor
+@inject UserManager<CityUser> UserManager
+
+@rendermode InteractiveServer
+
+@page "/Panel/Read/{Id:guid}"
+
+<PageTitle>اتوماسیون</PageTitle>
+
+
+<div class="row form-wrapper">
+    <div class="col1-1 mb-auto">
+        @if (Message is null || User is null)
+        {
+            <Loading CardMode=true />
+        }
+        else
+        {
+            <div class="card bordered-card">
+                <form>
+                    <div class="row">
+                        <div class="form-row col1-2">
+                            <div class="form-group fa">
+                                <label for="title" class="form-label">
+                                    <img src="/icons/message-title.svg" />
+                                </label>
+                                <h6 class="form-control">@Message.Title</h6>
+                            </div>
+                        </div>
+                        <div class="form-row col1-2">
+                            <div class="form-group fa">
+                                <label for="contact" class="form-label">
+                                    <img src="/icons/message-upload.svg" />
+                                </label>
+                                <h6 class="form-control">@Message.Sender.FirstName @Message.Sender.LastName</h6>
+                            </div>
+                            <div class="form-group fa">
+                                <label for="contact" class="form-label">
+                                    <img src="/icons/message-download.svg" />
+                                </label>
+                                <h6 class="form-control">@Message.Reciever.FirstName @Message.Reciever.LastName</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group h-auto fa">
+                        <label for="contact" class="form-label">
+                            <img src="/icons/message-context.svg" />
+                        </label>
+                        <p class="form-control">@Message.Context</p>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    private CityUser? User { get; set; }
+    private Message? Message { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id is null)
+        {
+            NavigationManager.NavigateTo("/Panel");
+            return;
+        }
+
+        using var context = DbFactory.CreateDbContext();
+
+        User = await UserAccessor.GetCurrentUser();
+        if (User is null)
+        {
+            return;
+        }
+
+        Message = await context.Messages
+            .Include(m => m.Sender)
+            .Include(m => m.Reciever)
+            .FirstOrDefaultAsync(m => m.Id == Id);
+        if(Message is null || !(Message.RecieverId == User.Id || Message.SenderId == User.Id))
+        {
+            NavigationManager.NavigateTo("/Panel");
+            return;
+        }
+
+        try
+        {
+            Message.Status = 1;
+            context.Attach(Message!).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+        }
+        catch
+        {
+            NavigationManager.NavigateTo("/Panel");
+            return;
+        }
+    }
+}
