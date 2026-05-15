@@ -1,0 +1,154 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+@inject IdentityUserAccessor UserAccessor
+@inject UserManager<CityUser> UserManager
+
+@rendermode InteractiveServer
+
+@page "/Panel"
+
+<PageTitle>اتوماسیون</PageTitle>
+
+
+<div class="list-wrapper">
+	<div class="list-header">
+		<div class="header-title colored">
+			<h6 class="title">پیام های دریافتی</h6>
+			<div class="search form-group fa">
+				<label class="form-label" for="paginator-search-input">
+					<img src="/icons/search-gray.svg" />
+				</label>
+				<InputText class="form-control" placeholder="جستجو" id="paginator-search-input" @bind-Value="searchText" @oninput="Search"></InputText>
+			</div>
+		</div>
+		<div class="paginator">
+			<nav role="navigation">
+				@if (pagination.TotalItemCount.HasValue)
+				{
+					var totalPages = pagination.TotalItemCount;
+					var pageIndex = pagination.CurrentPageIndex;
+					var currentPage = pageIndex + 1;
+					var lastPage = pagination.LastPageIndex + 1;
+					var firstItemNumber = 1 + (pagination.ItemsPerPage * pagination.CurrentPageIndex);
+					var lastItemNumber = pagination.ItemsPerPage * (pagination.CurrentPageIndex + 1);
+					<button @onclick="@(() => GoToPageAsync(pageIndex - 1))"
+							class="btn"
+							aria-current="@AriaCurrentValue(pageIndex - 1)"
+							aria-label="@(pageIndex - 1)"
+							disabled=@((pageIndex <= 0) ? "disabled" : false)>
+						<img src="/icons/arrow-right.svg" />
+					</button>
+					<button @onclick="@(() => GoToPageAsync(pageIndex + 1))"
+							class="btn"
+							aria-current="@AriaCurrentValue(pageIndex + 1)"
+							aria-label="@(pageIndex + 1)"
+							disabled=@((currentPage >= lastPage) ? "disabled" : false)>
+						<img src="/icons/arrow-left.svg" />
+					</button>
+				}
+			</nav>
+		</div>
+	</div>
+	@if (Messages is null)
+	{
+		<Loading CardMode="true" />
+	}
+	else
+	{
+		<div class="table-wrapper">
+			<QuickGrid Items="Messages.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
+				<TemplateColumn Class="action-button status" Title="وضعیت">
+					@if (context.Attachment is null)
+					{
+						<img src="/icons/message-attachment-off.svg" />
+					}
+					else
+					{
+						<img src="/icons/message-attachment.svg" />
+					}
+				</TemplateColumn>
+				<PropertyColumn Class="header-5" Title="عنوان" Property="@(m => m.Title)" />
+				<PropertyColumn Class="text-3" Title="فرستنده" Property="@(m => $"{m.Sender.FirstName} {m.Sender.LastName}")" />
+				<PropertyColumn Class="text-3" Title="تاریخ نامه" Property="@(m => m.Created)" />
+				<TemplateColumn Class="action-button">
+					<a class="edit-link" href="/Panel/Read/@context.Id">
+						@if(context.Status == 0)
+						{
+							<img src="/icons/message-status-unread.svg" />
+						}
+						else
+						{
+							<img src="/icons/message-status-read.svg" />
+						}
+					</a>
+				</TemplateColumn>
+			</QuickGrid>
+		</div>
+	}
+</div>
+
+@code {
+	private CityUser? User;
+	private List<Message>? Messages;
+
+	private string? searchText;
+
+	protected override async Task OnInitializedAsync()
+	{
+		Messages = null;
+
+		using var context = DbFactory.CreateDbContext();
+		User = await UserAccessor.GetCurrentUser();
+		if (User is null)
+		{
+			return;
+		}
+		Messages = await context.Messages
+			.Include(m => m.Sender)
+			.Include(m => m.Reciever)
+			.Where(m => m.RecieverId == User.Id)
+			.OrderByDescending(m => m.Created)
+			.ToListAsync();
+
+		if (Messages is null)
+		{
+			Messages = new List<Message>();
+		}
+
+		pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged();
+	}
+
+	private async Task Search(ChangeEventArgs args)
+	{
+		searchText = args.Value!.ToString();
+
+		using var context = DbFactory.CreateDbContext();
+		var totalMessages = await context.Messages
+				.Include(m => m.Sender)
+				.Include(m => m.Reciever)
+				.Where(m => m.RecieverId == User!.Id)
+				.OrderByDescending(m => m.Created)
+				.ToListAsync();
+		Messages = string.IsNullOrEmpty(searchText)
+			? totalMessages
+			: totalMessages
+				.Where(m =>
+					m.Sender.LastName.Contains(searchText)
+					||
+					m.Sender.FirstName.Contains(searchText)
+					||
+					m.Title.Contains(searchText))
+				.ToList();
+	}
+
+	private PaginationState pagination = new PaginationState { ItemsPerPage = 6 };
+
+	private async Task GoToPageAsync(int pageIndex)
+	{
+		await pagination.SetCurrentPageIndexAsync(pageIndex);
+	}
+
+	private string? AriaCurrentValue(int pageIndex)
+		=> pagination.CurrentPageIndex == pageIndex ? "page" : null;
+}

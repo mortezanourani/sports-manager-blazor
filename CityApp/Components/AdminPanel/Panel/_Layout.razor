@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inherits LayoutComponentBase
+
+@inject UserManager<CityUser> UserManager
+@inject IdentityUserAccessor UserAccessor
+
+@layout Layout.AdminLayout
+
+<AuthorizeView>
+    <nav class="secondary-navbar">
+        <div class="container">
+            <h5 class="sub-title">اتوماسیون</h5>
+            <ul class="nav">
+                <li class="nav-item">
+                    <NavLink href="/Panel" Match="NavLinkMatch.All">پیام های دریافتی</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Panel/Sent">پیام های ارسالی</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Panel/Send">ارسال پیام</NavLink>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <article class="content py-3">
+        @Body
+    </article>
+</AuthorizeView>
+
+@code {
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (HttpContext is null)
+        {
+            NavigationManager.Refresh(forceReload: true);
+        }
+    }
+}

@@ -1,0 +1,110 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+@inject IdentityUserAccessor UserAccessor
+@inject UserManager<CityUser> UserManager
+
+@rendermode InteractiveServer
+
+@page "/Panel/Send"
+
+<PageTitle>اتوماسیون</PageTitle>
+
+
+<div class="row form-wrapper">
+    <div class="col1-1 mb-auto">
+        @if (NewMessage is null || Contacts is null)
+        {
+            <Loading CardMode=true />
+        }
+        else
+        {
+            <div class="card bordered-card">
+                <EditForm method="post" Model="NewMessage" OnValidSubmit="SendMessage" FormName="create" Enhance>
+                    <DataAnnotationsValidator />
+                    <ValidationSummary class="text-danger" role="alert" />
+                    <div class="form-row">
+                        <div class="form-group fa mb-3">
+                            <label for="title" class="form-label">
+                                <img src="/icons/idcard.svg" />
+                            </label>
+                            <InputText id="title" @bind-Value="NewMessage!.Title" class="form-control" placeholder="عنوان پیام" />
+                        </div>
+                        <div class="form-group fa mb-3">
+                            <label for="contact" class="form-label">
+                                <img src="/icons/dropdown.svg" />
+                            </label>
+                            <InputSelect id="contact" class="form-control select" @bind-Value="NewMessage.RecieverId">
+                                @foreach(CityUser contact in Contacts)
+                                {
+                                    <option value="@contact.Id">@contact.FirstName @contact.LastName</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-3">ارسال</button>
+                    </div>
+                    @if (!string.IsNullOrEmpty(statusMessage))
+                    {
+                        <div class="alert alert-@statusMessageClass" role="alert">
+                            @statusMessage
+                        </div>
+                    }
+                    <div class="form-group h-auto fa mb-3">
+                        <InputTextArea rows="10" id="context" @bind-Value="NewMessage.Context" class="form-control pe-2" placeholder="متن پیام" />
+                    </div>
+                </EditForm>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Message NewMessage { get; set; } = new();
+
+    private string? statusMessage;
+    private string? statusMessageClass;
+
+    private CityUser? User { get; set; }
+    private List<CityUser>? Contacts { get; set; }
+
+    private string? searchText;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+
+        User = await UserAccessor.GetCurrentUser();
+        if (User is null)
+        {
+            return;
+        }
+
+        Contacts = await UserManager.Users
+            .OrderBy(u => u.LastName)
+            .OrderBy(u => u.FirstName)
+            .ToListAsync();
+    }
+
+    private async Task SendMessage()
+    {
+        using var context = DbFactory.CreateDbContext();
+
+        NewMessage.Id = Guid.NewGuid();
+        NewMessage.SenderId = User!.Id;
+
+        try
+        {
+            context.Messages.Add(NewMessage);
+            await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/Panel/Sent");
+        }
+        catch (Exception ex)
+        {
+            statusMessageClass = "danger";
+            statusMessage = ex.InnerException.Message;
+        }
+
+        return;
+    }
+}

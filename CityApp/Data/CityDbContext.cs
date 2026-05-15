@@ -32,6 +32,8 @@ public class CityDbContext(DbContextOptions<CityDbContext> options) : IdentityDb
 
     public DbSet<LocalFederationPresident> LocalFederationPresidents { get; set; }
 
+    public DbSet<Message> Messages { get; set; }
+
     public DbSet<PrivateFacility> PrivateFacilities { get; set; }
 
     public DbSet<PrivateFacilityLicense> PrivateFacilityLicenses { get; set; }
