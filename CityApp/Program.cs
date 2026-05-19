@@ -30,10 +30,10 @@ builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
 builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultScheme = IdentityConstants.ApplicationScheme;
-        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-    })
+{
+    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+})
     .AddIdentityCookies();
 
 builder.Services.AddIdentityCore<CityUser>(options => {
@@ -42,7 +42,7 @@ builder.Services.AddIdentityCore<CityUser>(options => {
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireDigit = false;
-    })
+})
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<CityDbContext>()
     .AddSignInManager()
@@ -58,79 +58,52 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("FullAccess", policy =>
         policy.RequireRole("SuperAdministrator"));
 
-    options.AddPolicy("HR_Admin", policy =>
+    options.AddPolicy("Administrator", policy =>
         policy.RequireAssertion(context =>
-        {
-            if (context.User.IsInRole("SuperAdministrator"))
-                return true;
-
-            if (!context.User.IsInRole("Administrator"))
-                return false;
-
-            var DepartmentClaim = context.User.FindFirst("HumanResource")?.Value;
-            var IsInDepartment = DepartmentClaim == true.ToString();
-            return IsInDepartment;
-        })
+            context.User.IsInRole("SuperAdministrator")
+            ||
+            context.User.IsInRole("Administrator")
+        )
     );
 
-    options.AddPolicy("HR_Manager", policy =>
+    options.AddPolicy("Sports", policy =>
         policy.RequireAssertion(context =>
-        {
-            if (context.User.IsInRole("SuperAdministrator"))
-                return true;
-
-            if (!(context.User.IsInRole("Administrator") || context.User.IsInRole("Manager")))
-                return false;
-
-            var DepartmentClaim = context.User.FindFirst("HumanResource")?.Value;
-            var IsInDepartment = DepartmentClaim == true.ToString();
-            return IsInDepartment;
-        })
+            context.User.IsInRole("SuperAdministrator")
+            ||
+            context.User.IsInRole("Administrator")
+            ||
+            context.User.IsInRole("SportsManager")
+        )
     );
 
-    options.AddPolicy("M5_Admin", policy =>
+    options.AddPolicy("M88", policy =>
         policy.RequireAssertion(context =>
-        {
-            if (context.User.IsInRole("SuperAdministrator"))
-                return true;
-
-            if (!context.User.IsInRole("Administrator"))
-                return false;
-
-            var DepartmentClaim = context.User.FindFirst("M5")?.Value;
-            var IsInDepartment = DepartmentClaim == true.ToString();
-            return IsInDepartment;
-        })
+            context.User.IsInRole("SuperAdministrator")
+            ||
+            context.User.IsInRole("Administrator")
+            ||
+            context.User.IsInRole("M88Manager")
+        )
     );
 
-    options.AddPolicy("M88_Admin", policy =>
+    options.AddPolicy("M5", policy =>
         policy.RequireAssertion(context =>
-        {
-            if (context.User.IsInRole("SuperAdministrator"))
-                return true;
-
-            if (!context.User.IsInRole("Administrator"))
-                return false;
-
-            var DepartmentClaim = context.User.FindFirst("M88")?.Value;
-            var IsInDepartment = DepartmentClaim == true.ToString();
-            return IsInDepartment;
-        })
+            context.User.IsInRole("SuperAdministrator")
+            ||
+            context.User.IsInRole("Administrator")
+            ||
+            context.User.IsInRole("M5Manager")
+        )
     );
 
-    options.AddPolicy("SportsGroup_Admin", policy =>
+    options.AddPolicy("Insurance", policy =>
         policy.RequireAssertion(context =>
-        {
-            if (context.User.IsInRole("SuperAdministrator"))
-                return true;
-
-            if (!context.User.IsInRole("Administrator"))
-                return false;
-
-            var DepartmentClaim = context.User.FindFirst("SportsGroup")?.Value;
-            var IsInDepartment = DepartmentClaim == true.ToString();
-            return IsInDepartment;
-        })
+            context.User.IsInRole("SuperAdministrator")
+            ||
+            context.User.IsInRole("Administrator")
+            ||
+            context.User.IsInRole("InsuranceManager")
+        )
     );
 });
 

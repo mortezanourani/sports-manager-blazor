@@ -67,25 +67,19 @@
 				@* <PropertyColumn Class="light" Title="نوع قرارداد" Property="@(u => u.Type!.PersianTitle)" /> *@
 				<PropertyColumn Class="text-3" Title="کد پرسنلی" Property="@(u => u.PersonnelId)" />
 				<TemplateColumn Class="action-button">
-					<AuthorizeView Policy="FullAccess" Context="AuthContext">
-						<a class="edit-link" href="/Panel/Accounts/ResetPassword/@context.Id">
-							<img src="/icons/password.svg" />
-						</a>
-					</AuthorizeView>
+					<a class="edit-link" href="/Panel/Accounts/ResetPassword/@context.Id">
+						<img src="/icons/password.svg" />
+					</a>
 				</TemplateColumn>
 				<TemplateColumn Class="action-button">
-					<AuthorizeView Policy="FullAccess" Context="AuthContext">
-						<a class="edit-link" href="/Panel/Accounts/AssignPolicies/@context.Id">
-							<img src="/icons/identity.svg" />
-						</a>
-					</AuthorizeView>
+					<a class="edit-link" href="/Panel/Accounts/AssignPolicies/@context.Id">
+						<img src="/icons/identity.svg" />
+					</a>
 				</TemplateColumn>
 				<TemplateColumn Class="action-button">
-					<AuthorizeView Policy="HR_Admin" Context="AuthContext">
-						<a class="edit-link" href="/Panel/Accounts/Edit/@context.Id">
-							<img src="/icons/user-edit.svg" />
-						</a>
-					</AuthorizeView>
+					<a class="edit-link" href="/Panel/Accounts/Edit/@context.Id">
+						<img src="/icons/user-edit.svg" />
+					</a>
 				</TemplateColumn>
 			</QuickGrid>
 		</div>
