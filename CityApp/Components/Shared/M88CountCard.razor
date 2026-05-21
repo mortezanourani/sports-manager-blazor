@@ -4,13 +4,13 @@
 	<h5 class="header-6 card-title">اماکن ورزشی دولتی</h5>
 	<div class="count-cols-wrapper">
 		<div class="count-col">
-			<p class="display-6">دارای پروانه فعالیت</p>
-			<h4 class="header-5">@($"{licensedCount:#,0}")</h4>
+			<p class="display-6">دارای سند</p>
+			<h4 class="header-5">@($"{hasDocument:#,0}")</h4>
 		</div>
 		<hr class="vertical-seperator" />
 		<div class="count-col">
-			<p class="display-6">فاقد پروانه فعالیت</p>
-			<h4 class="header-5">@($"{unlicensedCount:#,0}")</h4>
+			<p class="display-6">فاقد سند</p>
+			<h4 class="header-5">@($"{noDocument:#,0}")</h4>
 		</div>
 	</div>
 	<div class="count-row">
@@ -21,33 +21,24 @@
 
 @code {
     private int? totalCount = null!;
-    private int? licensedCount = null!;
-    private int? unlicensedCount = null!;
-
-    PersianCalendar persianCalendar = new PersianCalendar();
+    private int? noDocument = null!;
+    private int? hasDocument = null!;
 
     protected override async Task OnParametersSetAsync()
     {
-        var nowDate = DateTime.Now.Date;
-        var todayDate =
-            persianCalendar.GetYear(nowDate) * 10_000 +
-            persianCalendar.GetMonth(nowDate) * 100 +
-            persianCalendar.GetDayOfMonth(nowDate);
         totalCount = null;
 
         using var context = DbFactory.CreateDbContext();
 
-        var facilities = await context.GovernmentFacilities
-            .Include(m => m.GovernmentFacilityLicenses)
+        var facilities = await context.Facilities
+            .Include(m => m.FacilityContracts)
             .ToListAsync();
 
         totalCount = facilities.Count();
 
-        unlicensedCount = facilities
-            .Where(f => f.GovernmentFacilityLicenses
-                .All(l => !string.IsNullOrEmpty(l.ExpireDate) && Int32.Parse(l.ExpireDate!.Replace("-", "").Replace("/", "")) < todayDate))
-            .Count();
+        hasDocument = facilities
+            .Count(f => f.FacilityDocuments.Any());
 
-        licensedCount = totalCount - unlicensedCount;
+        noDocument = totalCount - hasDocument;
     }
 }

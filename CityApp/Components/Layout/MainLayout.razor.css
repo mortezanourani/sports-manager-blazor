@@ -1,3 +1,12 @@
+::deep .summary-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 24px;
+    margin: 24px auto;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

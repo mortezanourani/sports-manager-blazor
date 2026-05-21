@@ -103,7 +103,7 @@
         ::deep .table-wrapper .quickgrid-table tbody {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: stretch;
             gap: 16px;
         }

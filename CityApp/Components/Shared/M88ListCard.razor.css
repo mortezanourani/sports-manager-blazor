@@ -108,10 +108,10 @@
             background-color: white;
         }
 
-/*            ::deep .table-wrapper table tbody tr:empty {
+            ::deep .table-wrapper table tbody tr:empty {
                 display: none;
             }
-*/
+
             ::deep .table-wrapper table tbody tr td.gender,
             ::deep .table-wrapper table tbody tr td.info-button {
                 height: inherit;

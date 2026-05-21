@@ -23,7 +23,7 @@
 		var population = await context.Population
 			.SumAsync(m => m.RuralMen + m.RuralWomen + m.UrbanMen + m.UrbanWomen);
 
-		var facilities = await context.PrivateFacilities
+		var facilities = await context.GovernmentFacilities
 			.ToListAsync();
 
 		var sportLandArea = facilities
