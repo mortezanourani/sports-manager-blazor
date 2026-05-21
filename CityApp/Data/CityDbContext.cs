@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CityApp.Data;
 
-public class CityDbContext(DbContextOptions<CityDbContext> options) : IdentityDbContext<CityUser>(options)
+public class CityDbContext(DbContextOptions<CityDbContext> options) : IdentityDbContext<CityUser, CityRole, string>(options)
 {
     public DbSet<Department> Departments { get; set; }
 
