@@ -172,6 +172,7 @@
                     }
                     <button type="submit" class="btn btn-primary w-100">تایید</button>
                 </EditForm>
+                <a class="btn btn-danger p-2 mt-3" href="/Panel/M88/Delete/@Id">حذف مکان ورزشی</a>
             </div>
         }
     </div>
@@ -200,7 +201,7 @@
                 </div>
                 <div class="table-wrapper">
                     <QuickGrid Items="Contracts.AsQueryable()" Theme="">
-                        <TemplateColumn Class="action-button status" Title="مجوز ماده 5">
+                        <TemplateColumn Class="action-button status" Title="">
                             @if (!string.IsNullOrEmpty(context.LicenseSerial))
                             {
                                 <img src="/icons/verified.svg" />
@@ -214,8 +215,8 @@
                         <PropertyColumn Class="bold header-5" Title="نام موسس" Property="@(contract => contract.Name!)" />
                         <PropertyColumn Class="light text-3" Title="کد ملی موسس" Property="@(contract => contract.SeenCode!)" />
                         <PropertyColumn Class="light text-3" Title="شماره همراه موسس" Property="@(contract => contract.Phone!)" />
-                        <PropertyColumn Class="light text-3" Title="تاریخ تاسیس" Property="@(contract => contract.StartDate!)" />
-                        <PropertyColumn Class="light text-3 text-red" Title="تاریخ انقضا" Property="@(contract => contract.ExpireDate!)" />
+                        <PropertyColumn Class="light text-3" Title="شروع قرارداد" Property="@(contract => contract.StartDate!)" />
+                        <PropertyColumn Class="light text-3 text-red" Title="پایان قرارداد" Property="@(contract => contract.ExpireDate!)" />
                         <TemplateColumn Class="action-button">
                             <a class="edit-link" href="/Panel/M88/Contracts/Edit/@context.Id">
                                 <img src="/icons/note-edit.svg" />

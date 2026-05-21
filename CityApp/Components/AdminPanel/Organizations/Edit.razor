@@ -172,6 +172,7 @@
                     }
                     <button type="submit" class="btn btn-primary w-100">تایید</button>
                 </EditForm>
+                <a class="btn btn-danger p-2 mt-3" href="/Panel/Orgs/Delete/@Id">حذف مکان ورزشی</a>
             </div>
         }
     </div>
@@ -200,15 +201,19 @@
                 </div>
                 <div class="table-wrapper">
                     <QuickGrid Items="Licenses.AsQueryable()" Theme="" Class="licenses-table">
-                        <TemplateColumn Class="action-button status" Title="جنسیت">
+                        <TemplateColumn Class="action-button status" Title="">
                             <img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name)" />
                         </TemplateColumn>
-                        <PropertyColumn Class="header-5" Title="نام موسس" Property="@(license => license.Name!)" />
-                        <PropertyColumn Class="text-3" Title="سریال مجوز" Property="@(license => license.Serial!)" />
-                        <PropertyColumn Class="text-3" Title="تاریخ تاسیس" Property="@(license => license.StartDate!)" />
-                        <PropertyColumn Class="text-3" Title="تاریخ انقضا" Property="@(license => license.ExpireDate!)" />
-                        <PropertyColumn Class="text-3" Title="کد ملی موسس" Property="@(license => license.SeenCode!)" />
-                        <PropertyColumn Class="text-3" Title="شماره همراه موسس" Property="@(license => license.Phone!)" />
+                        <TemplateColumn Class="bold title" Title="موسس">
+                            <div class="name-wrapper">
+                                <h4 class="header-5">@context.Name</h4>
+                                <p class="text-5">@context.SeenCode</p>
+                            </div>
+                        </TemplateColumn>
+                        <PropertyColumn Class="text-3" Title="سریال پروانه" Property="@(license => license.Serial!)" />
+                        <PropertyColumn Class="text-3" Title="صدور پروانه" Property="@(license => license.StartDate!.Replace("-", "/")!)" />
+                        <PropertyColumn Class="text-3" Title="انقضا پروانه" Property="@(license => license.ExpireDate!.Replace("-", "/"))" />
+                        <PropertyColumn Class="text-3" Title="شماره همراه موسس" Property="@(license => $"{license.Phone!}")" />
                         <TemplateColumn Class="action-button">
                             <a class="edit-link" href="/Panel/Orgs/Licenses/Edit/@context.Id">
                                 <img src="/icons/note-edit.svg" />

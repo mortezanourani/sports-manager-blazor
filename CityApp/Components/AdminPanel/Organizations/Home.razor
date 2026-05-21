@@ -65,11 +65,11 @@
 							<img src="/icons/verified-off.svg" />
 						}
 					</TemplateColumn>
-					<PropertyColumn Class="title header-5" Title="عنوان مکان ورزشی" Property="@(facility => facility.Name)" />
-					<PropertyColumn Class="text-3" Title="موقعیت جغرافیایی" Property="@(facility => facility.IsRural == true ? "روستایی" : "شهری")" />
-					<PropertyColumn Class="text-3" Title="مساحت" Property="@(facility => facility.Area)" />
-					<PropertyColumn Class="text-3" Title="مساحت روباز" Property="@(facility => facility.SportLandArea)" />
-					<PropertyColumn Class="text-3" Title="مساحت سرپوشیده" Property="@(facility => facility.SportHallArea)" />
+					<PropertyColumn Class="bold title header-5" Title="عنوان مکان ورزشی" Property="@(facility => facility.Name)" />
+					<PropertyColumn Class="light text-3" Title="موقعیت جغرافیایی" Property="@(facility => facility.IsRural == true ? "روستایی" : "شهری")" />
+					<PropertyColumn Class="light text-3" Title="روباز" Property="@(facility => facility.SportLandArea)" />
+					<PropertyColumn Class="light text-3" Title="سرپوشیده" Property="@(facility => facility.SportHallArea)" />
+					<PropertyColumn Class="light header-5" Title="مساحت کل" Property="@(facility => facility.Area)" />
 					<TemplateColumn Class="action-button">
 						<a class="edit-link" href="/Panel/Orgs/Edit/@context.Id">
 							<img src="/icons/square-edit.svg" />

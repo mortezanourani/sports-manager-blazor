@@ -8,7 +8,7 @@
 }
 else
 {
-	<div class="list-wrapper">
+	<div class="list-wrapper mb-4">
 		<div class="list-header">
 			<div class="header-title">
 				<h6 class="title text-3">فهرست اماکن دولتی ورزش و جوانان</h6>
@@ -38,28 +38,41 @@ else
 			else
 			{
 				<QuickGrid Items="Facilities.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
-					<TemplateColumn Class="action-button" Title="جنسیت">
+					<TemplateColumn Class="action-button" Title="">
 						<img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name).ToLower()" />
 					</TemplateColumn>
-					<TemplateColumn Class="bold" Title="عنوان باشگاه">
+					<TemplateColumn Class="title bold" Title="عنوان مکان ورزشی">
 						<div class="names-wrapper">
 							<h4 class="header-5">@context.Name</h4>
 							<p class="text-4">@context.Address</p>
 						</div>
 					</TemplateColumn>
-					<TemplateColumn Class="light text-3 text-red" Title="مساحت کل">
+					<TemplateColumn Class="light text-3" Title="روباز">
 						<div class="names-wrapper">
-							<h4 class="header-5">@context.Area</h4>
+							<h4 class="header-6">@context.SportLandArea</h4>
 							<p class="text-5">مترمربع</p>
 						</div>
 					</TemplateColumn>
-					<PropertyColumn Class="light text-3" Property="@(m => m.Type == null ? "" : m.Type.PersianTitle)" />
-					<PropertyColumn Class="light text-3" Property="@(m => m.Phone)" />
+					<TemplateColumn Class="light text-3" Title="سرپوشیده">
+						<div class="names-wrapper">
+							<h4 class="header-6">@context.SportHallArea</h4>
+							<p class="text-5">مترمربع</p>
+						</div>
+					</TemplateColumn>
+					<TemplateColumn Class="light text-3" Title="مساحت کل">
+						<div class="names-wrapper">
+							<h4 class="header-5">@context.Area</h4>
+						</div>
+					</TemplateColumn>
+					<PropertyColumn Class="light text-3" Title="روباز/سرپوشیده" Property="@(m => m.Type == null ? "" : m.Type.PersianTitle)" />
+					<PropertyColumn Class="light text-3" Title="شماره تماس" Property="@(m => m.Phone)" />
+					@*
 					<TemplateColumn Class="action-button">
 						<a href="@string.Format("/M88/{0}", context.Id)">
 							<img src="/icons/info.svg" />
 						</a>
 					</TemplateColumn>
+					*@
 				</QuickGrid>
 			}
 		</div>

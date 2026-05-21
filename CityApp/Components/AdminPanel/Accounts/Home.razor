@@ -57,14 +57,18 @@
 	{
 		<div class="table-wrapper">
 			<QuickGrid Items="Users.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
-				<TemplateColumn Class="action-button status" Title="جنسیت">
+				<TemplateColumn Class="action-button status" Title="">
 					<img src="@string.Format("/icons/gender-{0}-only.svg", context.Gender?.Name.ToLower())" />
 				</TemplateColumn>
-				<PropertyColumn Class="header-5" Title="نام و نام خانوادگی" Property="@(u => $"{u.FirstName} {u.LastName}")" />
-				<PropertyColumn Class="text-3" Title="کد ملی" Property="@(u => u.UserName)" />
+				<TemplateColumn Class="bold title">
+					<div>
+						<h4 class="title header-5">@context.FirstName @context.LastName</h4>
+						<p class="text-4">@context.UserName</p>
+					</div>
+				</TemplateColumn>
+				<PropertyColumn Class="text-3" Title="تلفن همراه" Property="@(u => u.PhoneNumber)" />
 				<PropertyColumn Class="text-3" Title="نام پدر" Property="@(u => u.FatherName)" />
 				<PropertyColumn Class="text-3" Title="تاریخ تولد" Property="@(u => u.BirthDate!)" />
-				@* <PropertyColumn Class="light" Title="نوع قرارداد" Property="@(u => u.Type!.PersianTitle)" /> *@
 				<PropertyColumn Class="text-3" Title="کد پرسنلی" Property="@(u => u.PersonnelId)" />
 				<TemplateColumn Class="action-button">
 					<a class="edit-link" href="/Panel/Accounts/ResetPassword/@context.Id">

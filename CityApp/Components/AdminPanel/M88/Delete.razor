@@ -1,0 +1,72 @@
+﻿@page "/Panel/M88/Delete/{Id:guid}"
+
+@rendermode InteractiveServer
+
+<div class="row form-wrapper">
+    <div class="col3-5 mb-0">
+        <h6 class="display-4">حذف مکان ورزشی</h6>
+        <a class="text-4 d-block mb-3 link" href="/Panel/M88/@Id!" type="button">بازگشت به صفحه ویرایش.</a>
+        <div class="instructions">
+            <p class="mb-3">آیا از حذف ماکن ورزشی با عنوان @($"{Facility?.Name}") اطمینان دارید؟</p>
+        </div>
+    </div>
+    <div class="col2-5 mb-auto">
+        @if (Facility is null)
+        {
+            <Loading CardMode=true />
+        }
+        else
+        {
+            <div class="card bordered-card">
+                <button type="button" class="btn btn-danger w-100" @onclick="() => DeleteFacility(Id!)">بله، حذف می کنم.</button>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    private Facility? Facility { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+
+        Facility ??= await context.Facilities
+            .FirstOrDefaultAsync(f => f.Id == Id);
+
+        if (Facility is null)
+        {
+            NavigationManager.NavigateTo("/Panel/M88");
+        }
+    }
+
+    private async Task DeleteFacility(Guid? Id)
+    {
+        if(Id is null)
+        {
+            NavigationManager.NavigateTo("/Panel/M88");
+            return;
+        }
+
+        using var context = DbFactory.CreateDbContext();
+
+        var facility = await context.Facilities
+            .FirstOrDefaultAsync(f => f.Id == Id);
+
+        if (facility is null) return;
+
+        try
+        {
+            context.Facilities.Remove(facility);
+            await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/Panel/M88");
+        }
+        catch
+        {
+        }
+        return;
+    }
+}
