@@ -171,6 +171,7 @@
                     }
                     <button type="submit" class="btn btn-primary w-100">تایید</button>
                 </EditForm>
+                <a class="btn btn-danger p-2 mt-3" href="/Panel/M5/Delete/@Id">حذف مکان ورزشی</a>
             </div>
         }
     </div>
@@ -199,21 +200,30 @@
                 </div>
                 <div class="table-wrapper">
                     <QuickGrid Items="Licenses.AsQueryable()" Theme="" Class="licenses-table">
-                        <TemplateColumn Class="action-button status" Title="جنسیت">
+                        <TemplateColumn Class="action-button status" Title="">
                             <img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name)" />
                         </TemplateColumn>
-                        <PropertyColumn Class="action-button status" Title="سریال مجوز" Property="@(license => license.Serial!)" />
-                        <PropertyColumn Class="header-5" Title="نام موسس" Property="@(license => license.Name!)" />
-                        <PropertyColumn Class="text-3" Title="سریال مجوز" Property="@(license => license.Serial!)" />
-                        <PropertyColumn Class="text-3" Title="نوع مالکیت مجوز" Property="@(license => license.IsBeneficial == null ? "نامشخص" : (license.IsBeneficial == true ? "حقیقی" : "حقوقی"))" />
-                        <PropertyColumn Class="text-3" Title="نوع مالکیت ملک" Property="@(license => license.IsOwner == null ? "نامشخص" : (license.IsOwner == true ? "تملیکی" : "استیجاری"))" />
-                        <PropertyColumn Class="text-3" Title="نوع مجوز" Property="@(license => license.IsRenewal == null ? "نامشخص" : (license.IsRenewal == true ? "تمدید" : "تاسیس"))" />
-                        <PropertyColumn Class="text-3" Title="ارگان / شرکت" Property="@(license => license.Company!)" />
-                        <PropertyColumn Class="text-3" Title="تاریخ تاسیس" Property="@(license => license.StartDate!)" />
-                        <PropertyColumn Class="text-3" Title="تاریخ انقضا" Property="@(license => license.ExpireDate!)" />
-                        <PropertyColumn Class="text-3" Title="کد ملی موسس" Property="@(license => license.SeenCode!)" />
+                        <TemplateColumn Class="title bold" Title="موسس">
+                            <div class="name-wrapper">
+                                <h4 class="header-5">@context.Name</h4>
+                                <p class="text-4">@context.SeenCode</p>
+                            </div>
+                        </TemplateColumn>
                         <PropertyColumn Class="text-3" Title="شماره همراه موسس" Property="@(license => license.Phone!)" />
-                        <PropertyColumn Class="text-3" Title="جنسیت باشگاه" Property="@(license => license.UsersGender!.PersianName)" />
+                        <PropertyColumn Class="text-3" Title="مالکیت باشگاه" Property="@(license => license.IsOwner == null ? "-" : (license.IsOwner == true ? "تملیکی" : "استیجاری"))" />
+                        <PropertyColumn Class="text-3" Title="سریال مجوز" Property="@(license => license.Serial!)" />
+                        <TemplateColumn Class="text-3" Title="نوع مجوز">
+                            <div class="name-wrapper">
+                                <p class="text-3">
+                                    @(context.IsBeneficial == null ? "" : context.IsBeneficial == true ? "حقیقی" : "حقوقی")
+                                    -
+                                    @(context.IsRenewal == null ? "" : context.IsRenewal == true ? "تمدید" : "تاسیس")
+                                </p>
+                            </div>
+                        </TemplateColumn>
+                        @* <PropertyColumn Class="text-3" Title="ارگان / شرکت" Property="@(license => license.Company!)" /> *@
+                        <PropertyColumn Class="text-3" Title="صدور پروانه" Property="@(license => license.StartDate!)" />
+                        <PropertyColumn Class="text-3" Title="انقضا" Property="@(license => license.ExpireDate!)" />
                         <TemplateColumn Class="action-button">
                             <a class="edit-link" href="/Panel/M5/Licenses/Edit/@context.Id">
                                 <img src="/icons/note-edit.svg" />

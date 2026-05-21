@@ -72,22 +72,22 @@
 					<TemplateColumn Class="action-button status">
 						<img src="/icons/arrow-left.svg" />
 					</TemplateColumn>
-					<PropertyColumn Class="bold" Title="هیات ورزشی" Property="@(insurance => insurance.Key.PersianName)" />
+					<PropertyColumn Class="bold title" Title="" Property="@(insurance => insurance.Key.PersianName)" />
 
-					<TemplateColumn Class="action-button text-3" Title="تعداد بیمه آقایان">
+					<TemplateColumn Class="action-button" Title="">
 						<img src="/icons/man-blue.svg" />
 					</TemplateColumn>
-					<PropertyColumn Class="light text-3" Title="تعداد بیمه آقایان" Property="@(insurance => insurance.MenCount)" />
+					<PropertyColumn Class="light text-3 text-end" Title="" Property="@(insurance => insurance.MenCount)" />
 
-					<TemplateColumn Class="action-button text-3" Title="تعداد بیمه آقایان">
+					<TemplateColumn Class="action-button" Title="">
 						<img src="/icons/woman-blue.svg" />
 					</TemplateColumn>
-					<PropertyColumn Class="light text-3" Title="تعداد بیمه بانوان" Property="@(insurance => insurance.WomenCount)" />
+					<PropertyColumn Class="light text-3 text-end" Title="" Property="@(insurance => insurance.WomenCount)" />
 
-					<TemplateColumn Class="action-button header-5" Title="تعداد بیمه آقایان">
+					<TemplateColumn Class="action-button" Title="">
 						<img src="/icons/genders-blue.svg" />
 					</TemplateColumn>
-					<PropertyColumn Class="light header-5" Title="مجموع ورزشکاران سازمان یافته" Property="@(insurance => insurance.MenCount + insurance.WomenCount)" />
+					<PropertyColumn Class="light header-5 text-end" Title="" Property="@(insurance => insurance.MenCount + insurance.WomenCount)" />
 
 					<TemplateColumn Class="action-button">
 						<a class="edit-link" href="/Panel/Athletes/List/@context.Key.Id">

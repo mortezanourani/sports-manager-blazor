@@ -65,11 +65,40 @@
 							<img src="/icons/verified-off.svg" />
 						}
 					</TemplateColumn>
-					<PropertyColumn Class="title header-5" Title="عنوان مکان ورزشی" Property="@(facility => facility.Name)" />
+					<TemplateColumn class="title bold" Title="باشگاه ورزشی">
+						<div class="name-wrapper">
+							<h4 class="title header-5">@context.Name</h4>
+							<p class="text-4">@context.PrivateFacilityLicenses.FirstOrDefault()!.Serial</p>
+						</div>
+					</TemplateColumn>
 					<PropertyColumn Class="text-3" Title="موقعیت جغرافیایی" Property="@(facility => facility.IsRural == true ? "روستایی" : "شهری")" />
-					<PropertyColumn Class="text-3" Title="مساحت" Property="@(facility => facility.Area)" />
-					<PropertyColumn Class="text-3" Title="مساحت روباز" Property="@(facility => facility.SportLandArea)" />
-					<PropertyColumn Class="text-3" Title="مساحت سرپوشیده" Property="@(facility => facility.SportHallArea)" />
+					<TemplateColumn class="bold" Title="موسس">
+						<div class="name-wrapper">
+							<h4 class="title header-6">@context.PrivateFacilityLicenses.FirstOrDefault()!.Name</h4>
+							<p class="text-4">@context.PrivateFacilityLicenses.FirstOrDefault()!.SeenCode</p>
+						</div>
+					</TemplateColumn>
+					<PropertyColumn Class="text-3" Title="شماره تماس" Property="@(facility => facility.PrivateFacilityLicenses.FirstOrDefault()!.Phone)" />
+					@*
+					<TemplateColumn Class="text-3" Title="روباز">
+						<div class="name-wrapper">
+							<h4 class="header-6">@(context.SportLandArea ?? 0)</h4>
+							<p class="text-5">متر مربع</p>
+						</div>
+					</TemplateColumn>
+					<TemplateColumn Class="text-3" Title="سرپوشیده">
+						<div class="name-wrapper">
+							<h4 class="header-6">@(context.SportHallArea ?? 0)</h4>
+							<p class="text-5">متر مربع</p>
+						</div>
+					</TemplateColumn>
+					*@
+					<TemplateColumn Class="text-3" Title="مساحت کل">
+						<div class="name-wrapper">
+							<h4 class="header-5">@(context.Area ?? 0)</h4>
+							<p class="text-5">متر مربع</p>
+						</div>
+					</TemplateColumn>
 					<TemplateColumn Class="action-button">
 						<a class="edit-link" href="/Panel/M5/Edit/@context.Id">
 							<img src="/icons/square-edit.svg" />

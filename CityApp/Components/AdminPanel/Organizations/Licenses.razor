@@ -56,14 +56,21 @@
 				<TemplateColumn Class="action-button status">
 					<img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name)" />
 				</TemplateColumn>
-				<PropertyColumn Class="bold header-5" Title="عنوان مکان" Property="@(license => license.Facility.Name)" />
-				<PropertyColumn Class="light text-3" Title="نام موسس" Property="@(license => license.Name!)" />
-				<PropertyColumn Class="light text-3" Title="سریال مجوز" Property="@(license => license.Serial!)" />
-				<PropertyColumn Class="light text-3" Title="تاریخ تاسیس" Property="@(license => license.StartDate!)" />
-				<PropertyColumn Class="light text-3 text-red" Title="تاریخ انقضا" Property="@(license => license.ExpireDate!)" />
-				<PropertyColumn Class="light text-3" Title="کد ملی موسس" Property="@(license => license.SeenCode!)" />
-				<PropertyColumn Class="light text-3" Title="شماره همراه موسس" Property="@(license => license.Phone!)" />
-				<PropertyColumn Class="light text-3" Title="جنسیت باشگاه" Property="@(license => license.UsersGender!.PersianName)" />
+				<TemplateColumn Class="bold title" Title="عنوان باشگاه">
+					<div class="name-wrapper">
+						<h4 class="header-5">@context.Facility.Name</h4>
+						<p class="text-5">@context.Serial</p>
+					</div>
+				</TemplateColumn>
+				<TemplateColumn Class="bold" Title="موسس">
+					<div class="name-wrapper">
+						<h4 class="header-6">@context.Name</h4>
+						<p class="text-5">@context.SeenCode</p>
+					</div>
+				</TemplateColumn>
+				<PropertyColumn Class="light text-4" Title="شروع قرارداد" Property="@(license => license.StartDate!.Replace("-", "/"))" />
+				<PropertyColumn Class="light text-4 text-red" Title="پایان قرارداد" Property="@(license => license.ExpireDate!.Replace("-", "/"))" />
+				<PropertyColumn Class="light text-3" Title="شماره همراه" Property="@(license => license.Phone!)" />
 				<TemplateColumn Class="action-button">
 					<a class="edit-link" href="/Panel/Orgs/Licenses/Edit/@context.Id">
 						<img src="/icons/square-edit.svg" />

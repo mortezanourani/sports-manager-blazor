@@ -8,9 +8,9 @@
 }
 else
 {
-	<div class="federations-list">
+	<div class="list-wrapper mb-4">
 		<div class="list-header">
-			<div class="header-year">
+			<div class="header-title">
 				<h6 class="title text-3">فهرست باشگاه های خصوصی شهرستان</h6>
 			</div>
 			@{
@@ -30,38 +30,41 @@ else
 				</div>
 			}
 		</div>
-		<div class="counts-wrapper">
-			<div class="federations-count">
-				<div class="table-wrapper">
-					@if (Facilities is null)
-					{
-						<Loading CardMode="true" />
-					}
-					else
-					{
-						<QuickGrid Items="Facilities.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
-							<TemplateColumn Class="gender" Title="جنسیت">
-								<img src="@string.Format("/icons/gender-{0}.svg", context.PrivateFacilityLicenses.FirstOrDefault()!.UsersGender.Name).ToLower()" />
-							</TemplateColumn>
-							<TemplateColumn Class="title" Title="عنوان باشگاه">
-								<div class="names-wrapper">
-									<h4 class="header-5">@context.Name</h4>
-									<p class="text-5">@context.PrivateFacilityLicenses.OrderByDescending(m => m.ExpireDate).FirstOrDefault()!.Serial</p>
-								</div>
-							</TemplateColumn>
-							<PropertyColumn Class="title text-3" Title="شماره پروانه" Property="@(m => m.PrivateFacilityLicenses.FirstOrDefault()!.Name)" />
-							@* <PropertyColumn Class="title text-3" Title="کد پستی" Property="@(m => m.ZipCode)" /> *@
-							<PropertyColumn Class="phone text-3" Property="@(m => m.Phone)" />
-							<PropertyColumn Class="phone text-3" Property="@(m => m.PrivateFacilityLicenses.FirstOrDefault()!.Phone)" />
-							<TemplateColumn Class="info-button">
-								<a href="@string.Format("/M5/{0}", context.Id)">
-									<img src="/icons/info.svg" />
-								</a>
-							</TemplateColumn>
-						</QuickGrid>
-					}
-				</div>
-			</div>
+		<div class="table-wrapper">
+			@if (Facilities is null)
+			{
+				<Loading CardMode="true" />
+			}
+			else
+			{
+				<QuickGrid Items="Facilities.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
+ 					<TemplateColumn Class="action-button" Title="">
+						@if(context.PrivateFacilityLicenses.Count > 0)
+						{
+							<img src="@string.Format("/icons/gender-{0}.svg", context.PrivateFacilityLicenses.FirstOrDefault()!.UsersGender.Name).ToLower()" />
+						}
+					</TemplateColumn>
+					<TemplateColumn Class="title bold" Title="عنوان باشگاه">
+						<div class="names-wrapper">
+							<h4 class="header-5">@context.Name</h4>
+							@if(context.PrivateFacilityLicenses.Count > 0)
+							{
+								<p class="text-5">@context.PrivateFacilityLicenses.OrderByDescending(m => m.ExpireDate).FirstOrDefault()!.Serial</p>
+							}
+						</div>
+					</TemplateColumn>
+					<PropertyColumn Class="light text-3" Title="مدیر" Property="@(m => m.PrivateFacilityLicenses.Count != 0 ? m.PrivateFacilityLicenses.FirstOrDefault()!.Name : "")" />
+					<PropertyColumn Class="light text-3" Title="تلفن باشگاه" Property="@(m => m.Phone)" />
+					<PropertyColumn Class="light text-3" Title="شماره همراه" Property="@(m => m.PrivateFacilityLicenses.Count > 0 ? m.PrivateFacilityLicenses.FirstOrDefault()!.Phone : "")" />
+					@*
+					<TemplateColumn Class="info-button">
+						<a href="@string.Format("/M5/{0}", context.Id)">
+							<img src="/icons/info.svg" />
+						</a>
+					</TemplateColumn>
+					*@
+				</QuickGrid>
+			}
 		</div>
 	</div>
 }

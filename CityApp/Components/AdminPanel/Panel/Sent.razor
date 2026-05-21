@@ -58,7 +58,7 @@
 	{
 		<div class="table-wrapper">
 			<QuickGrid Items="Messages.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
-				<TemplateColumn Class="action-button status" Title="وضعیت">
+				<TemplateColumn Class="action-button status" Title="">
 					@if(context.Attachment is null)
 					{
 						<img src="/icons/message-attachment-off.svg" />
@@ -68,9 +68,9 @@
 						<img src="/icons/message-attachment.svg" />
 					}
 				</TemplateColumn>
-				<PropertyColumn Class="header-5" Title="عنوان" Property="@(m => m.Title)" />
+				<PropertyColumn Class="header-5" Title="عنوان پیام" Property="@(m => m.Title)" />
 				<PropertyColumn Class="text-3" Title="گیرنده" Property="@(m => $"{m.Reciever.FirstName} {m.Reciever.LastName}")" />
-				<PropertyColumn Class="text-3" Title="تاریخ نامه" Property="@(m => m.Created)" />
+				<PropertyColumn Class="text-3" Title="زمان ارسال" Property="@(m => m.Created)" />
 				<TemplateColumn Class="action-button">
 					<a class="edit-link" href="/Panel/Read/@context.Id">
 						@if (context.Status == 0)
