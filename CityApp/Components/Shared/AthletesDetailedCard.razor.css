@@ -108,7 +108,7 @@
         ::deep .table-wrapper .quickgrid-table tbody {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: stretch;
             gap: 16px;
         }
@@ -124,7 +124,7 @@
                 padding: 21px;
                 border: 1px solid var(--card-border-color);
                 border-radius: 24px;
-                flex: 0 1 100%;
+                flex: 0 1 33.33333%;
             }
 
                 .year-count .item-count:after,

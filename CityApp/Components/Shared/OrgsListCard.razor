@@ -11,7 +11,7 @@ else
 	<div class="federations-list">
 		<div class="list-header">
 			<div class="header-year">
-				<h6 class="title text-3">فهرست باشگاه های خصوصی شهرستان</h6>
+				<h6 class="title text-3">فهرست اماکن سایر ارگان های دولتی</h6>
 			</div>
 			@{
 				var currentPage = pagination.CurrentPageIndex;
@@ -41,20 +41,20 @@ else
 					{
 						<QuickGrid Items="Facilities.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
 							<TemplateColumn Class="gender" Title="جنسیت">
-								<img src="@string.Format("/icons/gender-{0}.svg", context.PrivateFacilityLicenses.FirstOrDefault()!.UsersGender.Name).ToLower()" />
+								<img src="@string.Format("/icons/gender-{0}.svg", context.GovernmentFacilityLicenses.FirstOrDefault()!.UsersGender.Name).ToLower()" />
 							</TemplateColumn>
 							<TemplateColumn Class="title" Title="عنوان باشگاه">
 								<div class="names-wrapper">
 									<h4 class="header-5">@context.Name</h4>
-									<p class="text-5">@context.PrivateFacilityLicenses.OrderByDescending(m => m.ExpireDate).FirstOrDefault()!.Serial</p>
+									<p class="text-5">@context.GovernmentFacilityLicenses.OrderByDescending(m => m.ExpireDate).FirstOrDefault()!.Serial</p>
 								</div>
 							</TemplateColumn>
-							<PropertyColumn Class="title text-3" Title="شماره پروانه" Property="@(m => m.PrivateFacilityLicenses.FirstOrDefault()!.Name)" />
+							<PropertyColumn Class="title text-3" Title="شماره پروانه" Property="@(m => m.GovernmentFacilityLicenses.FirstOrDefault()!.Name)" />
 							@* <PropertyColumn Class="title text-3" Title="کد پستی" Property="@(m => m.ZipCode)" /> *@
 							<PropertyColumn Class="phone text-3" Property="@(m => m.Phone)" />
-							<PropertyColumn Class="phone text-3" Property="@(m => m.PrivateFacilityLicenses.FirstOrDefault()!.Phone)" />
+							<PropertyColumn Class="phone text-3" Property="@(m => m.GovernmentFacilityLicenses.FirstOrDefault()!.Phone)" />
 							<TemplateColumn Class="info-button">
-								<a href="@string.Format("/M5/{0}", context.Id)">
+								<a href="@string.Format("/M88/{0}", context.Id)">
 									<img src="/icons/info.svg" />
 								</a>
 							</TemplateColumn>
@@ -67,7 +67,7 @@ else
 }
 
 @code {
-	private List<PrivateFacility>? Facilities;
+	private List<GovernmentFacility>? Facilities;
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -75,8 +75,8 @@ else
 
 		using var context = DbFactory.CreateDbContext();
 
-		Facilities = await context.PrivateFacilities
-			.Include(m => m.PrivateFacilityLicenses)
+		Facilities = await context.GovernmentFacilities
+			.Include(m => m.GovernmentFacilityLicenses)
 				.ThenInclude(m => m.UsersGender)
 			.OrderBy(m => m.Name)
 			.ToListAsync();
@@ -84,7 +84,7 @@ else
 		StateHasChanged();
 	}
 
-	private PaginationState pagination = new PaginationState { ItemsPerPage = 7 };
+	private PaginationState pagination = new PaginationState { ItemsPerPage = 5 };
 
 	private async Task GoToPageAsync(int pageIndex)
 	{
