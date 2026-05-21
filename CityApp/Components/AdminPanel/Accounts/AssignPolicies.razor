@@ -6,7 +6,7 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 
 @inject UserManager<CityUser> UserManager
-@inject RoleManager<IdentityRole> RoleManager
+@inject RoleManager<CityRole> RoleManager
 
 @rendermode InteractiveServer
 
@@ -46,20 +46,20 @@
                 <div class="mb-3">
                     <EditForm Model="Role" FormName="change-password" OnValidSubmit="AddRole" method="post">
                         <div class="form-row">
-                            <button type="submit" class="btn btn-primary flex-grow-0">
-                                <img src="/icons/person-add.svg" />
-                            </button>
-                            <div class="form-group fa">
+                            <div class="form-group">
                                 <label for="rolename" class="form-label">
                                     <img src="/icons/dropdown.svg" />
                                 </label>
-                                <InputSelect id="rolename" @bind-Value="Role!.Name" class="form-control text-start w-100">
-                                    @foreach (IdentityRole role in Roles!)
+                                <InputSelect id="rolename" @bind-Value="Role!.Name" class="form-control w-100">
+                                    @foreach (CityRole role in Roles!)
                                     {
-                                        <option value="@role.Name">@role.Name</option>
+                                        <option value="@role.Name">@role.Title</option>
                                     }
                                 </InputSelect>
                             </div>
+                            <button type="submit" class="btn btn-primary flex-grow-0">
+                                <img src="/icons/person-add.svg" />
+                            </button>
                         </div>
                     </EditForm>
                 </div>
@@ -72,13 +72,13 @@
                     else
                     {
                         <div class="table-wrapper">
-                            <QuickGrid Items="UserRoles.AsQueryable()" Theme="" Class="quickgrid-table en">
-                                <PropertyColumn Class="text-start" Title="Role" Property="@(role => role)" />
+                            <QuickGrid Items="UserRoles.AsQueryable()" Theme="" Class="quickgrid-table">
                                 <TemplateColumn Class="action-button">
-                                    <button class="btn p-0" @onclick="() => RemoveRole(context)">
+                                    <button class="btn p-0" @onclick="() => RemoveRole(context.Name)">
                                         <img src="/icons/person-remove.svg" />
                                     </button>
                                 </TemplateColumn>
+                                <PropertyColumn Class="" Title="Role" Property="@(role => role.Title)" />
                             </QuickGrid>
                         </div>
                     }
@@ -93,12 +93,12 @@
     public string? UserId { get; set; }
 
     [SupplyParameterFromForm]
-    private IdentityRole? Role { get; set; } = new();
+    private CityRole? Role { get; set; } = new();
 
-    private List<IdentityRole>? Roles;
+    private List<CityRole>? Roles;
 
     private CityUser? User;
-    private List<string>? UserRoles = new();
+    private List<CityRole>? UserRoles = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -114,7 +114,7 @@
         }
 
         Roles = await RoleManager.Roles
-            .OrderBy(role => role.Name)
+            .OrderBy(role => role.Title)
             .ToListAsync();
 
         await UpdateLists();
@@ -127,7 +127,9 @@
         if (user is null) return;
 
         var userRoles = await UserManager.GetRolesAsync(user!);
-        UserRoles = userRoles.ToList();
+        UserRoles = await RoleManager.Roles
+            .Where(r => userRoles.Contains(r.Name!))
+            .ToListAsync();
 
         StateHasChanged();
         return;
@@ -138,7 +140,14 @@
         CityUser? user = await UserManager.FindByIdAsync(User!.Id!);
         if (user is null) return;
 
-        await UserManager.AddToRoleAsync(user!, Role!.Name);
+        try
+        {
+            await UserManager.AddToRoleAsync(user!, Role!.Name);
+        }
+        catch (Exception ex)
+        {
+            var error = ex;
+        }
 
         await UpdateLists();
         return;

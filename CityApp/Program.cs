@@ -43,7 +43,7 @@ builder.Services.AddIdentityCore<CityUser>(options => {
     options.Password.RequireLowercase = false;
     options.Password.RequireDigit = false;
 })
-    .AddRoles<IdentityRole>()
+    .AddRoles<CityRole>()
     .AddEntityFrameworkStores<CityDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();
