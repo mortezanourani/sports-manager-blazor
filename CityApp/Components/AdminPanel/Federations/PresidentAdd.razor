@@ -1,4 +1,8 @@
-﻿@page "/Panel/Federations/President/Add/{Id:guid}"
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<CityUser> UserManager
+
+@page "/Panel/Federations/President/Add/{Id:guid}"
 
 @rendermode InteractiveServer
 
@@ -41,9 +45,10 @@
         </div>
     </div>
     <div class="col2-5 mb-auto">
-        <div class="card p-3">
+        <div class="card bordered-card">
             <EditForm method="post" Model="LocalFederationPresident" OnValidSubmit="AddPresident" FormName="create" Enhance>
                 <DataAnnotationsValidator />
+                @*
                 <div class="form-group fa mb-3">
                     <label for="name" class="form-label">
                         <img src="/icons/user.svg" />
@@ -84,12 +89,29 @@
                         <InputText id="educationalmajor" @bind-Value="LocalFederationPresident.EducationalMajor" class="form-control" placeholder="رشته تحصیلی" />
                     </div>
                 </div>
-                <hr class="mt-0" />
+                *@
                 <div class="form-row">
-                    <div class="form-group verification-sign mb-3">
+                    <div class="form-group fa mb-3">
+                        <label for="presidentid" class="form-label">
+                            <img src="/icons/dropdown.svg" />
+                        </label>
+                        <InputSelect id="presidentid" class="select form-control" @bind-Value="LocalFederationPresident.PresidentId">
+                            @if (Accounts is not null)
+                            {
+                                foreach (CityUser account in Accounts)
+                                {
+                                    <option value="@account.Id">@account.FirstName @account.LastName</option>
+                                }
+                            }
+                        </InputSelect>
+                    </div>
+                </div>
+                <hr class="white-space" />
+                <div class="form-row">
+                    <div class="form-group checkbox mb-3">
                         <label for="ispresident" class="form-label">
-                            <img class="verified" src="/icons/verified.svg" />
-                            <img class="unverified" src="/icons/verified-off.svg" />
+                            <img class="checked" src="/icons/verified.svg" />
+                            <img class="unchecked" src="/icons/verified-off.svg" />
                         </label>
                         <InputCheckbox id="ispresident" @bind-Value="LocalFederationPresident.IsPresident" class="form-check-input" />
                     </div>
@@ -134,13 +156,27 @@
     [SupplyParameterFromForm]
     private LocalFederationPresident LocalFederationPresident { get; set; } = new();
 
+    private List<CityUser> Accounts { get; set; } = null!;
+
     private string? statusMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Accounts = await UserManager.Users
+            .OrderBy(u => u.LastName)
+            .OrderBy(u => u.FirstName)
+            .ToListAsync();
+    }
 
     private async Task AddPresident()
     {
         using var context = DbFactory.CreateDbContext();
 
         LocalFederationPresident.FederationId = Id;
+        if (string.IsNullOrEmpty(LocalFederationPresident.BirthDate))
+        {
+            LocalFederationPresident.BirthDate = "-";
+        }
         context.LocalFederationPresidents.Add(LocalFederationPresident);
         try
         {
@@ -152,6 +188,6 @@
             return;
         }
 
-        NavigationManager.NavigateTo("/Dashboard/SportsGroup/Federations/Edit/" + LocalFederationPresident.FederationId);
+        NavigationManager.NavigateTo("/Panel/Federations/Edit/" + LocalFederationPresident.FederationId);
     }
 }

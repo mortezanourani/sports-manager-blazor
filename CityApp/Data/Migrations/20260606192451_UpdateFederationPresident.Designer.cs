@@ -4,6 +4,7 @@ using CityApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityApp.Data.Migrations
 {
     [DbContext(typeof(CityDbContext))]
-    partial class CityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260606192451_UpdateFederationPresident")]
+    partial class UpdateFederationPresident
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -413,6 +416,7 @@ namespace CityApp.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BirthDate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EducationalMajor")
@@ -428,6 +432,7 @@ namespace CityApp.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -437,6 +442,7 @@ namespace CityApp.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SeenCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TermEnd")
