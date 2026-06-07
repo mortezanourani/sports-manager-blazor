@@ -48,48 +48,6 @@
         <div class="card bordered-card">
             <EditForm method="post" Model="LocalFederationPresident" OnValidSubmit="AddPresident" FormName="create" Enhance>
                 <DataAnnotationsValidator />
-                @*
-                <div class="form-group fa mb-3">
-                    <label for="name" class="form-label">
-                        <img src="/icons/user.svg" />
-                    </label>
-                    <InputText id="name" @bind-Value="LocalFederationPresident.Name" class="form-control" placeholder="نام و نام خانوداگی" />
-                </div>
-                <div class="form-row">
-                    <div class="form-group en mb-3">
-                        <label for="seencode" class="form-label">
-                            <img src="/icons/idcard.svg" />
-                        </label>
-                        <InputText id="seencode" @bind-Value="LocalFederationPresident.SeenCode" class="form-control" placeholder="کد ملی" />
-                    </div>
-                    <div class="form-group en mb-3">
-                        <label for="phone" class="form-label">
-                            <img src="/icons/phone.svg" />
-                        </label>
-                        <InputText id="phone" @bind-Value="LocalFederationPresident.Phone" class="form-control" placeholder="شماره همراه" />
-                    </div>
-                </div>
-                <div class="form-group en mb-3">
-                    <label for="birthdate" class="form-label">
-                        <img src="/icons/calendar.svg" />
-                    </label>
-                    <InputText id="birthdate" @bind-Value="LocalFederationPresident.BirthDate" class="form-control" placeholder="تاریخ تولد" />
-                </div>
-                <div class="form-row">
-                    <div class="form-group fa mb-3">
-                        <label for="educationalqualification" class="form-label">
-                            <img src="/icons/school.svg" />
-                        </label>
-                        <InputText id="educationalqualification" @bind-Value="LocalFederationPresident.EducationalQualification" class="form-control" placeholder="مدرک تحصیلی" />
-                    </div>
-                    <div class="form-group fa mb-3">
-                        <label for="educationalmajor" class="form-label">
-                            <img src="/icons/school.svg" />
-                        </label>
-                        <InputText id="educationalmajor" @bind-Value="LocalFederationPresident.EducationalMajor" class="form-control" placeholder="رشته تحصیلی" />
-                    </div>
-                </div>
-                *@
                 <div class="form-row">
                     <div class="form-group fa mb-3">
                         <label for="presidentid" class="form-label">
@@ -173,10 +131,6 @@
         using var context = DbFactory.CreateDbContext();
 
         LocalFederationPresident.FederationId = Id;
-        if (string.IsNullOrEmpty(LocalFederationPresident.BirthDate))
-        {
-            LocalFederationPresident.BirthDate = "-";
-        }
         context.LocalFederationPresidents.Add(LocalFederationPresident);
         try
         {

@@ -50,7 +50,7 @@ else
 							<PropertyColumn Class="item-count type" Title="حکم" Property="@(federation => federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.IsPresident ? "رئیس" : "سرپرست")" />
 							<PropertyColumn Class="item-count header-4 name" Property="@(federation => federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.President != null
 								? federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.President.FirstName + " " +
-							      federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.President.FirstName
+							      federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.President.LastName
 								: "")" />
 						</QuickGrid>
 					}
