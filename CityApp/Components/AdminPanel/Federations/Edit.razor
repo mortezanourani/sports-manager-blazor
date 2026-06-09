@@ -146,6 +146,11 @@
                             disabled=@((pageIndex <= 0) ? "disabled" : false)>
                         <img src="/icons/arrow-right.svg" />
                     </button>
+                    <nav role="navigation">
+                        <a href="/Panel/Federations/President/Add/@LocalFederation!.Id">
+                            <img src="/icons/person-add-blue.svg" />
+                        </a>
+                    </nav>
                     <button @onclick="@(() => GoToPageAsync(pageIndex + 1))"
                             aria-current="@AriaCurrentValue(pageIndex + 1)"
                             aria-label="@(pageIndex + 1)"
@@ -172,9 +177,9 @@
                         }
                     </TemplateColumn>
                     @* <PropertyColumn Title="وضعیت تصدی" Property="@(president => president.IsPresident ? "رئیس" : "سرپرست")" /> *@
-                    <PropertyColumn Class="header-5" Title="نام و نام خانوداگی" Property="@(president => president.Name)" />
-                    <PropertyColumn Class="text-3" Title="کد ملی" Property="@(president => president.SeenCode)" />
-                    <PropertyColumn Class="text-3" Title="شماره همراه" Property="@(president => president.Phone)" />
+                    <PropertyColumn Class="header-5" Title="نام و نام خانوداگی" Property="@(president => (president.President != null) ? president.President.FirstName + " " + president.President.LastName : "")" />
+                    <PropertyColumn Class="text-3" Title="کد ملی" Property="@(president => (president.President != null) ? president.President.UserName : "")" />
+                    <PropertyColumn Class="text-3" Title="شماره همراه" Property="@(president => (president.President != null) ? president.President.PhoneNumber : "")" />
                     <PropertyColumn Class="text-3" Title="آغاز تصدی" Property="@(president => president.AppointmentDate)" />
                     <PropertyColumn Class="text-3 text-red" Title="اتمام تصدی" Property="@(president => president.TermEnd)" />
                     <TemplateColumn Class="action-button">
@@ -207,6 +212,7 @@
         LocalFederation ??= await context.LocalFederations
             .Include(federation => federation.Federation)
             .Include(federation => federation.LocalFederationPresidents)
+                .ThenInclude(p => p.President)
             .FirstOrDefaultAsync(federation => federation.Id == Id);
 
         Presidents ??= LocalFederation!.LocalFederationPresidents

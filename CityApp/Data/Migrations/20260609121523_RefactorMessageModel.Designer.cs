@@ -4,6 +4,7 @@ using CityApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityApp.Data.Migrations
 {
     [DbContext(typeof(CityDbContext))]
-    partial class CityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260609121523_RefactorMessageModel")]
+    partial class RefactorMessageModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -479,48 +482,6 @@ namespace CityApp.Data.Migrations
                     b.HasIndex("ReceiverId");
 
                     b.HasIndex("SenderFederationId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("CityApp.Models.Message", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Attachment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Context")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RecieverId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("Seen")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SenderId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecieverId");
 
                     b.HasIndex("SenderId");
 
@@ -1067,25 +1028,6 @@ namespace CityApp.Data.Migrations
                     b.Navigation("Sender");
 
                     b.Navigation("SenderFederation");
-                });
-
-            modelBuilder.Entity("CityApp.Models.Message", b =>
-                {
-                    b.HasOne("CityApp.Identity.CityUser", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("RecieverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CityApp.Identity.CityUser", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Reciever");
-
-                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("CityApp.Models.PrivateFacility", b =>

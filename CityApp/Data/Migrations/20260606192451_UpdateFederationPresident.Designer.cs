@@ -4,6 +4,7 @@ using CityApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityApp.Data.Migrations
 {
     [DbContext(typeof(CityDbContext))]
-    partial class CityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260606192451_UpdateFederationPresident")]
+    partial class UpdateFederationPresident
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -412,14 +415,35 @@ namespace CityApp.Data.Migrations
                     b.Property<string>("AppointmentOrder")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BirthDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EducationalMajor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EducationalQualification")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("FederationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsPresident")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PresidentId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SeenCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TermEnd")
                         .HasColumnType("nvarchar(max)");
@@ -431,58 +455,6 @@ namespace CityApp.Data.Migrations
                     b.HasIndex("PresidentId");
 
                     b.ToTable("LocalFederationPresidents");
-                });
-
-            modelBuilder.Entity("CityApp.Models.Message", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Attachment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Context")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ReceiverFederationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ReceiverId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("Seen")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("SenderFederationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("SenderId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceiverFederationId");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderFederationId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("CityApp.Models.Message", b =>
@@ -1036,37 +1008,6 @@ namespace CityApp.Data.Migrations
                     b.Navigation("Federation");
 
                     b.Navigation("President");
-                });
-
-            modelBuilder.Entity("CityApp.Models.Message", b =>
-                {
-                    b.HasOne("CityApp.Models.LocalFederation", "ReceiverFederation")
-                        .WithMany()
-                        .HasForeignKey("ReceiverFederationId");
-
-                    b.HasOne("CityApp.Identity.CityRole", "Receiver")
-                        .WithMany()
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CityApp.Models.LocalFederation", "SenderFederation")
-                        .WithMany()
-                        .HasForeignKey("SenderFederationId");
-
-                    b.HasOne("CityApp.Identity.CityRole", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Receiver");
-
-                    b.Navigation("ReceiverFederation");
-
-                    b.Navigation("Sender");
-
-                    b.Navigation("SenderFederation");
                 });
 
             modelBuilder.Entity("CityApp.Models.Message", b =>

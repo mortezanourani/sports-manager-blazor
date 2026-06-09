@@ -12,7 +12,11 @@ public class Message
     public string? Attachment { get; set; }
     public int Status { get; set; }
     public string SenderId { get; set; } = null!;
-    public string RecieverId { get; set; } = null!;
-    public virtual CityUser Sender { get; set; } = null!;
-    public virtual CityUser Reciever { get; set; } = null!;
+    public string ReceiverId { get; set; } = null!;
+    public Guid? SenderFederationId { get; set; }
+    public Guid? ReceiverFederationId { get; set; }
+    public virtual CityRole Sender { get; set; } = null!;
+    public virtual CityRole Receiver { get; set; } = null!;
+    public virtual LocalFederation? SenderFederation { get; set; }
+    public virtual LocalFederation? ReceiverFederation { get; set; }
 }

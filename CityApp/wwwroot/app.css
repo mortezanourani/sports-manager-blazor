@@ -782,13 +782,20 @@ h1:focus {
                 font-weight: 400;
             }
 
-            .list-wrapper .list-header .header-title .search {
+            .list-wrapper .list-header .header-title .search,
+            .list-wrapper .list-header .header-title .select {
                 height: 36px;
                 border-radius: 50px;
             }
 
-                .list-wrapper .list-header .header-title .search input {
+                .list-wrapper .list-header .header-title .search input,
+                .list-wrapper .list-header .header-title .select select {
                     border-radius: 50px;
+                }
+
+                .list-wrapper .list-header .header-title .select select {
+                    padding: 8px 42px 10px 10px;
+                    font-size: 13px;
                 }
 
         .list-wrapper .list-header .paginator {

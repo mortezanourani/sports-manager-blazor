@@ -3,6 +3,7 @@
 
 @inject IdentityUserAccessor UserAccessor
 @inject UserManager<CityUser> UserManager
+@inject RoleManager<CityRole> RoleManager
 
 @rendermode InteractiveServer
 
@@ -69,7 +70,7 @@
 					}
 				</TemplateColumn>
 				<PropertyColumn Class="header-5" Title="عنوان پیام" Property="@(m => m.Title)" />
-				<PropertyColumn Class="text-3" Title="گیرنده" Property="@(m => $"{m.Reciever.FirstName} {m.Reciever.LastName}")" />
+				<PropertyColumn Class="text-3" Title="گیرنده" Property="@(m => $"{m.Receiver.Title}")" />
 				<PropertyColumn Class="text-3" Title="زمان ارسال" Property="@(m => m.Created)" />
 				<TemplateColumn Class="action-button">
 					<a class="edit-link" href="/Panel/Read/@context.Id">
@@ -105,10 +106,26 @@
 			return;
 		}
 
+		var UserRolesNames = await UserManager
+			.GetRolesAsync(User);
+		var UserRoles = await RoleManager.Roles
+			.Where(r => UserRolesNames.Contains(r.Name!) && r.Name != "Federation")
+			.ToListAsync();
+
+		var UserFederations = await context.LocalFederations
+			.Include(lf => lf.LocalFederationPresidents)
+				.ThenInclude(fp => fp.President)
+			.Where(lf => lf.LocalFederationPresidents
+				.OrderByDescending(p => p.TermEnd)
+				.FirstOrDefault()!.PresidentId == User.Id)
+			.ToListAsync();
+
 		Messages = await context.Messages
 			.Include(m => m.Sender)
-			.Include(m => m.Reciever)
-			.Where(m => m.SenderId == User.Id)
+			.Include(m => m.Receiver)
+			.Where(m => UserRoles.Contains(m.Sender)
+				||
+				(m.Sender.Name == "Federation" && UserFederations.Contains(m.SenderFederation!)))
 			.OrderByDescending(m => m.Created)
 			.ToListAsync();
 
@@ -127,7 +144,7 @@
 		using var context = DbFactory.CreateDbContext();
 		var totalMessages = await context.Messages
 				.Include(m => m.Sender)
-				.Include(m => m.Reciever)
+				.Include(m => m.Receiver)
 				.Where(m => m.SenderId == User!.Id)
 				.OrderByDescending(m => m.Created)
 				.ToListAsync();
@@ -135,10 +152,10 @@
 			? totalMessages
 			: totalMessages
 				.Where(m =>
-					m.Reciever.LastName.Contains(searchText)
-					||
-					m.Reciever.FirstName.Contains(searchText)
-					||
+					// m.Receiver.LastName.Contains(searchText)
+					// ||
+					// m.Receiver.FirstName.Contains(searchText)
+					// ||
 					m.Title.Contains(searchText))
 				.ToList();
 	}

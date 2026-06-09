@@ -66,13 +66,6 @@ else
 					</TemplateColumn>
 					<PropertyColumn Class="light text-3" Title="روباز/سرپوشیده" Property="@(m => m.Type == null ? "" : m.Type.PersianTitle)" />
 					<PropertyColumn Class="light text-3" Title="شماره تماس" Property="@(m => m.Phone)" />
-					@*
-					<TemplateColumn Class="action-button">
-						<a href="@string.Format("/M88/{0}", context.Id)">
-							<img src="/icons/info.svg" />
-						</a>
-					</TemplateColumn>
-					*@
 				</QuickGrid>
 			}
 		</div>

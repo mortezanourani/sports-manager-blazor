@@ -1,4 +1,8 @@
-﻿@page "/Panel/Federations/President/Add/{Id:guid}"
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<CityUser> UserManager
+
+@page "/Panel/Federations/President/Add/{Id:guid}"
 
 @rendermode InteractiveServer
 
@@ -41,55 +45,31 @@
         </div>
     </div>
     <div class="col2-5 mb-auto">
-        <div class="card p-3">
+        <div class="card bordered-card">
             <EditForm method="post" Model="LocalFederationPresident" OnValidSubmit="AddPresident" FormName="create" Enhance>
                 <DataAnnotationsValidator />
-                <div class="form-group fa mb-3">
-                    <label for="name" class="form-label">
-                        <img src="/icons/user.svg" />
-                    </label>
-                    <InputText id="name" @bind-Value="LocalFederationPresident.Name" class="form-control" placeholder="نام و نام خانوداگی" />
-                </div>
-                <div class="form-row">
-                    <div class="form-group en mb-3">
-                        <label for="seencode" class="form-label">
-                            <img src="/icons/idcard.svg" />
-                        </label>
-                        <InputText id="seencode" @bind-Value="LocalFederationPresident.SeenCode" class="form-control" placeholder="کد ملی" />
-                    </div>
-                    <div class="form-group en mb-3">
-                        <label for="phone" class="form-label">
-                            <img src="/icons/phone.svg" />
-                        </label>
-                        <InputText id="phone" @bind-Value="LocalFederationPresident.Phone" class="form-control" placeholder="شماره همراه" />
-                    </div>
-                </div>
-                <div class="form-group en mb-3">
-                    <label for="birthdate" class="form-label">
-                        <img src="/icons/calendar.svg" />
-                    </label>
-                    <InputText id="birthdate" @bind-Value="LocalFederationPresident.BirthDate" class="form-control" placeholder="تاریخ تولد" />
-                </div>
                 <div class="form-row">
                     <div class="form-group fa mb-3">
-                        <label for="educationalqualification" class="form-label">
-                            <img src="/icons/school.svg" />
+                        <label for="presidentid" class="form-label">
+                            <img src="/icons/dropdown.svg" />
                         </label>
-                        <InputText id="educationalqualification" @bind-Value="LocalFederationPresident.EducationalQualification" class="form-control" placeholder="مدرک تحصیلی" />
-                    </div>
-                    <div class="form-group fa mb-3">
-                        <label for="educationalmajor" class="form-label">
-                            <img src="/icons/school.svg" />
-                        </label>
-                        <InputText id="educationalmajor" @bind-Value="LocalFederationPresident.EducationalMajor" class="form-control" placeholder="رشته تحصیلی" />
+                        <InputSelect id="presidentid" class="select form-control" @bind-Value="LocalFederationPresident.PresidentId">
+                            @if (Accounts is not null)
+                            {
+                                foreach (CityUser account in Accounts)
+                                {
+                                    <option value="@account.Id">@account.FirstName @account.LastName</option>
+                                }
+                            }
+                        </InputSelect>
                     </div>
                 </div>
-                <hr class="mt-0" />
+                <hr class="white-space" />
                 <div class="form-row">
-                    <div class="form-group verification-sign mb-3">
+                    <div class="form-group checkbox mb-3">
                         <label for="ispresident" class="form-label">
-                            <img class="verified" src="/icons/verified.svg" />
-                            <img class="unverified" src="/icons/verified-off.svg" />
+                            <img class="checked" src="/icons/verified.svg" />
+                            <img class="unchecked" src="/icons/verified-off.svg" />
                         </label>
                         <InputCheckbox id="ispresident" @bind-Value="LocalFederationPresident.IsPresident" class="form-check-input" />
                     </div>
@@ -134,7 +114,17 @@
     [SupplyParameterFromForm]
     private LocalFederationPresident LocalFederationPresident { get; set; } = new();
 
+    private List<CityUser> Accounts { get; set; } = null!;
+
     private string? statusMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Accounts = await UserManager.Users
+            .OrderBy(u => u.LastName)
+            .OrderBy(u => u.FirstName)
+            .ToListAsync();
+    }
 
     private async Task AddPresident()
     {
@@ -152,6 +142,6 @@
             return;
         }
 
-        NavigationManager.NavigateTo("/Dashboard/SportsGroup/Federations/Edit/" + LocalFederationPresident.FederationId);
+        NavigationManager.NavigateTo("/Panel/Federations/Edit/" + LocalFederationPresident.FederationId);
     }
 }

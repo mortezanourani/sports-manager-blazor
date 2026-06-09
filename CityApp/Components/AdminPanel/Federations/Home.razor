@@ -75,8 +75,12 @@
 							*@
 							<PropertyColumn Class="title header-5" Title="عنوان هیات" Property="@(federation => federation.Federation.PersianName)" />
 							<PropertyColumn Title="بخش" Property="@(federation => federation.District)" />
-							<PropertyColumn Class="text-3" Title="رئیس / سرپرست" Property="@(federation => federation.LocalFederationPresidents!.Count > 0
-								? federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.Name
+							<PropertyColumn Class="text-3" Title="رئیس / سرپرست" Property="@(federation =>
+								federation.LocalFederationPresidents!.Count > 0 
+								&&
+								federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.President != null
+								? federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.President.FirstName + " " +
+									federation.LocalFederationPresidents.OrderByDescending(p => p.AppointmentDate).FirstOrDefault()!.President!.LastName
 								: string.Empty
 							)" />
 							<PropertyColumn Class="text-3" Title="شناسه ملی" Property="@(federation => federation.NationalId)" />
@@ -138,11 +142,13 @@
 			? await context.LocalFederations
 				.Include(federation => federation.Federation)
 				.Include(federation => federation.LocalFederationPresidents)
+					.ThenInclude(p => p.President)
 				.OrderBy(federation => federation.Federation.PersianName)
 				.ToListAsync()
 			: await context.LocalFederations
 				.Include(federation => federation.Federation)
 				.Include(federation => federation.LocalFederationPresidents)
+					.ThenInclude(p => p.President)
 				.Where(federation => federation.Federation.PersianName.Contains(searchText))
 				.OrderBy(federation => federation.Federation.PersianName)
 				.ToListAsync();
@@ -157,6 +163,7 @@
 		Federations = await context.LocalFederations
 			.Include(federation => federation.Federation)
 			.Include(federation => federation.LocalFederationPresidents)
+					.ThenInclude(p => p.President)
 			.OrderBy(federation => federation.Federation.PersianName)
 			.ToListAsync();
 
