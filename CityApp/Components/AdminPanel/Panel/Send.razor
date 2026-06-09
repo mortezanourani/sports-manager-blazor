@@ -3,6 +3,7 @@
 
 @inject IdentityUserAccessor UserAccessor
 @inject UserManager<CityUser> UserManager
+@inject RoleManager<CityRole> RoleManager
 
 @rendermode InteractiveServer
 
@@ -12,8 +13,11 @@
 
 
 <div class="row form-wrapper">
-    <div class="col1-1 mb-auto">
-        @if (NewMessage is null || Contacts is null)
+    <div class="col3-5">
+
+    </div>
+    <div class="col2-5 mb-auto">
+        @if (NewMessage is null || Roles is null)
         {
             <Loading CardMode=true />
         }
@@ -23,6 +27,87 @@
                 <EditForm method="post" Model="NewMessage" OnValidSubmit="SendMessage" FormName="create" Enhance>
                     <DataAnnotationsValidator />
                     <ValidationSummary class="text-danger" role="alert" />
+                    <input type="hidden" name="NewMessage.Id" value="@Guid.NewGuid()" />
+                    <div class="form-row">
+                        <div class="form-group fa">
+                            <label for="sender" class="form-label">
+                                <img src="/icons/group.svg" />
+                            </label>
+                            @if (SenderRoles!.Count > 1)
+                            {
+                                <InputSelect id="sender" class="form-control select" @bind-Value="NewMessage.SenderId" @onclick="OnParametersSetAsync">
+                                    @foreach (CityRole role in SenderRoles!)
+                                    {
+                                        <option value="@role.Id">@role.Title</option>
+                                    }
+                                </InputSelect>
+                            }
+                            else
+                            {
+                                <input type="hidden" name="NewMessage.SenderId" value="@SenderRoles.FirstOrDefault()!.Id" />
+                                <div class="form-control select">@SenderRoles.FirstOrDefault()!.Title</div>
+                            }
+                        </div>
+                    </div>
+                    @if (SenderFederations is not null)
+                    {
+                        <div class="form-row">
+                            <div class="form-group fa mt-3">
+                                <label for="senderfederations" class="form-label">
+                                    <img src="/icons/user.svg" />
+                                </label>
+                                <InputSelect id="senderfederations" class="form-control select" @bind-Value="NewMessage.SenderFederationId">
+                                    @foreach (LocalFederation federation in SenderFederations)
+                                    {
+                                        <option value="@federation.Id">@federation.Federation.PersianName</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                        </div>
+                    }
+                    <hr class="my-4" />
+                    <div class="form-row">
+                        <div class="form-group fa mb-3">
+                            <label for="group" class="form-label">
+                                <img src="/icons/group.svg" />
+                            </label>
+                            <InputSelect id="group" class="form-control select" @bind-Value="NewMessage.ReceiverId" @onclick="OnParametersSetAsync">
+                                @foreach (CityRole role in Roles)
+                                {
+                                    <option value="@role.Id">@role.Title</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group fa mb-3">
+                            <label for="federations" class="form-label">
+                                <img src="/icons/user.svg" />
+                            </label>
+                            @if (Federations is not null)
+                            {
+                                <InputSelect id="federations" class="form-control select" @bind-Value="NewMessage.ReceiverFederationId">
+                                    @foreach (LocalFederation federation in Federations)
+                                    {
+                                        <option value="@federation.Id">
+                                            @federation.LocalFederationPresidents.FirstOrDefault()!.President.FirstName
+                                            @federation.LocalFederationPresidents.FirstOrDefault()!.President.LastName
+                                            (
+                                            @federation.Federation.PersianName
+                                            )
+                                        </option>
+                                    }
+                                </InputSelect>
+                            }
+                            else
+                            {
+                                <div id="employee" class="form-control select">
+                                    @Employee?.FirstName @Employee?.LastName
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <hr class="white-space" />
                     <div class="form-row">
                         <div class="form-group fa mb-3">
                             <label for="title" class="form-label">
@@ -30,18 +115,12 @@
                             </label>
                             <InputText id="title" @bind-Value="NewMessage!.Title" class="form-control" placeholder="عنوان پیام" />
                         </div>
-                        <div class="form-group fa mb-3">
-                            <label for="contact" class="form-label">
-                                <img src="/icons/dropdown.svg" />
-                            </label>
-                            <InputSelect id="contact" class="form-control select" @bind-Value="NewMessage.RecieverId">
-                                @foreach(CityUser contact in Contacts)
-                                {
-                                    <option value="@contact.Id">@contact.FirstName @contact.LastName</option>
-                                }
-                            </InputSelect>
-                        </div>
-                        <button type="submit" class="btn btn-primary mb-3">ارسال</button>
+                    </div>
+                    <div class="form-group h-auto fa mb-3">
+                        <InputTextArea rows="10" id="context" @bind-Value="NewMessage.Context" class="form-control pe-2" placeholder="متن پیام" />
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-primary">ارسال</button>
                     </div>
                     @if (!string.IsNullOrEmpty(statusMessage))
                     {
@@ -49,9 +128,6 @@
                             @statusMessage
                         </div>
                     }
-                    <div class="form-group h-auto fa mb-3">
-                        <InputTextArea rows="10" id="context" @bind-Value="NewMessage.Context" class="form-control pe-2" placeholder="متن پیام" />
-                    </div>
                 </EditForm>
             </div>
         }
@@ -66,7 +142,12 @@
     private string? statusMessageClass;
 
     private CityUser? User { get; set; }
-    private List<CityUser>? Contacts { get; set; }
+    private List<CityRole>? SenderRoles { get; set; }
+    private List<LocalFederation>? SenderFederations { get; set; }
+
+    private List<CityRole>? Roles { get; set; }
+    private List<LocalFederation>? Federations { get; set; }
+    private CityUser? Employee { get; set; }
 
     private string? searchText;
 
@@ -80,29 +161,94 @@
             return;
         }
 
-        Contacts = await UserManager.Users
-            .OrderBy(u => u.LastName)
-            .OrderBy(u => u.FirstName)
+        var senderRoles = await UserManager
+            .GetRolesAsync(User);
+        SenderRoles = await RoleManager.Roles
+            .Where(r => senderRoles.Contains(r.Name!))
             .ToListAsync();
+
+        NewMessage.SenderId = SenderRoles!.FirstOrDefault()!.Id;
+
+        Roles = await RoleManager.Roles
+            .Where(r => r.Name != "SuperAdministrator")
+            .OrderBy(r => r.Title)
+            .ToListAsync();
+
+        NewMessage.ReceiverId = Roles.FirstOrDefault()!.Id;
+
+        await OnParametersSetAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        SenderFederations = null!;
+        Federations = null!;
+        Employee = null!;
+
+        using var context = DbFactory.CreateDbContext();
+
+        NewMessage.Sender = Roles!
+            .FirstOrDefault(r => r.Id == NewMessage.SenderId)!;
+
+        if (NewMessage.Sender != null && NewMessage.Sender!.Name == "Federation")
+        {
+            SenderFederations = await context.LocalFederations
+                .Include(lf => lf.Federation)
+                .Include(lf => lf.LocalFederationPresidents)
+                    .ThenInclude(fp => fp.President)
+                .OrderBy(lf => lf.Federation.PersianName)
+                .Where(lf => lf.LocalFederationPresidents
+                    .OrderByDescending(p => p.TermEnd)
+                    .FirstOrDefault()!.PresidentId == User!.Id)
+                .ToListAsync();
+
+            NewMessage.SenderFederationId = SenderFederations.FirstOrDefault()!.Id;
+        }
+        else
+        {
+            NewMessage.SenderFederationId = null;
+        }
+
+        NewMessage.Receiver = Roles!
+            .FirstOrDefault(r => r.Id == NewMessage.ReceiverId)!;
+
+        if (NewMessage.Receiver!.Name == "Federation")
+        {
+            Federations = await context.LocalFederations
+                .Include(lf => lf.Federation)
+                .Include(lf => lf.LocalFederationPresidents)
+                    .ThenInclude(fp => fp.President)
+                .OrderBy(lf => lf.Federation.PersianName)
+                .ToListAsync();
+        }
+        else
+        {
+            var roleUsers = await UserManager
+                .GetUsersInRoleAsync(NewMessage.Receiver.Name!);
+
+            Employee = await UserManager.Users
+                .FirstOrDefaultAsync(u => roleUsers.Contains(u));
+
+            NewMessage.ReceiverFederationId = null;
+        }
     }
 
     private async Task SendMessage()
     {
         using var context = DbFactory.CreateDbContext();
 
-        NewMessage.Id = Guid.NewGuid();
-        NewMessage.SenderId = User!.Id;
-
+        NewMessage.Sender = null;
+        NewMessage.Receiver = null;
+        context.Messages.Add(NewMessage);
         try
         {
-            context.Messages.Add(NewMessage);
             await context.SaveChangesAsync();
             NavigationManager.NavigateTo("/Panel/Sent");
         }
         catch (Exception ex)
         {
             statusMessageClass = "danger";
-            statusMessage = ex.InnerException.Message;
+            statusMessage = ex.InnerException!.Message;
         }
 
         return;

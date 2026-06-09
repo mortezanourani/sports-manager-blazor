@@ -35,13 +35,13 @@
                                 <label for="contact" class="form-label">
                                     <img src="/icons/message-upload.svg" />
                                 </label>
-                                <h6 class="form-control">@Message.Sender.FirstName @Message.Sender.LastName</h6>
+                                <h6 class="form-control">@Message.Sender.Title</h6>
                             </div>
                             <div class="form-group fa">
                                 <label for="contact" class="form-label">
                                     <img src="/icons/message-download.svg" />
                                 </label>
-                                <h6 class="form-control">@Message.Reciever.FirstName @Message.Reciever.LastName</h6>
+                                <h6 class="form-control">@Message.Receiver.Title</h6>
                             </div>
                         </div>
                     </div>
@@ -82,9 +82,10 @@
 
         Message = await context.Messages
             .Include(m => m.Sender)
-            .Include(m => m.Reciever)
+            .Include(m => m.Receiver)
             .FirstOrDefaultAsync(m => m.Id == Id);
-        if(Message is null || !(Message.RecieverId == User.Id || Message.SenderId == User.Id))
+
+        if (Message is null)
         {
             NavigationManager.NavigateTo("/Panel");
             return;
