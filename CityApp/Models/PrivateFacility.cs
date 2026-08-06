@@ -6,8 +6,7 @@ namespace CityApp.Models;
 
 public class PrivateFacility : BasePrivateFacility
 {
-    public int? TypeId { get; set; }
-    public virtual FacilityType? Type { get; set; }
+    public int? Type { get; set; }
 
     public virtual ICollection<PrivateFacilityLicense> PrivateFacilityLicenses { get; set; } = new List<PrivateFacilityLicense>();
 }

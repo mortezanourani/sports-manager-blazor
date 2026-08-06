@@ -103,13 +103,10 @@
                             <label for="genderid" class="form-label">
                                 <img src="/icons/genders.svg" />
                             </label>
-                            <InputSelect id="genderid" class="select form-control" @bind-Value="User!.GenderId">
-                                @if (Genders is not null)
+                            <InputSelect id="genderid" class="select form-control" @bind-Value="User!.Gender">
+                                @foreach (var gender in Statics.Genders)
                                 {
-                                    foreach (Gender gender in Genders)
-                                    {
-                                        <option value="@gender.Id">@gender.PersianName</option>
-                                    }
+                                    <option value="@gender.Key">@gender.Value</option>
                                 }
                             </InputSelect>
                         </div>
@@ -164,16 +161,11 @@
     [SupplyParameterFromForm]
     private CityUser? User { get; set; }
 
-    private List<Gender>? Genders;
-
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
 
-        Genders = await context.Genders.ToListAsync();
-
         User ??= await UserManager.Users
-            .Include(u => u.Gender)
             .FirstOrDefaultAsync(u => u.Id == UserId);
 
         if (User is null)
@@ -185,13 +177,12 @@
     private async Task UpdateUser()
     {
         var user = await UserManager.Users
-            .Include(u => u.Gender)
             .FirstOrDefaultAsync(u => u.Id == UserId!);
 
         user.UserName = User!.UserName!;
         user.FirstName = User.FirstName;
         user.LastName = User.LastName;
-        user.GenderId = User.GenderId;
+        user.Gender = User.Gender;
         user.BirthDate = User.BirthDate;
         user.FatherName = User.FatherName;
         user.PhoneNumber = User.PhoneNumber;

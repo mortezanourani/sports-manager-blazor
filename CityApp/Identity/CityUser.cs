@@ -15,6 +15,5 @@ public class CityUser : IdentityUser
 
     public string? PersonnelId { get; set; }
 
-    public int? GenderId { get; set; }
-    public Gender? Gender { get; set; }
+    public int? Gender { get; set; }
 }

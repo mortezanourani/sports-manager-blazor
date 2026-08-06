@@ -53,8 +53,19 @@
 		else
 		{
 			<QuickGrid Items="FacilitiesLicenses.AsQueryable()" Pagination="pagination" Theme="">
-				<TemplateColumn Class="action-button status">
-					<img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name)" />
+				<TemplateColumn Class="action-button status" Title="">
+					@if (context.UsersGender == 0)
+					{
+						<img src="/icons/gender-male-only.svg" />
+					}
+					else if (context.UsersGender == 1)
+					{
+						<img src="/icons/gender-female-only.svg" />
+					}
+					else
+					{
+						<img src="/icons/gender-mixed-gender.svg" />
+					}
 				</TemplateColumn>
 				<TemplateColumn Class="bold title" Title="عنوان باشگاه">
 					<div class="name-wrapper">
@@ -100,7 +111,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		var licenses = await context.GovernmentFacilityLicenses
-				.Include(license => license.UsersGender)
 				.Include(license => license.Facility)
 				.OrderByDescending(license => license.ExpireDate)
 				.ToListAsync();
@@ -125,7 +135,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		FacilitiesLicenses = await context.GovernmentFacilityLicenses
-				.Include(license => license.UsersGender)
 				.Include(license => license.Facility)
 				.OrderByDescending(license => license.ExpireDate)
 				.ToListAsync();

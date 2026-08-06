@@ -100,7 +100,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		var facilities = await context.GovernmentFacilities
-				.Include(facility => facility.Type)
 				.Include(facility => facility.GovernmentFacilityLicenses)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync();
@@ -126,7 +125,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		Facilities = await context.GovernmentFacilities
-				.Include(facility => facility.Type)
 				.Include(facility => facility.GovernmentFacilityLicenses)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync();

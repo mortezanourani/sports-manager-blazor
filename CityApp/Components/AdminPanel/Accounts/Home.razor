@@ -67,7 +67,14 @@
 		<div class="table-wrapper">
 			<QuickGrid Items="Users.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
 				<TemplateColumn Class="action-button status" Title="">
-					<img src="@string.Format("/icons/gender-{0}-only.svg", context.Gender?.Name.ToLower())" />
+					@if (context.Gender == 0)
+					{
+						<img src="/icons/gender-female-only.svg" />
+					}
+					else
+					{
+						<img src="/icons/gender-male-only.svg" />
+					}
 				</TemplateColumn>
 				<TemplateColumn Class="bold title">
 					<div>
@@ -115,7 +122,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		Users = await UserManager.Users
-			.Include(u => u.Gender)
 			.OrderBy(u => u.FirstName)
 			.OrderBy(u => u.LastName)
 			.ToListAsync();
@@ -124,7 +130,6 @@
 			.GetUsersInRoleAsync("Federation");
 
 		Users = await UserManager.Users
-			.Include(u => u.Gender)
 			.OrderBy(u => u.FirstName)
 			.OrderBy(u => u.LastName)
 			.Where(u => !FederationUsers.Contains(u))
@@ -138,7 +143,6 @@
 		if (Filter)
 		{
 			Users = await UserManager.Users
-				.Include(u => u.Gender)
 				.OrderBy(u => u.FirstName)
 				.OrderBy(u => u.LastName)
 				.Where(u => FederationUsers.Contains(u))
@@ -147,7 +151,6 @@
 		else
 		{
 			Users = await UserManager.Users
-				.Include(u => u.Gender)
 				.OrderBy(u => u.FirstName)
 				.OrderBy(u => u.LastName)
 				.Where(u => !FederationUsers.Contains(u))
@@ -165,7 +168,6 @@
 
 		Users = string.IsNullOrEmpty(searchText)
 			? await UserManager.Users
-				.Include(u => u.Gender)
 				.OrderBy(u => u.FirstName)
 				.OrderBy(u => u.LastName)
 				.ToListAsync()

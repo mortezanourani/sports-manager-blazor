@@ -39,7 +39,18 @@ else
 			{
 				<QuickGrid Items="Facilities.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
 					<TemplateColumn Class="action-button" Title="">
-						<img src="@string.Format("/icons/gender-{0}.svg", context.GovernmentFacilityLicenses.FirstOrDefault()!.UsersGender.Name).ToLower()" />
+						@if (context.GovernmentFacilityLicenses.FirstOrDefault()!.UsersGender == 0)
+						{
+							<img src="/icons/gender-male-only.svg" />
+						}
+						else if (context.GovernmentFacilityLicenses.FirstOrDefault()!.UsersGender == 1)
+						{
+							<img src="/icons/gender-female-only.svg" />
+						}
+						else
+						{
+							<img src="/icons/gender-mixed-gender.svg" />
+						}
 					</TemplateColumn>
 					<TemplateColumn Class="title bold" Title="عنوان مکان ورزشی">
 						<div class="names-wrapper">
@@ -67,7 +78,6 @@ else
 
 		Facilities = await context.GovernmentFacilities
 			.Include(m => m.GovernmentFacilityLicenses)
-				.ThenInclude(m => m.UsersGender)
 			.OrderBy(m => m.Name)
 			.ToListAsync();
 

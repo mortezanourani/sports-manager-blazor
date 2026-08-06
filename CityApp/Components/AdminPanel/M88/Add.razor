@@ -65,17 +65,10 @@
         </div>
     </div>
     <div class="col2-5 mb-auto">
-        @if (Types is null)
-        {
-            <Loading CardMode=true />
-        }
-        else
-        {
             <div class="card bordered-card">
                 <EditForm method="post" Model="Facility" OnValidSubmit="AddFacility" FormName="create" Enhance>
                     <DataAnnotationsValidator />
                     <ValidationSummary role="alert" />
-                    <input type="hidden" name="Facility.CityId" value="@CityId" />
                     <div class="form-row">
                         <div class="form-group fa mb-3">
                             <label for="title" class="form-label">
@@ -142,10 +135,13 @@
                             <label for="typeid" class="form-label">
                                 <img src="/icons/dropdown.svg" />
                             </label>
-                            <InputSelect id="typeid" class="select form-control" @bind-Value="TypeId">
-                                @foreach (FacilityType type in Types!)
+                            <InputSelect id="typeid" class="select form-control" @bind-Value="Facility.Type">
+                                @foreach (var type in Statics.FacilityTypes!)
                                 {
-                                    <option value="@type.Id">@type.PersianTitle</option>
+                                    if (type.Key > 0)
+                                    {
+                                        <option value="@type.Key">@type.Value</option>
+                                    }
                                 }
                             </InputSelect>
                         </div>
@@ -179,7 +175,7 @@
                     <button type="submit" class="btn btn-primary w-100">تایید</button>
                 </EditForm>
             </div>
-        }
+        
     </div>
 </div>
 
@@ -190,25 +186,14 @@
     private string? statusMessage;
     private string? statusMessageClass;
 
-    private List<City>? Cities;
-    private List<FacilityType>? Types;
-
-    private int CityId = 4;
-    private int TypeId = 1;
-
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-
-        Types = await context.FacilityTypes
-            .ToListAsync();
     }
 
     private async Task AddFacility()
     {
         using var context = DbFactory.CreateDbContext();
-
-        Facility.TypeId = TypeId;
 
         try
         {
@@ -220,7 +205,7 @@
             if (isExist)
             {
                 statusMessageClass = "danger";
-                statusMessage = $"باشگاهی با عنوان {Facility.Name} در شهرستان {Cities!.FirstOrDefault(c => c.Id == CityId)!.PersianName} قبلا ثبت شده است.";
+                statusMessage = $"باشگاهی با عنوان {Facility.Name} قبلا ثبت شده است.";
                 return;
             }
 

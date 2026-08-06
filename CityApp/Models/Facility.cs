@@ -6,11 +6,9 @@ namespace CityApp.Models;
 
 public class Facility : BaseFacility
 {
-    public int? TypeId { get; set; }
-    public virtual FacilityType? Type { get; set; }
+    public int? Type { get; set; }
 
-    public int UsersGenderId { get; set; }
-    public virtual UsersGender UsersGender { get; set; } = null!;
+    public int UsersGender { get; set; }
 
     public virtual ICollection<FacilityContract> FacilityContracts { get; set; } = new List<FacilityContract>();
 

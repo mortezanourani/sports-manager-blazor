@@ -39,7 +39,18 @@ else
 			{
 				<QuickGrid Items="Facilities.AsQueryable()" Theme="" Class="quickgrid-table" Pagination="@pagination">
 					<TemplateColumn Class="action-button" Title="">
-						<img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name).ToLower()" />
+						@if (context.UsersGender == 0)
+						{
+							<img src="/icons/gender-male-only.svg" />
+						}
+						else if (context.UsersGender == 1)
+						{
+							<img src="/icons/gender-female-only.svg" />
+						}
+						else
+						{
+							<img src="/icons/gender-mixed-gender.svg" />
+						}
 					</TemplateColumn>
 					<TemplateColumn Class="title bold" Title="عنوان مکان ورزشی">
 						<div class="names-wrapper">
@@ -64,7 +75,7 @@ else
 							<h4 class="header-5">@context.Area</h4>
 						</div>
 					</TemplateColumn>
-					<PropertyColumn Class="light text-3" Title="روباز/سرپوشیده" Property="@(m => m.Type == null ? "" : m.Type.PersianTitle)" />
+					<PropertyColumn Class="light text-3" Title="روباز/سرپوشیده" Property="@(m => Statics.FacilityTypes[m.Type ?? 0])" />
 					<PropertyColumn Class="light text-3" Title="شماره تماس" Property="@(m => m.Phone)" />
 				</QuickGrid>
 			}
@@ -83,8 +94,6 @@ else
 
 		Facilities = await context.Facilities
 			.Include(m => m.FacilityContracts)
-			.Include(m => m.UsersGender)
-			.Include(m => m.Type)
 			.OrderBy(m => m.Name)
 			.ToListAsync();
 

@@ -41,7 +41,18 @@ else
  					<TemplateColumn Class="action-button" Title="">
 						@if(context.PrivateFacilityLicenses.Count > 0)
 						{
-							<img src="@string.Format("/icons/gender-{0}.svg", context.PrivateFacilityLicenses.FirstOrDefault()!.UsersGender.Name).ToLower()" />
+							@if (context.PrivateFacilityLicenses.FirstOrDefault()!.UsersGender == 0)
+                            {
+                                <img src="/icons/gender-male-only.svg" />
+                            }
+							else if (context.PrivateFacilityLicenses.FirstOrDefault()!.UsersGender == 1)
+                            {
+                                <img src="/icons/gender-female-only.svg" />
+                            }
+                            else
+                            {
+                                <img src="/icons/gender-mixed-gender.svg" />
+                            }
 						}
 					</TemplateColumn>
 					<TemplateColumn Class="title bold" Title="عنوان باشگاه">
@@ -80,7 +91,6 @@ else
 
 		Facilities = await context.PrivateFacilities
 			.Include(m => m.PrivateFacilityLicenses)
-				.ThenInclude(m => m.UsersGender)
 			.OrderBy(m => m.Name)
 			.ToListAsync();
 

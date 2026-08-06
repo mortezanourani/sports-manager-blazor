@@ -101,13 +101,10 @@
                             <label for="genderid" class="form-label">
                                 <img src="/icons/genders.svg" />
                             </label>
-                            <InputSelect id="genderid" class="select form-control" @bind-Value="User!.GenderId">
-                                @if (Genders is not null)
+                            <InputSelect id="genderid" class="select form-control" @bind-Value="User!.Gender">
+                                @foreach (var gender in Statics.Genders)
                                 {
-                                    foreach (Gender gender in Genders)
-                                    {
-                                        <option value="@gender.Id">@gender.PersianName</option>
-                                    }
+                                    <option value="@gender.Key">@gender.Value</option>
                                 }
                             </InputSelect>
                         </div>
@@ -158,13 +155,9 @@
     private string? statusMessage;
     private string? statusMessageClass;
 
-    private List<Gender>? Genders;
-
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-
-        Genders = await context.Genders.ToListAsync();
     }
 
     private async Task AddUser()

@@ -136,10 +136,13 @@
                             <label for="typeid" class="form-label">
                                 <img src="/icons/dropdown.svg" />
                             </label>
-                            <InputSelect id="typeid" class="select form-control" @bind-Value="Facility.TypeId">
-                                @foreach (FacilityType type in Types!)
+                            <InputSelect id="typeid" class="select form-control" @bind-Value="Facility.Type">
+                                @foreach (var type in Statics.FacilityTypes!)
                                 {
-                                    <option value="@type.Id">@type.PersianTitle</option>
+                                    if (type.Key > 0)
+                                    {
+                                        <option value="@type.Key">@type.Value</option>
+                                    }
                                 }
                             </InputSelect>
                         </div>
@@ -241,8 +244,6 @@
     [SupplyParameterFromForm]
     private Facility? Facility { get; set; }
 
-    private List<FacilityType>? Types;
-
     private List<FacilityContract>? Contracts;
 
     protected override async Task OnParametersSetAsync()
@@ -250,8 +251,6 @@
         Facility = null;
 
         using var context = DbFactory.CreateDbContext();
-
-        Types = await context.FacilityTypes.ToListAsync();
 
         Facility ??= await context.Facilities
             .FirstOrDefaultAsync(facility => facility.Id == Id);
@@ -274,7 +273,6 @@
     {
         using var context = DbFactory.CreateDbContext();
 
-        Facility.Type = context.FacilityTypes.FirstOrDefault(type => type.Id == Facility!.TypeId);
         Facility.FacilityContracts = await context.FacilityContracts
             .Where(license => license.FacilityId == Facility.Id)
             .ToListAsync();

@@ -56,7 +56,18 @@
 			{
 				<QuickGrid Items="Facilities.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
 					<TemplateColumn Class="action-button status" Title="">
-						<img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender!.Name)" />
+						@if (context.UsersGender == 0)
+						{
+							<img src="/icons/gender-male-only.svg" />
+						}
+						else if (context.UsersGender == 1)
+						{
+							<img src="/icons/gender-female-only.svg" />
+						}
+						else
+						{
+							<img src="/icons/gender-mixed-gender.svg" />
+						}
 					</TemplateColumn>
 					<PropertyColumn Class="bold header-5 title" Title="عنوان مکان ورزشی" Property="@(facility => facility.Name)" />
 					<PropertyColumn Class="light text-3" Title="موقعیت جغرافیایی" Property="@(facility => facility.IsRural == true ? "روستایی" : "شهری")" />
@@ -93,8 +104,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		var facilities = await context.Facilities
-				.Include(facility => facility.Type)
-				.Include(facility => facility.UsersGender)
 				.Include(facility => facility.FacilityContracts)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync();
@@ -120,8 +129,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		Facilities = await context.Facilities
-			.Include(facility => facility.Type)
-			.Include(facility => facility.UsersGender)
 			.Include(facility => facility.FacilityContracts)
 			.OrderBy(facility => facility.Name)
 			.ToListAsync();

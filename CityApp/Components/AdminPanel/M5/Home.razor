@@ -71,6 +71,7 @@
 							<p class="text-4">@context.PrivateFacilityLicenses.FirstOrDefault()!.Serial</p>
 						</div>
 					</TemplateColumn>
+					<PropertyColumn Class="text-3" Title="نوع مکان" Property="@(facility => Statics.FacilityTypes[facility.Type ?? 0])" />
 					<PropertyColumn Class="text-3" Title="موقعیت جغرافیایی" Property="@(facility => facility.IsRural == true ? "روستایی" : "شهری")" />
 					<TemplateColumn class="bold" Title="موسس">
 						<div class="name-wrapper">
@@ -130,12 +131,10 @@
 
 		Facilities = string.IsNullOrEmpty(searchText)
 			? await context.PrivateFacilities
-				.Include(facility => facility.Type)
 				.Include(facility => facility.PrivateFacilityLicenses)
 				.OrderBy(facility => facility.Name)
 				.ToListAsync()
 			: await context.PrivateFacilities
-				.Include(facility => facility.Type)
 				.Include(facility => facility.PrivateFacilityLicenses)
 				.Where(facility =>
 					facility.Name.Contains(searchText)
@@ -155,7 +154,6 @@
 		using var context = DbFactory.CreateDbContext();
 
 		Facilities = await context.PrivateFacilities
-			.Include(facility => facility.Type)
 			.Include(facility => facility.PrivateFacilityLicenses)
 			.OrderBy(facility => facility.Name)
 			.ToListAsync();

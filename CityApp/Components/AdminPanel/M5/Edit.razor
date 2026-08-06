@@ -135,10 +135,10 @@
                             <label for="typeid" class="form-label">
                                 <img src="/icons/dropdown.svg" />
                             </label>
-                            <InputSelect id="typeid" class="select form-control" @bind-Value="Facility.TypeId">
-                                @foreach (FacilityType type in Types!)
+                            <InputSelect id="typeid" class="select form-control" @bind-Value="Facility.Type">
+                                @foreach (var type in Statics.FacilityTypes!)
                                 {
-                                    <option value="@type.Id">@type.PersianTitle</option>
+                                    <option value="@type.Key">@type.Value</option>
                                 }
                             </InputSelect>
                         </div>
@@ -201,7 +201,18 @@
                 <div class="table-wrapper">
                     <QuickGrid Items="Licenses.AsQueryable()" Theme="" Class="licenses-table">
                         <TemplateColumn Class="action-button status" Title="">
-                            <img src="@string.Format("/icons/gender-{0}.svg", context.UsersGender.Name)" />
+                            @if (context.UsersGender == 0)
+                            {
+                                <img src="/icons/gender-male-only.svg" />
+                            }
+                            else if (context.UsersGender == 1)
+                            {
+                                <img src="/icons/gender-female-only.svg" />
+                            }
+                            else
+                            {
+                                <img src="/icons/gender-mixed-gender.svg" />
+                            }
                         </TemplateColumn>
                         <TemplateColumn Class="title bold" Title="موسس">
                             <div class="name-wrapper">
@@ -246,8 +257,6 @@
     [SupplyParameterFromForm]
     private PrivateFacility? Facility { get; set; }
 
-    private List<FacilityType>? Types;
-
     private List<PrivateFacilityLicense>? Licenses;
 
     protected override async Task OnParametersSetAsync()
@@ -255,8 +264,6 @@
         Facility = null;
 
         using var context = DbFactory.CreateDbContext();
-
-        Types = await context.FacilityTypes.ToListAsync();
 
         Facility ??= await context.PrivateFacilities
             .FirstOrDefaultAsync(facility => facility.Id == Id);
@@ -268,7 +275,6 @@
         else
         {
             Licenses = await context.PrivateFacilityLicenses
-                .Include(license => license.UsersGender)
                 .Where(license => license.FacilityId == Facility!.Id)
                 .OrderByDescending(license => license.ExpireDate)
                 .ToListAsync();
@@ -279,7 +285,6 @@
     {
         using var context = DbFactory.CreateDbContext();
 
-        Facility.Type = context.FacilityTypes.FirstOrDefault(type => type.Id == Facility!.TypeId);
         Facility.PrivateFacilityLicenses = await context.PrivateFacilityLicenses
             .Where(license => license.FacilityId == Facility.Id)
             .ToListAsync();

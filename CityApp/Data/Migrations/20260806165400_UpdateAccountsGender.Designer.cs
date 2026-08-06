@@ -4,6 +4,7 @@ using CityApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityApp.Data.Migrations
 {
     [DbContext(typeof(CityDbContext))]
-    partial class CityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260806165400_UpdateAccountsGender")]
+    partial class UpdateAccountsGender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,16 +180,20 @@ namespace CityApp.Data.Migrations
                     b.Property<string>("Sports")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Type")
+                    b.Property<int?>("TypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersGender")
+                    b.Property<int>("UsersGenderId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
+
+                    b.HasIndex("UsersGenderId");
 
                     b.ToTable("Facilities");
                 });
@@ -276,13 +283,15 @@ namespace CityApp.Data.Migrations
                     b.Property<int?>("SportLandArea")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Type")
+                    b.Property<int?>("TypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("GovernmentFacilities");
                 });
@@ -318,7 +327,7 @@ namespace CityApp.Data.Migrations
                     b.Property<string>("StartDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsersGender")
+                    b.Property<int>("UsersGenderId")
                         .HasColumnType("int");
 
                     b.Property<string>("WomenSports")
@@ -327,6 +336,8 @@ namespace CityApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FacilityId");
+
+                    b.HasIndex("UsersGenderId");
 
                     b.ToTable("GovernmentFacilityLicenses");
                 });
@@ -535,13 +546,15 @@ namespace CityApp.Data.Migrations
                     b.Property<int?>("SportLandArea")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Type")
+                    b.Property<int?>("TypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("PrivateFacilities");
                 });
@@ -589,7 +602,7 @@ namespace CityApp.Data.Migrations
                     b.Property<string>("StartDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsersGender")
+                    b.Property<int>("UsersGenderId")
                         .HasColumnType("int");
 
                     b.Property<string>("WomenSports")
@@ -598,6 +611,8 @@ namespace CityApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FacilityId");
+
+                    b.HasIndex("UsersGenderId");
 
                     b.ToTable("PrivateFacilityLicenses");
                 });
@@ -872,6 +887,23 @@ namespace CityApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CityApp.Models.Facility", b =>
+                {
+                    b.HasOne("Infrastructure.Models.FacilityType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
+
+                    b.HasOne("Infrastructure.Models.UsersGender", "UsersGender")
+                        .WithMany()
+                        .HasForeignKey("UsersGenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Type");
+
+                    b.Navigation("UsersGender");
+                });
+
             modelBuilder.Entity("CityApp.Models.FacilityContract", b =>
                 {
                     b.HasOne("CityApp.Models.Facility", "Facility")
@@ -889,6 +921,15 @@ namespace CityApp.Data.Migrations
                     b.Navigation("LegalContractor");
                 });
 
+            modelBuilder.Entity("CityApp.Models.GovernmentFacility", b =>
+                {
+                    b.HasOne("Infrastructure.Models.FacilityType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
+
+                    b.Navigation("Type");
+                });
+
             modelBuilder.Entity("CityApp.Models.GovernmentFacilityLicense", b =>
                 {
                     b.HasOne("CityApp.Models.GovernmentFacility", "Facility")
@@ -897,7 +938,15 @@ namespace CityApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Infrastructure.Models.UsersGender", "UsersGender")
+                        .WithMany()
+                        .HasForeignKey("UsersGenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Facility");
+
+                    b.Navigation("UsersGender");
                 });
 
             modelBuilder.Entity("CityApp.Models.Insurance", b =>
@@ -970,6 +1019,15 @@ namespace CityApp.Data.Migrations
                     b.Navigation("SenderFederation");
                 });
 
+            modelBuilder.Entity("CityApp.Models.PrivateFacility", b =>
+                {
+                    b.HasOne("Infrastructure.Models.FacilityType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
+
+                    b.Navigation("Type");
+                });
+
             modelBuilder.Entity("CityApp.Models.PrivateFacilityLicense", b =>
                 {
                     b.HasOne("CityApp.Models.PrivateFacility", "Facility")
@@ -978,7 +1036,15 @@ namespace CityApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Infrastructure.Models.UsersGender", "UsersGender")
+                        .WithMany()
+                        .HasForeignKey("UsersGenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Facility");
+
+                    b.Navigation("UsersGender");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.FacilityDocument", b =>
