@@ -1,0 +1,70 @@
+﻿@page "/Setup"
+
+@inject ISetupService SetupService
+@inject NavigationManager NavigationManager
+
+@rendermode InteractiveServer
+
+<h3>Initial Setup</h3>
+
+@if (status is null)
+{
+    <p>Checking status...</p>
+}
+else if (status.IsComplete)
+{
+    <p>Setup already completed.</p>
+    <button @onclick="GoHome">Go to Home</button>
+}
+else
+{
+    <p>DB reachable: @status.DbReachable</p>
+    <p>Migrations applied: @status.MigrationsApplied</p>
+    <p>SuperAdministrator exists: @status.SuperAdminExists</p>
+
+    <p class="text-danger">@errorMessage</p>
+    <EditForm Model="Admin" OnValidSubmit="RunSetup" FormName="Setup">
+        <ValidationSummary />
+        <InputText @bind-Value="Admin.Username" class="form-control mb-2" placeholder="Administrator Username" />
+        <InputText @bind-Value="Admin.Firstname" class="form-control mb-2" placeholder="Administrator Firstname" />
+        <InputText @bind-Value="Admin.Lastname" class="form-control mb-2" placeholder="Administrator Lastname" />
+        <InputText @bind-Value="Admin.Email" class="form-control mb-2" placeholder="Administrator Email" />
+        <InputText @bind-Value="Admin.Password" class="form-control mb-2" type="password" placeholder="Administrator Password" />
+        <button class="form-control" type="submit">Run Setup</button>
+    </EditForm>
+}
+
+@code {
+    private SetupStatus? status;
+    private string? errorMessage;
+    private InputModel Admin { get; set; } = new InputModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        status = await SetupService.GetStatusAsync();
+    }
+
+    private async Task RunSetup()
+    {
+        try
+        {
+            await SetupService.RunSetupAsync(Admin.Username, Admin.Firstname, Admin.Lastname, Admin.Email, Admin.Password);
+            NavigationManager.NavigateTo("/", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.InnerException?.Message ?? ex.Message;
+        }
+    }
+
+    private void GoHome() => NavigationManager.NavigateTo("/");
+
+    private class InputModel
+    {
+        public string Username { get; set; } = null!;
+        public string Firstname { get; set; } = null!;
+        public string Lastname { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string Password { get; set; } = null!;
+    }
+}

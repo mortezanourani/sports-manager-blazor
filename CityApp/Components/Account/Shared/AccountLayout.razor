@@ -26,3 +26,11 @@ else
         }
     }
 }
+
+@code {
+    protected override Task OnInitializedAsync()
+    {
+        NavigationManager.NavigateTo("/Account/Login", forceLoad: true);
+        return base.OnInitializedAsync();
+    }
+}

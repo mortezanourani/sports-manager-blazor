@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using CityApp.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using CityApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -107,6 +108,8 @@ builder.Services.AddAuthorization(options =>
     );
 });
 
+builder.Services.AddScoped<ISetupService, SetupService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -118,12 +121,42 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
+app.UseAntiforgery();
+
+app.Use(async (context, next) =>
+{
+    var path = context.Request.Path;
+    if (path.StartsWithSegments("/setup") ||
+        path.StartsWithSegments("/_blazor") ||
+        path.StartsWithSegments("/_framework") ||
+        path.StartsWithSegments("/css") ||
+        path.StartsWithSegments("/js"))
+    {
+        await next();
+        return;
+    }
+    if (!SetupGate.ConfirmedComplete)
+    {
+        var serupService = context.RequestServices.GetRequiredService<ISetupService>();
+        var status = await serupService.GetStatusAsync();
+
+        if (status.IsComplete)
+        {
+            SetupGate.ConfirmedComplete = true;
+        }
+        else
+        {
+            context.Response.Redirect("/setup");
+            return;
+        }
+    }
+
+    await next();
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
