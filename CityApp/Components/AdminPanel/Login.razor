@@ -45,6 +45,11 @@
                     <button type="submit" class="w-100 btn btn-primary">ورود</button>
                 </div>
             </EditForm>
+            <div class="form-group fa m-3">
+                <p class="text-danger ">
+                    @statusMessage
+                </p>
+            </div>
         </div>
     </div>
     <div class="login-image-box">
@@ -60,6 +65,8 @@
 
     [SupplyParameterFromQuery]
     private string? ReturnUrl { get; set; }
+
+    private string statusMessage { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -93,6 +100,7 @@
         }
         else
         {
+            statusMessage = result.ToString();
             // Error Handling
         }
     }

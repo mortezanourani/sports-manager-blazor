@@ -91,16 +91,20 @@
             return;
         }
 
-        try
+        var userRoles = await UserManager.GetRolesAsync(User);
+        if (userRoles.Contains(Message.Receiver.Name!))
         {
-            Message.Status = 1;
-            context.Attach(Message!).State = EntityState.Modified;
-            await context.SaveChangesAsync();
-        }
-        catch
-        {
-            NavigationManager.NavigateTo("/Panel");
-            return;
+            try
+            {
+                Message.Status = 1;
+                context.Attach(Message!).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+            }
+            catch
+            {
+                NavigationManager.NavigateTo("/Panel");
+                return;
+            }
         }
     }
 }
