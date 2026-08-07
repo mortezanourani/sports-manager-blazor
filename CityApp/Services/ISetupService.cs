@@ -8,7 +8,23 @@ public interface ISetupService
     Task RunSetupAsync(string AdminUsername, string FirstName, string LastName, string AdminEmail, string AdminPassword);
 }
 
-public record SetupStatus(bool DbReachable, bool MigrationsApplied, bool SuperAdminExists)
+public record SetupStatus(
+    bool DbReachable,
+    bool MigrationsApplied,
+    bool GendersExists,
+    bool UsersGendersExists,
+    bool FacilityTypesExists,
+    bool FederationsExists,
+    bool RolesExists,
+    bool SuperAdminExists)
 {
-    public bool IsComplete => DbReachable && MigrationsApplied && SuperAdminExists;
+    public bool IsComplete => 
+        DbReachable && 
+        MigrationsApplied && 
+        GendersExists &&
+        UsersGendersExists &&
+        FacilityTypesExists &&
+        FederationsExists &&
+        RolesExists &&
+        SuperAdminExists;
 }

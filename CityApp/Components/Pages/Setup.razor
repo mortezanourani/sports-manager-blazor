@@ -14,13 +14,18 @@
 else if (status.IsComplete)
 {
     <p>Setup already completed.</p>
-    <button @onclick="GoHome">Go to Home</button>
+    <button class="btn" @onclick="GoHome">Go to Home</button>
 }
 else
 {
     <p>DB reachable: @status.DbReachable</p>
     <p>Migrations applied: @status.MigrationsApplied</p>
     <p>SuperAdministrator exists: @status.SuperAdminExists</p>
+    <p>Gedners List exists: @status.GendersExists</p>
+    <p>UsersGedners List exists: @status.UsersGendersExists</p>
+    <p>Facility Types List exists: @status.FacilityTypesExists</p>
+    <p>Federations List exists: @status.FederationsExists</p>
+    <p>Identity Roles List exists: @status.RolesExists</p>
 
     <p class="text-danger">@errorMessage</p>
     <EditForm Model="Admin" OnValidSubmit="RunSetup" FormName="Setup">
