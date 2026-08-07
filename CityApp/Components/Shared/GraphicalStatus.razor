@@ -68,8 +68,11 @@
             .Where(m => ((m.Year * 100) + m.Month) > lastYear)
             .SumAsync(m => m.MenCount + m.WomenCount);
 
-        facilitiesCount = await context.GovernmentFacilities
+        var govFacilitiesCount = await context.GovernmentFacilities
             .CountAsync();
+        facilitiesCount = await context.Facilities
+            .CountAsync();
+        facilitiesCount += govFacilitiesCount;
 
         var nowDate = DateTime.Now.Date;
         var todayDate =

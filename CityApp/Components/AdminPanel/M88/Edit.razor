@@ -10,7 +10,10 @@
 
 <div class="row form-wrapper">
     <div class="col3-5 mb-0">
-        <h6 class="display-4 mb-3">@Facility?.Name</h6>
+        @if (Facility is not null)
+        {
+            <h6 class="display-4 mb-3">@Facility?.Name</h6>
+        }
         <div class="instructions">
             <p class="mb-3">فرم مقابل جهت ثبت اطلاعات باشگاه های ورزشی خصوصی بر اساس پروانه فعالیت صادر شده از سامانه طراحی شده است.</p>
             <div class="instruction-item">
@@ -78,7 +81,6 @@
                     <DataAnnotationsValidator />
                     <ValidationSummary role="alert" />
                     <input type="hidden" name="Facility.Id" value="@Facility.Id" />
-                    <input type="hidden" name="Facility.CityId" value="@CityId" />
                     <div class="form-row">
                         <div class="form-group fa mb-3">
                             <label for="title" class="form-label">
@@ -232,8 +234,6 @@
 @code {
     [Parameter]
     public Guid Id { get; set; }
-
-    private int CityId = 4;
 
     private string? statusMessage;
     private string? statusMessageClass;

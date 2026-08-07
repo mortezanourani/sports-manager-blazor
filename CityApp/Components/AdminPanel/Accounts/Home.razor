@@ -9,7 +9,6 @@
 
 <PageTitle>کاربران سامانه</PageTitle>
 
-
 <div class="list-wrapper">
 	<div class="list-header">
 		<div class="header-title colored">
@@ -67,7 +66,7 @@
 		<div class="table-wrapper">
 			<QuickGrid Items="Users.AsQueryable()" Pagination="pagination" Theme="" Class="quickgrid-table">
 				<TemplateColumn Class="action-button status" Title="">
-					<img src="@string.Format("/icons/gender-{0}-only.svg", context.Gender?.Name.ToLower())" />
+					<img src="@string.Format("/icons/gender-{0}.svg", context.Gender?.Name.ToLower())" />
 				</TemplateColumn>
 				<TemplateColumn Class="bold title">
 					<div>

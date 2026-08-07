@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Components.QuickGrid
+
+@page "/Panel/Population"
+
+@rendermode InteractiveServer
+
+<PageTitle>جمعیت شهرستان</PageTitle>
+
+<div class="list-wrapper">
+	<div class="table-wrapper">
+		@if (Populations is not null)
+		{
+			<QuickGrid Items="Populations.AsQueryable()" Theme="" Class="quickgrid-table">
+				<PropertyColumn Class="action-button" Title="" Property="@(population => $"{population.Year}")" />
+				<PropertyColumn Title="جمعیت شهری مردان" Property="@(population => $"{population.UrbanMen:#,0}")" />
+				<PropertyColumn Title="جمعیت شهری زنان" Property="@(population => $"{population.UrbanWomen:#,0}")" />
+				<PropertyColumn Title="جمعیت شهری" Property="@(population => $"{population.UrbanMen + population.UrbanWomen:#,0}")" />
+				<PropertyColumn Title="جمعیت روستای مردان" Property="@(population => $"{population.RuralMen:#,0}")" />
+				<PropertyColumn Title="جمعیت روستایی زنان" Property="@(population => $"{population.RuralWomen:#,0}")" />
+				<PropertyColumn Title="جمعیت روستایی" Property="@(population => $"{population.RuralMen + population.RuralWomen:#,0}")" />
+				<PropertyColumn Title="جمعیت کل" Property="@(population => $"{population.RuralMen + population.RuralWomen + population.UrbanMen + population.UrbanWomen:#,0}")" />
+				<TemplateColumn Class="action-button">
+					<a class="edit-link" href="/Panel/Population/Edit/@context.Id">
+						<img src="/icons/square-edit.svg" />
+					</a>
+				</TemplateColumn>
+			</QuickGrid>
+		}
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public int Year { get; set; }
+
+	private List<int>? Years;
+
+	private List<Population>? Populations { get; set; }
+	private int TotalPopulation { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		using var context = DbFactory.CreateDbContext();
+
+		Years = await context.Population
+			.GroupBy(p => p.Year)
+			.Select(g => g.Key)
+			.OrderByDescending(y => y)
+			.ToListAsync();
+
+		Year = Years.FirstOrDefault();
+	}
+
+	protected override async Task OnParametersSetAsync()
+	{
+		using var context = DbFactory.CreateDbContext();
+
+		Populations = await context.Population
+			.Where(m => m.Year == Year)
+			.ToListAsync();
+
+		TotalPopulation = Populations
+			.Sum(p => p.UrbanMen + p.RuralMen + p.UrbanWomen + p.RuralWomen);
+	}
+}

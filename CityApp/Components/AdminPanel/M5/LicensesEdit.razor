@@ -259,7 +259,7 @@
         try
         {
             await context.SaveChangesAsync();
-            NavigationManager.NavigateTo($"/Dashboard/M5/Edit/{License.FacilityId}");
+            NavigationManager.NavigateTo($"/Panel/M5/Edit/{License.FacilityId}");
         }
         catch (Exception exception)
         {

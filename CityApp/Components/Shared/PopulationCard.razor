@@ -20,9 +20,6 @@
 </div>
 
 @code {
-    [Parameter]
-    public int? CityId { get; set; }
-
     private int? TotalPopulation = null!;
     private int? UrbanMenPopulation = null!;
     private int? UrbanWomenPopulation = null!;
@@ -31,7 +28,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var currentYear = 1404;
+        PersianCalendar pCalendar = new PersianCalendar();
+        var currentYear = pCalendar.GetYear(DateTime.Now);
         
         using var context = DbFactory.CreateDbContext();
 
@@ -56,11 +54,6 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        if (CityId is null)
-        {
-            return;
-        }
-
         var currentYear = 1404;
         
         using var context = DbFactory.CreateDbContext();

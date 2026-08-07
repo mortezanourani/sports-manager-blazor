@@ -4,12 +4,12 @@
 	<h5 class="header-6 card-title">اماکن ورزشی دولتی</h5>
 	<div class="count-cols-wrapper">
 		<div class="count-col">
-			<p class="display-6">دارای سند</p>
+			<p class="display-6">واگذار شده</p>
 			<h4 class="header-5">@($"{hasDocument:#,0}")</h4>
 		</div>
 		<hr class="vertical-seperator" />
 		<div class="count-col">
-			<p class="display-6">فاقد سند</p>
+			<p class="display-6">تحت تصدی</p>
 			<h4 class="header-5">@($"{noDocument:#,0}")</h4>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
         totalCount = facilities.Count();
 
         hasDocument = facilities
-            .Count(f => f.FacilityDocuments.Any());
+            .Count(f => f.FacilityContracts.Any());
 
         noDocument = totalCount - hasDocument;
     }

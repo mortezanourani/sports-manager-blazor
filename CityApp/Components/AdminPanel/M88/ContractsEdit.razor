@@ -8,16 +8,16 @@
 
 <div class="row form-wrapper">
     <div class="col3-5 mb-0">
-        <h6 class="display-4 mb-1">ویرایش قرارداد واگذاری @Contract?.Facility.Name</h6>
+        <h6 class="display-4 mb-1">ویرایش قرارداد واگذاری @Contract?.Facility!.Name</h6>
         <a class="text-4 d-block mb-3 link" href="/Panel/M88/Edit/@Contract?.FacilityId">
             بازگشت به صفحه ویرایش مکان ورزشی
         </a>
         <div class="instructions">
-            <p class="mb-3">پروانه فعالیت باشگاه های ماده 5 بر اساس مجوز صادر شده از درگاه ملی مجوزها در سامانه آماری اداره کل ورزش و جوانان استان گیلان ثبت می گردد.</p>
+            <p class="mb-3">تنها قراردادهای واگذاری تحویل شده از سوی اداره کل ورزش و جوانان استان گیلان ثبت می گردد.</p>
             <div class="instruction-item">
                 <div class="icon-title mb-2">
                     <img src="/icons/qrcode-blue.svg">
-                    <h6>شماره پروانه فعالیت:</h6>
+                    <h6>شماره سریال قرارداد واگذاری:</h6>
                 </div>
                 <p>شماره پروانه فعالیت باشگاه بر اساس مجوز صادر شده از درگاه ملی مجوزها.</p>
             </div>
@@ -28,36 +28,6 @@
                 </div>
                 <p>تاریخ صدور و اتمام مجوز بر اساس مجوز صادر شده از درگاه ملی مجوزها به صورت ده کاراکتر وارد می گردد.</p>
                 <p>لطفا تاریخ ها را به صورت چهاررقم سال، دو رقم ماه و دو رقم روز با خط فاصله از هم جدا نمایید.</p>
-            </div>
-            <div class="instruction-item">
-                <div class="icon-title mb-2">
-                    <img src="/icons/calendar-blue.svg">
-                    <h6>تاریخ برگزاری دوره:</h6>
-                </div>
-                <p>تاریخ برگزاری دوره در دو بخش ماه و سال در سامانه ذخیره می گردد. سال برگزاری دوره به صورت چهار رقمی و ماه برگزاری دوره به صورت دو رقمی وارد می شود.</p>
-            </div>
-            <div class="instruction-item">
-                <div class="icon-title mb-2">
-                    <img src="/icons/genders-blue.svg">
-                    <h6>جنسیت استفاده کنندگان:</h6>
-                </div>
-                <p>لطفا جنسیت استفاده کنندگان از باشگاه مربوطه را بر اساس پروانه فعالیت آن از منوی کشویی انتخاب نمایید.</p>
-            </div>
-            <div class="instruction-item">
-                <div class="icon-title mb-2">
-                    <img src="/icons/man-blue.svg">
-                    <h6>و</h6>
-                    <img src="/icons/woman-blue.svg">
-                    <h6>رشته های ورزشی:</h6>
-                </div>
-                <p>رشته های ورزشی ثبت شده در پروانه فعالیت باشگاه را به تفکیک آقایان و بانوان به صورت جدا شده با ویرگول (،) ثبت نمایید.</p>
-            </div>
-            <div class="instruction-item">
-                <div class="icon-title mb-2">
-                    <img src="/icons/organization-blue.svg">
-                    <h6>عنوان مالک حقوقی:</h6>
-                </div>
-                <p>در صورتی که مجوز به صورت حقوقی ثبت شده است لطفا عنوان ارگان، سازمان یا شرکت صاحب مجوز را وارد نمایید.</p>
             </div>
             <div class="instruction-item">
                 <div class="icon-title mb-2">
@@ -166,8 +136,7 @@
     {
         using var context = DbFactory.CreateDbContext();
         Contract = await context.FacilityContracts
-            // .Include(contract => contract.Facility)
-                // .ThenInclude(facility => facility.City)
+            .Include(contract => contract.Facility)
             .FirstOrDefaultAsync(contract => contract.Id == Id);
 
         if (Contract is null)

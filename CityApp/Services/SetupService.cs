@@ -122,7 +122,7 @@ public class SetupService : ISetupService
             await db.SaveChangesAsync();
         }
 
-        var facilityTypesExists = await db.Facilities.CountAsync();
+        var facilityTypesExists = await db.FacilityTypes.CountAsync();
         if (facilityTypesExists == 0)
         {
             var facilityTypes = new List<FacilityType>()
@@ -209,6 +209,7 @@ public class SetupService : ISetupService
                 new CityRole { Name = "M88Manager", Title = "کارشناس ماده 88" },
                 new CityRole { Name = "M5Manager", Title = "کارشناس امور باشگاه ها" },
                 new CityRole { Name = "InsuranceManager", Title = "کارشناس بیمه ورزشی" },
+                new CityRole { Name = "Federation", Title = "رئیس هیات" },
             };
 
             foreach (CityRole role in roles)
