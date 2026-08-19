@@ -32,7 +32,7 @@ public class SetupService : ISetupService
         catch { reachable = false; }
 
         bool migrated = false;
-        if (reachable)
+        if (migrated)
         {
             var pending = await db.Database.GetPendingMigrationsAsync();
             migrated = !pending.Any();
@@ -46,35 +46,35 @@ public class SetupService : ISetupService
         }
 
         bool hasGenders = false;
-        if (reachable)
+        if (migrated)
         {
             var genders = await db.Genders.ToListAsync();
             hasGenders = genders.Count > 0;
         }
 
         bool hasUsersGenders = false;
-        if (reachable)
+        if (migrated)
         {
             var usersGenders = await db.UsersGenders.ToListAsync();
             hasUsersGenders = usersGenders.Count > 0;
         }
 
         bool hasFacilityTypes = false;
-        if (reachable)
+        if (migrated)
         {
             var facilityTypes = await db.FacilityTypes.ToListAsync();
             hasFacilityTypes = facilityTypes.Count > 0;
         }
 
         bool hasFederations = false;
-        if (reachable)
+        if (migrated)
         {
             var federations = await db.Federations.ToListAsync();
             hasFederations = federations.Count > 0;
         }
 
         bool hasRoles = false;
-        if (reachable)
+        if (migrated)
         {
             var roles = await _roleManager.Roles.ToListAsync();
             hasRoles = roles.Count > 2;
